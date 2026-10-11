@@ -20,10 +20,13 @@
     "qa:environment-controls": "node scripts/qa/environment-controls.cjs",
     "qa:environment-race": "node scripts/qa/environment-race.cjs",
     "qa:terrain": "node scripts/qa/terrain-clearance.mjs",
-    "qa:realism": "node scripts/qa/realism.cjs"
+    "qa:realism": "node scripts/qa/realism.cjs",
+    "predev": "node scripts/prepare-cesium.mjs",
+    "prebuild": "node scripts/prepare-cesium.mjs"
   },
   "dependencies": {
     "@fontsource/noto-sans-kr": "5.2.6",
+    "cesium": "1.146.0",
     "three": "0.180.0"
   },
   "devDependencies": {
