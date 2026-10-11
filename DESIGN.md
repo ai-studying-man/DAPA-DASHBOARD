@@ -93,3 +93,32 @@ MenuToggle: nativebutton aria-expanded. Home leavesnavigationcollapsed, menuopen
 Persona: museumfirstvisitor seeshero→branch→visual; portraittouchuser controlsreachablebottomand48px; keyboardreaderusesanchors/buttonsandnoncanvasdata; employeeopenspublicsources/details. Debt: actualhardwareGPU/24h/volume/offlinemodelintegrationnotcertified. Syntheticqualitynumbersmustbeobservednotinvented. Video footageisnotavailableunderverifiedlocallicense; useactualphotoandreal-time3Dmotion,noclaimfinishedvideo.
 実装細部補足: StoryHeroの実写はFA-50写真であり飛行動画とは表記しない。hero alphaはsky-lightの.98/.95/.35/.1、横herogradient90deg・縦180deg。HeroCTA56px/mobile48px、choice64px/mobile56px、export72px、mobilecredit10px(補助著作権のみ)、mobilecanvas400px・desktop560px、maxcanvas680px。StoryMapは展示スクロールを優先しOrbitControls無効、詳細地図で回転/拡大が可能。detail-moreはnative detailsで企業/事業/契約/出典を開閉しgraphの根拠動作で自動展開。menuEscapeはダイアログがない時閉じてbuttonにfocus復帰。page320msの値とcopyはトスから直接コピーせず展示固有のルール。
 세로 하드웨어 보정: 화면폭만으로가로배치를선택하지않는다. aspect-ratio3/4이하·601px이상은hero상단8dvh(64~160px),title60px,한반도/세계장면singlecolumn,canvas45dvh(560~900px),군버튼80px. 현재장면의번호는accent색으로선택배경에서AA대비를유지한다. overlayportraitalpha.96/.08.
+
+
+## 위성 전시 v8 · 2026-10-12 토스 실측 적용
+
+사용자 요청에 따라 토스 공식 홈페이지 https://toss.im/ 의 현재 런타임을 다시 확인했다. 최신 레퍼런스는 상단 16px/500 메뉴, 12px 다운로드 버튼 radius, 60px/700/72px hero 제목, 40px/700/56px 장면 제목, 큰 둥근 미디어와 문구 단위 translate 전개다. 금융 영상·브랜드 로고·전용 글꼴은 이 프로젝트 자산으로 복제하지 않는다. 기존 v7의 밝은 표면·큰 제목·실사 장면을 유지하면서 미디어 깊이와 장면 연결을 강화한다. 정확한 화면 복제가 아닌 전시용 디자인 시스템 적용이다.
+
+토큰 추가: --motion-reveal 720ms, --motion-stagger 90ms, --motion-fast 200ms, --motion-panel 360ms, --motion-shift 24px, --motion-hero-shift 48px, --motion-hero-scale 1.06, --motion-media-shift 32px, --motion-hero-travel 64px, --motion-spring cubic-bezier(.16,1,.3,1), --motion-press-scale .98. Lenis 홈 전용 wheel lerp .085, wheelMultiplier1, 프로그램 이동 duration .9초, easing min(1,1.001-2**(-10*t)). 터치는 네이티브 관성을 유지한다. 모든 수치는 전시 적응용 결정이며 토스 고유 애니메이션의 정확한 시간으로 주장하지 않는다.
+
+기존 primitive를 재사용: StoryCTA/Action/FilterChip/SystemCard에 같은 press/focus/selected 토큰; StoryHeading은 글자 단위 대신 한국어 의미 단위 span을 90ms 간격으로 드러낸다. StoryMedia는 같은 reveal primitive를 사용하며 viewport 안에서만 scroll transform 최대32px. HeroMedia는 확대1.06→1과 64px 이내 이동, HeroHeading은 짧은 문구 단위 전개. StoryChapters는 현재 위치를 명시하고 progress transform을 연속 갱신한다. MotionShowcase는 기존 /?showcase=1에서 상태를 확인한다.
+
+홈 .main만 Lenis로 부드럽게 이동한다. 지도 탐색·자체 스크롤 목록·native dialog·3D pointer controls는 네이티브 조작을 유지한다. 홈 종료, dialog 열림, document hidden, reduced motion 변경에는 Lenis를 제거하거나 정지하고 pending RAF/WAAPI 취소. 모든 프로그램 이동은 interruptible, 클릭·키보드 입력을 잠그지 않는다. reveal 기본 DOM은 읽기 가능하며 focus 즉시 표시. 모션 감소에서는 모든 transform 효과·smooth wheel을 제거하고 최종 상태와 동일한 콘텐츠를 제공한다. 모션은 장면 순서·현재 위치·선택 반응을 설명하는 데 사용하고 무기 동작을 꾸미지 않는다.
+
+위성 지형은 실제 Esri World Imagery와 ArcGIS Terrain3D 고도1:1, CesiumJS 렌더링이다. v6의 과장 지형·중립 이동 마커 설명은 이 절로 대체한다. KAAV/FA-50/도산안창호급/누리호 GLB는 공개 자료 기반 외형 재구성, 제조사 CAD·검증된 실내 아님. 공식 원문 내부 자료는 별도 OfficialResource 카드에서 기관·자료 범위·사용권을 명시한다. 원본CAD 재배포권한과 측정좌표 없는 자료로 현재 추정 시점을 검증된 탑승 시점으로 바꾸지 않는다.
+
+접근성/부채: 기존 48px 터치·focus·한국어 keep-all·본문대비 유지. 저사양GPU·오프라인지형·실측내부는 미검증이다. 모바일터치에wheel을강제하지않고 reveal은유한한진입동작이다. 성능점수는측정없이주장하지않는다.
+
+OfficialResource primitive: 기관+자료명+확인범위+원문열기+사용권. 공식 자료를 확인한 체계에만 표시하고 실측CAD·검증내부 여부를 scope/rights로 구분. surface elevated, radius r3, padding s5, gap s3, heading t3, body t1, caption t0, link accent/underline, hover accent-dark, focus 기존2px. 같은 component를 상세와시연 inspector에 재사용. Showcase는 FA-50 카드·CTA default/disabled/selected를공통토큰으로표시.
+
+HeroMedia v8 프레임: 토스 1280px 실제화면의 inset16과 큰라운드미디어를 참고하여 width calc(100%-s8), margin s4 auto s8, radius story-radius. 전시 고유 FA-50사진을사용. HeroCTA는 3D전시둘러보기1개만primary, 위성장비직접진입과음성은secondary로계층분리.
+
+OfficialResourceFacts는 공식문서에서확인된구성항목을dl(dt/ dd)로표시. font t1/line1.65, gap s3, dd margin s1, dt600/text, ddmuted. 3D내부검증과일치성을추정하지않는다.
+
+MapLabelLayout: 한반도에서체계이름이겹치면화면좌표·실제font측정으로충돌라벨만숨긴다. 선택체계는항상우선표시. 모든23개point와목록은유지하고zoom/drag/resize후재계산한다. label14px/600·centeranchor, 실제문자폭+20px배경/여유, height28px. export국가레이어는기존표시유지.
+
+지도모바일가독성: 라벨가로는실제화면폭내로제한. 수출7개국/기준점 라벨은28px단계로최대84px까지세로옮겨겹침을피하고지리point/연결선은원좌표유지. 한반도는선택우선충돌숨김, 목록은모두유지.
+
+SceneViewControls도최소48px, actionradius r2. 모바일사진자료는toolbar2행높이+s10 위에배치하여서로의터치영역을가리지않는다.
+
+SourceTerm: Warning Lights/L/G Panel/Side Stick/Throttle Grip 및붙는조사어절은nowrap으로기술명중간분절을막는다. 카드폭보다짧은검증된기술명에만적용한다.

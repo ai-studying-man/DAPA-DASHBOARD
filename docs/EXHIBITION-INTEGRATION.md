@@ -22,4 +22,3 @@ Photographs are not 3D meshes. A public external viewer cannot be attached to a 
 - Browser error log empty during observed cases. Source maps/terrain remain dependent on external network services.
 - LSP was unavailable and installation previously declined; no claim of LSP diagnostics coverage. Manufacturer CAD, verified interiors and all-system terrain meshes remain unavailable.
 - Proof image: local ignored docs/evidence/air-exhibition.png.
-
