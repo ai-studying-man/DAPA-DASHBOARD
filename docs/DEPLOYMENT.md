@@ -27,3 +27,7 @@ QA_URL=https://ai-studying-man.github.io/DAPA-DASHBOARD/ QA_EVIDENCE_DIR=docs/ev
 QA_EVIDENCE_DIR은 캡처·보고서 출력 위치다. Windows PowerShell에서는 $env:QA_URL과 $env:QA_EVIDENCE_DIR로 환경 변수를 설정한다. 브라우저 검증은 설치된 Chrome을 사용하며 영상 캡처는 Playwright ffmpeg가 필요하다.
 
 node_modules, dist, .local, .codegraph, 환경 파일과 로컬 QA 캡처 docs/evidence는 Git에서 제외한다. 배포물 dist는 Actions가 생성하여 Pages에 업로드한다. 공개 원자료·사진·글꼴의 출처·사용권은 기존 표시를 유지한다.
+
+## 최초 공개 배포 확인
+
+GitHub Actions 실행 38147300845가 성공했고 공개 URL의 HTML·사진·지도·지형·출처 자료가 HTTP 200으로 응답했다. 실제 공개 URL에서 51개 화면을 검사하여 브라우저 오류·axe 위반·가로 넘침이 없음을 확인했다. 이후 로고와 컴포넌트 화면의 홈 링크도 ./로 수정하고, 홈 복귀 검사를 포함한 52개 화면을 저장소 하위 경로에서 재검증했다. 영상·화면 캡처·상세 결과는 Git에서 제외한 로컬 docs/evidence/pages에 보관한다.

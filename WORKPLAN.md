@@ -21,4 +21,4 @@
 ## GitHub Pages 공개 배포
 - [x] 로컬 Git·원격 저장소·인증·Pages 상태 확인: 원격은 공개 빈 저장소, 인증 사용자는 ai-studying-man.
 - [x] 배포 경로 호환 및 main 자동 배포 workflow 구성·로컬 하위 경로 검증.
-- [ ] 원격 push·Pages 활성화·실제 공개 URL의 지도/이미지/시연 검증.
+- [x] 원격 push·Pages 활성화·실제 공개 URL의 지도/이미지/시연 검증.
