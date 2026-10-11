@@ -1,0 +1,37 @@
+{
+  "name": "k-defense-atlas",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173",
+    "build": "vite build && node scripts/inline-styles.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "qa:browser": "node scripts/qa/browser.cjs",
+    "qa:accessibility": "node scripts/qa/accessibility.cjs",
+    "qa:touch": "node scripts/qa/touch.cjs",
+    "fonts:subset": "node scripts/subset-fonts.cjs",
+    "qa:redesign": "node scripts/qa/redesign.cjs",
+    "qa:exhibition": "node scripts/qa/exhibition.cjs",
+    "qa:voice": "node scripts/qa/voice.cjs",
+    "qa:ontology": "node scripts/qa/ontology.cjs",
+    "qa:environment": "node scripts/qa/environment.cjs",
+    "qa:environment-scroll": "node scripts/qa/environment-scroll.cjs",
+    "qa:environment-controls": "node scripts/qa/environment-controls.cjs",
+    "qa:environment-race": "node scripts/qa/environment-race.cjs",
+    "qa:terrain": "node scripts/qa/terrain-clearance.mjs",
+    "qa:realism": "node scripts/qa/realism.cjs"
+  },
+  "dependencies": {
+    "@fontsource/noto-sans-kr": "5.2.6",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "lighthouse": "^13.5.0",
+    "playwright": "^1.64.0",
+    "pngjs": "^7.0.0",
+    "subset-font": "^2.9.0",
+    "vite": "7.3.7"
+  }
+}

@@ -1,0 +1,27 @@
+const paths = {
+  speaker: '<path d="M4 9h4l5-4v14l-5-4H4Z"/><path d="M17 8a6 6 0 0 1 0 8M20 5a10 10 0 0 1 0 14"/>',
+  play: '<path d="m8 4 12 8-12 8Z"/>',
+  stop: '<rect x="5" y="5" width="14" height="14" rx="1"/>',
+
+  map: '<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15M15 6v15"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',
+  network: '<circle cx="12" cy="4" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><circle cx="12" cy="13" r="2"/><path d="M12 6v5M6 18l4-4M14 14l4 4"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  layers: '<path d="m12 3 10 6-10 6L2 9Zm-10 11 10 6 10-6M2 18l10 5 10-5"/>',
+  land: '<path d="M3 14h18v5H3zM7 14v-4h8l3 4M12 10V6l8-2M6 21h12"/>',
+  sea: '<path d="M3 13h18l-4 6H7ZM8 13V8h7v5M11 8V3m-8 18 3-1 3 1 3-1 3 1 3-1 3 1"/>',
+  air: '<path d="m12 3 2 7 7 5v2l-8-2v4l3 2H8l3-2v-4l-8 2v-2l7-5Z"/>',
+  space: '<path d="m9 9 6 6M9 7l4-4 4 4-4 4ZM3 13l4-4 4 4-4 4ZM13 17l4-4 4 4-4 4ZM17 3l4 4M3 17l4 4"/>',
+  search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
+  settings: '<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/>',
+  arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
+  reset: '<path d="M4 9a8 8 0 1 1 0 7M4 3v6h6"/>',
+  expand: '<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  minus: '<path d="M5 12h14"/>',
+  close: '<path d="m6 6 12 12M18 6 6 18"/>',
+  link: '<path d="m10 14 4-4M8 16l-2 2a3 3 0 0 1-4-4l4-4a3 3 0 0 1 4 0m4-2 2-2a3 3 0 0 1 4 4l-4 4a3 3 0 0 1-4 0"/>',
+  external: '<path d="M14 3h7v7m0-7L10 14M10 3H3v18h18v-7"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/>',
+};
+export const icon = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.layers}</svg>`;

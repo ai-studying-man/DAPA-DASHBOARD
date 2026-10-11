@@ -1,0 +1,95 @@
+# K-방산 ATLAS 디자인 시스템
+
+## 0. Research Log
+- 기획 기준: docs/PRD-MVP-v0.1.md와 사용자의 다중 화면·유연한 메뉴·검색 요구.
+- 내장 후보: Linear, Vercel, Supabase. soft-skill + Linear 선택: 어두운 다층 표면·선명한 계층·넓은 지도 작업면. 브랜드·로고는 복제하지 않는다.
+- 인터랙션: beui.dev/r/tabs/raw 확인. 오버슈트 없는 선택 강조와 reduced-motion 적용. vanilla CSS로 구현.
+- Lazyweb: map dashboard navigation 1회 검색, Mapbox 통계 화면과 Google Maps 소개 화면 2개 실제 열람. Mapbox의 고정 탐색 레일·상단 필터와 Maps의 지도 중심 설명 구조를 차용. 스크린샷은 임시 자료만 사용하고 제품에 복제하지 않음.
+- Imagen: 해당 생성 도구가 이 세션에 없어 생략. 생성 이미지를 기능 화면 대신 사용하지 않는다.
+- 지도: datasets/geo-countries의 Natural Earth 해안선. 실제 DEM 대신 일정 높이로 돌출한 설명용 지리 모형.
+
+## 1. Atmosphere & Identity
+디지털 과학관의 탐색 테이블. 어두운 남색 유리 패널 뒤에 민트빛 한반도가 입체로 떠 있다. 세 가지 검토 방향(군 작전실, 통계 포털, 과학관) 중 과학관을 선택한다. 장비의 역할→사업→국가로 이어지는 선택이 기억에 남는 경험이다. 기관 로고나 실시간 군 상황처럼 보이는 표현은 쓰지 않는다.
+
+## 2. Color
+CSS token: bg #080f18, panel #101c29, elevated #182939, line #294052, text #eff5f6, muted #a0b4c4, dim #7891a5, accent #84e6c4, accent-dark #102c27, air #91c5ff, sea #78d6ed, space #cab3ff, warning #f4ca85, land #84e6c4, black #040a10. Material alpha: white 0.04/0.08/0.12, black 0.12/0.24. 3D: sea #0d2637, north #23474f, surrounding #173544, korea #458f80, outline #85ead3, model #b5d9d5, model-dark #375e66, grid #345263. Country surface #204552. 선택과 환경에만 색을 사용하고 모두 텍스트를 병기한다.
+
+## 3. Typography
+로컬 Noto Sans KR, monospace ui-monospace. 12/14/16/18/22/28/36px 토큰, 제목 600~700, 본문 400~500, line-height 1.55. body 최소 14px. 한국어 word-break keep-all, overflow-wrap anywhere. 전시 모드 UI 밀도와 글씨 확대. 영어 기술명은 보조 정보다.
+
+## 4. Spacing & Layout
+4px 기본 단위: 4/8/12/16/20/24/32/40/48/64. radius 8/12/20/28. 터치 48px 최소. shell height 100dvh. header 80px, footer 36px, rail 96px, detail 320px, compact detail 280px. Shell은 header/body/footer로 구성하고 목록·상세 영역만 각각 스크롤한다. 지도가 중앙 공간의 주인이다. 세로·900px 미만은 하단 nav + 지도/상세 상하 배치. 600px 미만은 검색·필터 줄바꿈, 상세 정보는 지도 아래 스크롤. 수동 좌측 메뉴에서도 좁은 화면에는 가로 nav로 안전하게 재배치한다. 자동/가로/세로 구성은 프레임 배치만 바꾸며 화면을 강제 회전시키지 않는다.
+
+## 5. Components
+- Action: button/a; default/hover/pressed/focus/disabled; 48px, radius 12, 선택 aria-pressed. 네이티브 키보드.
+- ModeNav: nav>button, 아이콘+이름; 한반도/수출/관계망/목록. 선택 상태 동일 컴포넌트가 좌측·하단 재사용.
+- FilterChip: button; 영역/군 선택과 결과 수, 선택 aria-pressed, 빈 결과는 초기화 동작 제공.
+- SystemCard: button; 체계명/영역/설명, 선택 테두리·배경, 이름이 긴 경우 줄바꿈, 리스트 스크롤 소유.
+- DetailPanel: heading/section/source links; 설명·관계·원문·기준일. 자체 스크롤, 체계 선택 시 콘텐츠 변경.
+- Status: role=status 로딩/빈 결과/실패/완료. 실패 시 실제 재시도 및 목록 대안.
+- Settings: native dialog; 자동/가로/세로, 메뉴 위치, 전시 밀도. Escape 닫기·초점 복귀.
+- MapStage: canvas + DOM selectable labels. 캔버스는 설명을 제공하고 모든 체계는 목록으로도 선택 가능.
+- RelationGraph: SVG lines + DOM buttons. 지식 관계만 표시, 각 노드가 실제 선택/필터/수출 이동에 연결.
+- Primitive showcase: /?showcase=1. 동일 primitive의 모든 상태를 표시한다.
+
+## 6. Motion & Interaction
+150ms press, 240ms emphasis, cubic-bezier(.22,1,.36,1). transform/opacity와 색상 상태 강조. 지도 회전은 사용자의 drag 또는 시점 버튼으로만 발생한다. 장비 자동 비행·전투 효과는 없다. reduced-motion은 transitions 제거 및 즉시 카메라 이동. 버튼 active scale .98, focus 2px accent ring. 선택한 지도 label이 상세와 연결된다.
+
+## 7. Depth & Surface
+Mixed: Linear의 near-black 층과 hairline rim, soft의 이중 프레임을 차용. 패널 상단 white/0.04 gradient + inset white/0.08 1px highlight, 바깥 프레임 line. 배경 radial sea glow. 캔버스는 실제 mesh·조명·입체 측면과 지리 경계를 렌더링한다. 제품 화면을 이미지로 대체하지 않는다.
+
+## 8. Accessibility Constraints & Accepted Debt
+목표 WCAG 2.2 AA: 48px 조작, visible focus, 네이티브 버튼과 검색 label, 라이브 결과 알림, 모션 감소, canvas와 별개 목록. 대시보드에 정확한 작전 배치 없음.
+제약(사용자 승인된 부채가 아닌 MVP 범위): 내부 업무바통·실시간 AI·전체 사업 통계·DEM·정밀 장비 모델 미구현. 지도·프로그램과 콘텐츠는 로컬 HTTP 제공; 출처 원문 열기는 인터넷 필요. 4K 실물 터치 장비와 장시간 운영은 별도 현장 검증 필요.
+
+## 2026-10-08 밝은 전시 시스템 개편 (이 절이 앞선 어두운 토큰을 대체)
+
+사용자 요청: 밝은 디자인, 첫 화면 무기체계 선택, 군/환경별 큰 분류, 변천 비교.
+공식 참고: Fluent 2 https://fluent2.microsoft.design/color 의 neutral/brand 분리, Material 3 https://m3.material.io/styles/color/the-color-system 의 surface/container/selected 역할, Palantir https://www.palantir.com/explore/platforms/foundry/ontology/ 의 체계와 연결 정보 구조. 브랜드 복제나 공식 제품이라고 표시하지 않는다.
+
+표면: bg #f5f7fa, panel #ffffff, elevated #edf2f8, line #d0d9e5, text #172b4d, muted #52657d, dim #5d7085. 선택: accent #145caa, accent-dark #e7f0fc. 환경 텍스트: land #176348, sea #096681, air #225da9, space #654aa0, warning #8c570d. 명도 대비를 우선한다. white-low/mid/high는 청색 0.025/0.05/0.08; shade는 청색 0.08. primary-action의 글자는 #ffffff. 집중된 표면과 얕은 그림자로 계층을 표현한다.
+지도: 밝은 바다 #e1edf5, 주변 땅 #d2dce7, 북한 #b9c9d9, 대한민국 #5d9fc9, 윤곽 #266c9c, 그리드 #c9dbe9. 흰 광원, 어두운 모델 하부 #36536d. 지도 색은 src/scene-theme.js에 별도 역할 토큰으로 관리한다.
+
+새 재사용 요소: WelcomeCategory(군 4개·환경 3개/우주 확장), WelcomeSystem(실제 체계 직접 선택), EraCard(과거/현재/미래 상태·날짜·근거), JourneyNav(홈 복귀), TimelineView(3열→좁은 화면 1열). 기본/hover/pressed/focus 상태는 공통 선택 토큰과 150ms 전환을 사용한다. 정보 없는 미래는 미확인 상태로 표시한다.
+
+첫 진입은 선택 화면. 카드 선택→해당 필터가 적용된 지도 또는 직접 체계 상세로 이동. 왼쪽/하단 탐색 메뉴와 처음으로 버튼으로 재탐색 가능. 선택 화면에는 큰 제목·군별 선택·환경별 선택·대표 체계 직접 선택이 있다. 헤더/메뉴는 고정, 선택 본문은 자체 스크롤. 지도 JS는 지도 선택 후 로드한다.
+변천 화면은 공개 수록 기록 비교다. 단일 발표만 있으면 과거를 추정하지 않는다. 현재는 최신 수록 발표 기준이며 2026년 실시간 상태가 아니다. 미래는 공개자료의 계획/기대만 표시하고 확정 실적과 구분한다. 역사적 선행·후속 체계 비교는 별도 검수 데이터 추가가 필요하다.
+키오스크 초심자: 이름 몰라도 군/환경으로 진입. 직원: 체계 선택→변천→근거. 저시력/키보드 사용자: 48px 터치, 대비, focus, 색과 텍스트 병기. 실제 현장 장비·정식 온톨로지·전체 통계 범위는 기존 제한을 유지한다.
+
+## 관람객 전시 경험 (2026-10-08)
+
+공식 사례 조사: Inhance aerospace / EBC의 단계적 이야기·실시간 3D, Saab Underwater Virtual Booth의 주제별 진입, Museum of Flight/point2explore의 모델 조작과 투어, Hanwha virtual showroom의 제품별 탐색. 출처는 docs/EXHIBITION-RESEARCH.md에 보관. 기존 밝은 테마를 유지한다.
+
+분류 원칙: 군(누가 사용하는가)과 환경(어디에서 사용하는가)을 독립된 탭으로 구분한다. 한 번에 하나의 분류만 진입하며 다른 분류의 잔여 필터는 초기화한다. category 탭은 selected/aria-selected와 안내문을 가진다. 음성 전시 시작은 첫 화면의 주 동작이며 버튼을 누른 뒤만 발화한다.
+새 요소: ClassificationTabs, AudioTourDialog(큰 자막·3D 모델·이전/다음·재생/정지), RoleSummary, OrganizationCard(기업/연구기관/사업기관 및 근거 링크), RegionPicker(공개 도시 단위 산업 연결), ModelViewer(동일 renderer 재사용), MapObjectPicking(드래그와 클릭 구분). 기존 spacing/touch/focus/motion 토큰 사용, 지역 선택은 텍스트와 선택 상태 병기.
+모델뷰어 높이 220px(detail) / minmax(240px,1fr)(tour), 음성 투어 최대폭 1100px·높이 85dvh, 도시버튼과 음성버튼 48px 이상. 모델은 직접 제작한 설명용 3D 모형이며 실측 제조사 CAD로 표시하지 않는다.
+음성: SpeechSynthesis ko voice를 사용하고 같은 내용의 자막을 항상 표시. 한국어 음성 미설치/오류 상태에서는 글로 탐색할 수 있고 자동 재생은 정지한다. 이전/다음/닫기/홈 이동 시 기존 발화를 취소하여 겹치지 않는다. 텍스트만 환경에서도 모든 정보 접근 가능.
+지역: 사천/울산/창원 등 공식 기업 자료에 공개된 도시 수준의 산업 연결. 전시 모델 위치와 산업 연결 마커는 구분하며 실제 배치 위치로 표현하지 않는다. 참여기관은 검증 가능한 공개 역할만 표시하고 정보기관 참여는 추정하지 않는다.
+사용자 흐름: 홈 군/환경 선택 → 지도에서 체계/지역 선택 → 역할·3D 모델·기관과 근거 → 듣기/변천. 음성 투어는 육·해·공·해병·우주 5개 장면을 명시적으로 선택·전환하며 자동 넘김은 선택 옵션이다. 키보드와 터치·자막 대체를 유지한다.
+
+## 객체 중심 체계 시연 v4
+팔란티어 공식 Ontology core concepts의 객체·속성·관계·동작 개념을 참고한다. 실제 Foundry SDK나 OWL 추론 엔진은 아니다. System/Organization/Project/Region/Source와 타입 있는 관계를 로컬 데이터로 구성하며 원문 근거와 설명용 분류를 구분한다. 공통 환경/기관 연결은 실제 무기 간 상호운용이나 전술 협업을 입증하지 않는다.
+SystemDemo: 기존 1100px·85dvh 밝은 native dialog를 재사용. 외형/구성/역할 단계 button(aria-pressed), 3D stage와 관계 탐색 inspector, 이전 화면으로 복귀. 구성은 실물 내부 부품이 아닌 설명 모형의 외형 그룹이다. 역할 단계는 사용자가 재생할 때만 6초의 단순 이동/관측 표현을 시연하고 중지/초기화 가능. 실제 속도·사거리·임무 계획을 표현하지 않는다. 모션 감소·탭 비활성·닫기에서는 재생을 중지한다.
+기존 token과 네이티브 dialog 초점관리 사용. beui center-morph-modal 소스의 controlled open/close·reduced-motion 원칙을 참고하되 React/Motion 의존성은 추가하지 않는다. 관계 카드는 공통 환경/공개기관 여부와 근거 링크를 명시하며 체계 버튼은 다음 객체의 시연으로 이동한다.
+
+## 실물 외형 자료 v5
+장비의 임의 도형과 외형 조각 펼치기를 전시에서 제거한다. 지도에는 장비를 의미하는 중립 마커를 사용한다. 장비별 공개 3D / 실물 사진 / 자료 준비 중을 구분한다. K9는 위장 도색 공개 3D, K2는 상세 외형이나 실물 도색과 다른 공개 3D다. FA-50·천무는 실제 사진으로 표시하며 3D라고 부르지 않는다. 모든 자산에 저작자·사용권·원본을 표시한다. 외부 뷰어·사진에는 인터넷이 필요하다. 동작 애니메이션 미확보 상태에서 임의 이동을 재생하지 않는다. 아직 없는 장비 자산은 정직한 준비 상태와 기존 공개 정보로 탐색한다.
+
+## 한반도 운용 환경 v6
+기존 밝은 색·48px 버튼·native dialog를 유지한다. EnvironmentScene은 공개 DEM의 지형과 지상/수면/수중/공중/연안/우주 환경을 연결한다. 지형 높이와 항공·수중 레이어 간격은 전시에서 보기 쉽도록 과장한다. 공개 고도 데이터를 로컬로 가공하여 외부 지형 서비스 연결 없이 표시한다. 실제 배치·항로·잠항 수심·작전이나 성능을 표현하지 않는다.
+장비 외형과 운용 환경은 별도 탭으로 동일 체계에 연결한다. 외형은 검증된 공개 3D/사진을 유지하고 환경 시연의 이동 표시는 이름이 붙은 중립 마커다. 공개 모델 iframe을 현지 Three.js 지형에 삽입한 것으로 표현하지 않는다. 사진 장비도 환경 시연이 가능하나 장비 자체 3D 동작은 아니다. 제조사 사용권 있는 GLB 확보 후 동일 장면에 실물 외형 자산을 통합할 수 있다.
+EnvironmentHost 높이430px/모바일340px, 환경 안내·지형 출처·재생/중지/전체 시점 버튼 제공. 선택시 적합한 환경으로 자동 연결: 전차·자주포·천무=지상, 충남함=수면, 도산안창호급=수중, FA-50/MUAV=공중, KAAV=연안, 위성=우주. 지상만 산악/평지 선택 제공. 지도 자체도 DEM과 해당 높이 레이어로 마커 배치. 육해공 군 분류와 운용 환경은 독립된 관계로 표시한다.
+환경 이동은 명시적 재생 시8초, 종료/닫기/체계 변경/탭 비활성에서 취소. 모션 감소 시 정지 지점과 자막으로 동일 내용을 제공한다. 모든 환경 설명은 텍스트 대안, 전체 체계는 목록으로 선택 가능. 로딩/실패/재시도 상태 제공. DEM은 0.05도 샘플로 정밀 현장 지형이나 항해 자료로 사용할 수 없다.
+환경 토큰: terrain-low #6ba787, terrain-high #ced7c9, terrain-rock #7e927f, terrain-base #a7c3b1, water-deep #8ebdd0, water-surface #b8dce9, sky #edf6fc. 색보다 환경 이름·범례가 분류의 기준이다.
+
+## 관람객 스크롤 전시 v7 · Toss 참고
+사용자 요청은 토스의 UI/UX 원칙을 K-방산 전시에 적용하는 것이다. 금융 화면·로고·글꼴·브랜드 콘텐츠의 픽셀 복제가 아니다. 2026-10-08 실제 Chrome ko-KR에서 https://toss.im/ 를390/768/1440px로 열어 첫 장면과 스크롤 장면, computedStyle을 docs/evidence/story-v7/reference에 기록했다. /ko는404여서 참고에서 제외했고 한국어 루트의 정상 캡처로 대체했다. 확인값: desktop navigation16px/500, mobile hero40px/700/46px line-height, tablet hero60px/700/72px. 큰 제목, 이미지 중심 장면, 장면별 짧은 설명, 여백, 시각적 스크롤 전개를 차용한다. 제품은 로컬 Noto Sans KR 유지. Toss Product Sans는 복제하지 않는다.
+
+토큰 v7(밝은 기본 토큰을 대체): text #191f28, muted #4e5968, dim #6b7684, bg #f7f8fa, panel #ffffff, elevated #f2f4f6, line #e5e8eb, accent #1b64da, accent-dark #e8f3ff; blue-hover #1557c0, sky-light #eef6ff, hero-tint #dcecff. spacing은 기존4px단위, 추가section96/128px, max-story-width1200px. radius action16px, media32px, pill999px. 제목 story40/60/72px, subsection28/40/48px, body18/20px, caption12/14px. mobile title32px로한국어어절을보존한다. contrastAA목표, linkunderline, 최소48px터치.
+StorySection: 한장면한제목·짧은설명·1주동작. Hero에는실제FA-50사진(원본CCBY2),명확한군4선택. 다음 장면은공개DEM한반도3D, 다음은공개계약세계3D, 마지막은전체체계와군/환경선택. 상세정보는기존탐색/시연으로이어지고출처는접을수있는details로제공한다. 숫자는수록데이터범위,수출은폴란드1개국·계약사례이며세계전체시장이나납품실적으로칭하지않는다. 제조사CAD·모든실사자산미확보범위유지.
+StoryCTA: defaultblue/hoverblue-hover/pressscale.98/focusring/disablednative. StoryJump: native anchor orbutton smoothscroll(600msbrowsernative),touchmomentumnative. Reveal: IntersectionObserverroot.main, contentvisiblebydefault; enteropacity0→1,y24→0,600mscubic-bezier(.22,1,.36,1), nooutgoinghidden. Onkeyboardfocusreveal즉시. Sectionactivepill showscurrentchapter,progressbartransformscaleX. Stage3D: realThree.jsexistingAtlasMap reuseAPI, on-demandlazyload, loading/error/retryDOM, sourcedataandaccessibledetailbuttons. Scroll-driven3D changescamera/connection reveal onlyactiveviewport, userrotationdisableprogrammaticupdateuntilscene-reset; noindefinitedecorativerotation. worldline한국→폴란드는계약관계,실제운송경로아님.
+PageTransition: scoped .main opacity0→1+translateY12→0,320ms; WAAPI; cancelpreviousanimationrapidnavigation. Dialog open same320ms fade/translate, close nativefocusrestore. Reducedmotiondisablestransformreveal/page/cameraanimationsandnativejumpinstant, finalstaticstate&allcontentavailable. documenthidden/nohome stopsstoryframes. Passive scroll schedulesoneRAFperframe, no wheel/touch hijack, no scroll trap.
+MenuToggle: nativebutton aria-expanded. Home leavesnavigationcollapsed, menuopensdrawer; explorationcanmanuallyhideleft/bottomnav; duringdemoauto-collapseandrestorepreviousmenustateonclose. Demo focusplay hidesinspectorandauxiliarycopy, explicitinformationbuttonrestoresrelatedsystems; stop/endrestores. Closeandpendingplayversionguardsremain.
+Persona: museumfirstvisitor seeshero→branch→visual; portraittouchuser controlsreachablebottomand48px; keyboardreaderusesanchors/buttonsandnoncanvasdata; employeeopenspublicsources/details. Debt: actualhardwareGPU/24h/volume/offlinemodelintegrationnotcertified. Syntheticqualitynumbersmustbeobservednotinvented. Video footageisnotavailableunderverifiedlocallicense; useactualphotoandreal-time3Dmotion,noclaimfinishedvideo.
+実装細部補足: StoryHeroの実写はFA-50写真であり飛行動画とは表記しない。hero alphaはsky-lightの.98/.95/.35/.1、横herogradient90deg・縦180deg。HeroCTA56px/mobile48px、choice64px/mobile56px、export72px、mobilecredit10px(補助著作権のみ)、mobilecanvas400px・desktop560px、maxcanvas680px。StoryMapは展示スクロールを優先しOrbitControls無効、詳細地図で回転/拡大が可能。detail-moreはnative detailsで企業/事業/契約/出典を開閉しgraphの根拠動作で自動展開。menuEscapeはダイアログがない時閉じてbuttonにfocus復帰。page320msの値とcopyはトスから直接コピーせず展示固有のルール。
+세로 하드웨어 보정: 화면폭만으로가로배치를선택하지않는다. aspect-ratio3/4이하·601px이상은hero상단8dvh(64~160px),title60px,한반도/세계장면singlecolumn,canvas45dvh(560~900px),군버튼80px. 현재장면의번호는accent색으로선택배경에서AA대비를유지한다. overlayportraitalpha.96/.08.

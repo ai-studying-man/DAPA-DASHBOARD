@@ -1,0 +1,33 @@
+import * as T from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {loadTerrain,terrainMesh,terrainY,elevation,surfaceHeight,markerHeight} from './terrain.js';
+import {sceneTheme as palette} from './scene-theme.js';
+import {environmentFor,environments} from './environment-data.js';
+export class EnvironmentViewer{
+ constructor(host,onStatus){
+  this.host=host;this.onStatus=onStatus;this.scene=new T.Scene();this.scene.background=new T.Color(palette.sky);this.camera=new T.PerspectiveCamera(40,1,.1,150);
+  this.renderer=new T.WebGLRenderer({antialias:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.domElement.setAttribute('role','img');host.replaceChildren(this.renderer.domElement);
+  this.label=document.createElement('span');this.label.className='environment-label';host.append(this.label);
+  this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.enablePan=false;this.controls.minDistance=7;this.controls.maxDistance=35;this.controls.maxPolarAngle=Math.PI/2.02;this.controls.addEventListener('change',()=>this.render());
+  this.scene.add(new T.HemisphereLight(palette.skyLight,palette.terrainRock,2));const sun=new T.DirectionalLight(palette.sun,3);sun.position.set(-8,12,6);this.scene.add(sun);this.content=new T.Group();this.scene.add(this.content);
+  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(host);this.reduced=matchMedia('(prefers-reduced-motion: reduce)');this.reduced.addEventListener('change',()=>this.stop());document.addEventListener('visibilitychange',()=>{if(document.hidden)this.stop()});this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.stop();this.onStatus('3D 환경 연결이 중단되었습니다. 다시 불러오기 버튼을 누르세요.')});
+ }
+ async init(){this.data=await loadTerrain();this.region=await fetch('/data/region.json').then(r=>{if(!r.ok)throw new Error('해안선 자료 연결 실패');return r.json()});this.host.dataset.ready='true'}
+ setSystem(system,preset){this.stop();this.system=system;this.mode=preset||environmentFor(system);this.host.dataset.environment=this.mode;this.renderer.domElement.setAttribute('aria-label',system.name+' · '+environments[this.mode].name+' · 공개 고도 기반 환경. 이동 표시는 설명용 마커입니다.');this.content.traverse(o=>{o.geometry?.dispose();o.material?.dispose()});this.content.clear();
+  this.content.add(terrainMesh(this.data,{base:.12,bathymetry:this.mode==='underwater'}));
+  const water=new T.Mesh(new T.PlaneGeometry(32,32),new T.MeshStandardMaterial({color:palette.waterSurface,roughness:.45,transparent:this.mode==='underwater',opacity:this.mode==='underwater'?.3:1,depthWrite:this.mode!=='underwater',side:T.DoubleSide}));water.rotation.x=-Math.PI/2;water.position.y=.015;this.content.add(water);
+  for(const feature of this.region.filter(f=>['South Korea','North Korea'].includes(f.name)))for(const polygon of feature.polygons){const points=polygon[0].map(([lon,lat])=>new T.Vector3((lon-127.5)*1.25,terrainY(this.data,lon,lat,.12)+.025,-(lat-37.3)*1.6));this.content.add(new T.Line(new T.BufferGeometry().setFromPoints(points),new T.LineBasicMaterial({color:palette.outline,transparent:true,opacity:.65})))}
+  if(['air','space'].includes(this.mode)){const layer=new T.Mesh(new T.PlaneGeometry(10,17),new T.MeshBasicMaterial({color:this.mode==='air'?palette.air:palette.space,transparent:true,opacity:.07,side:T.DoubleSide,depthWrite:false}));layer.rotation.x=-Math.PI/2;layer.position.y=this.mode==='air'?3.3:5;this.content.add(layer)}
+  this.path=new T.Line(new T.BufferGeometry().setFromPoints(Array.from({length:65},(_,i)=>this.position(i/64))),new T.LineDashedMaterial({color:palette[this.mode==='underwater'?'sea':this.mode==='plain'||this.mode==='coast'?'land':this.mode]||palette.connection,dashSize:.16,gapSize:.1}));this.path.computeLineDistances();this.content.add(this.path);
+  this.marker=new T.Mesh(new T.SphereGeometry(.12,20,16),new T.MeshStandardMaterial({color:palette.connection,roughness:.35}));this.marker.position.copy(this.position(0));this.content.add(this.marker);this.label.textContent=system.name+' · 설명용 위치';this.home();this.onStatus('환경 준비 완료 · 재생 버튼으로 살펴보세요.');this.render();
+ }
+ position(t){let lon,lat,y;switch(this.mode){case'land':lon=128+t*.5;lat=37.3+t*.5;y=markerHeight(this.data,lon,lat,.12);break;case'plain':lon=126.8+t*.35;lat=35.6+t*.3;y=markerHeight(this.data,lon,lat,.12);break;case'coast':lon=126.0+t*.8;lat=35.5;y=markerHeight(this.data,lon,lat,.12);break;case'air':lon=126.6+t*2;lat=35.5+t*2;y=3.8+Math.sin(t*Math.PI)*.3;break;case'space':lon=126+t*3;lat=38+t;y=5.3+Math.sin(t*Math.PI)*.4;break;default:lon=130.2+t;lat=36+t;y=this.mode==='underwater'?Math.max(-.9,surfaceHeight(this.data,lon,lat,.12)+.2):.17}
+  return new T.Vector3((lon-127.5)*1.25,y,-(lat-37.3)*1.6)
+ }
+ home(){this.controls.target.set(0,1,-.9);this.camera.position.set(7,11,14);if(this.mode==='underwater'){this.controls.target.set(1,-.25,-1);this.camera.position.set(9,7,12)}this.resize();this.controls.update();this.render()}
+ resize(){const w=this.host.clientWidth,h=this.host.clientHeight;if(!w||!h)return;this.camera.aspect=w/h;this.camera.updateProjectionMatrix();this.renderer.setSize(w,h);const base=Math.max(24,17/Math.max(this.camera.aspect,.5));const direction=this.camera.position.clone().sub(this.controls.target).normalize();this.camera.position.copy(this.controls.target).addScaledVector(direction,base);this.render()}
+ play(){this.stop();if(!this.marker||!this.system||document.hidden||!this.host.closest('dialog')?.open)return;if(this.reduced.matches){this.onStatus('모션 감소 설정 · '+environments[this.mode].steps.join(' → '));return}const start=performance.now();let phase=-1;const tick=now=>{if(!this.host.isConnected||this.host.hidden||!this.host.closest('dialog')?.open)return this.stop();const t=Math.min((now-start)/8000,1),index=Math.min(2,Math.floor(t*3));this.marker.position.copy(this.position(t));if(index!==phase){phase=index;this.onStatus((index+1)+' / 3 · '+environments[this.mode].steps[index])}this.draw();if(t<1)this.animation=requestAnimationFrame(tick);else{this.animation=0;this.onStatus('환경 시연 완료 · 장비 동작·성능을 재현한 애니메이션은 아닙니다.')}};this.animation=requestAnimationFrame(tick)}
+ stop(){cancelAnimationFrame(this.animation);this.animation=0}
+ render(){if(this.frame)return;this.frame=requestAnimationFrame(()=>{this.frame=0;this.draw()})}
+ draw(){this.renderer.render(this.scene,this.camera);if(!this.marker)return;const v=this.marker.position.clone().project(this.camera);this.label.hidden=v.z>1||Math.abs(v.x)>1||Math.abs(v.y)>1;this.label.style.left=(v.x*.5+.5)*this.host.clientWidth+'px';this.label.style.top=(-v.y*.5+.5)*this.host.clientHeight+'px'}
+}
