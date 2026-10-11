@@ -1,10 +1,11 @@
 export const environments={
- land:{name:'지상 · 산악',text:'고도 자료의 산악·계곡 위로 지상 체계의 활동 환경을 살펴봅니다.',steps:['산악 지형 살펴보기','지형을 따르는 지상 이동 표시','체계의 역할과 참여기관 확인']},
- plain:{name:'지상 · 평지',text:'낮은 고도 지형에서 지상 플랫폼의 활동 환경을 비교합니다.',steps:['평지 지형 살펴보기','지표면을 따르는 이동 표시','산악 환경과 비교']},
- sea:{name:'해상 · 수면',text:'한반도 주변 바다의 수면에서 함정이 활동하는 환경입니다.',steps:['한반도와 주변 해역 살펴보기','수면 위 활동 환경 표시','함정의 공개 사업 확인']},
- underwater:{name:'해상 · 수중',text:'수면을 투명하게 펼쳐 해저 지형과 수중 활동 영역을 보여줍니다.',steps:['수면과 수중 영역 구분','해저 위 수중 이동 표시','잠수함의 공개 사업 확인']},
- air:{name:'공중 · 하늘',text:'한반도 지형 위에 공중 활동 영역을 구분합니다. 이동 표시는 비행 성능이나 실제 항로가 아닙니다.',steps:['지형과 공중 영역 구분','지형 위 공중 이동 표시','항공 체계의 공개 역할 확인']},
- coast:{name:'연안 · 해상에서 지상',text:'해병대 상륙돌격장갑차가 물과 육지를 오가는 활동 환경을 설명합니다.',steps:['바다와 해안 지형 살펴보기','해상·지상 환경 연결 표시','상륙 기동 체계의 역할 확인']},
- space:{name:'우주 · 관측 영역',text:'지형보다 높은 우주 관측 영역을 설명합니다. 표시 높이와 곡선은 실제 궤도가 아닙니다.',steps:['한반도와 우주 영역 구분','설명용 관측 영역 표시','위성 사업과 참여기관 확인']}
+ land:{name:'지상 · 산악',text:'실제 위성 영상과 고도 지형 위에서 산악 환경과 장비 외형 자료를 함께 관찰합니다.',steps:['한반도','산악 환경','장비 관찰']},
+ plain:{name:'지상 · 평지',text:'전주 일대의 실제 위성·고도 지도에서 평지와 지상 장비의 관계를 살펴봅니다.',steps:['한반도','평지 환경','장비 관찰']},
+ sea:{name:'해상 · 수면',text:'한반도 동해 해역과 실제 함정 외형 자료를 함께 살펴봅니다.',steps:['한반도','해상 환경','함정 자료']},
+ underwater:{name:'해상 · 수중 체계',text:'동해 위성 지도와 잠수함 실물 자료를 관찰합니다. 수중 가시화·실제 잠항 수심·해저 모델은 제공하지 않습니다.',steps:['한반도','해상 관측','잠수함 자료']},
+ air:{name:'공중 · 하늘',text:'실제 한반도 위성 지도와 항공기 외형 자료를 관찰합니다. 관측 높이는 전시용이며 실제 비행 항로나 운용 고도가 아닙니다.',steps:['한반도','공중 환경','항공기 자료']},
+ coast:{name:'연안 · 해상에서 지상',text:'포항 동해 연안에서 KAAV 외형 재구성과 상륙훈련 실제 사진을 비교합니다. 사진 기반 재구성은 RCWS 개량형이나 제조사 CAD가 아닙니다.',steps:['한반도','연안 환경','장비 관찰']},
+ space:{name:'우주 · 지구 관측',text:'지구 전체와 한반도의 관측 환경, 정찰·통신위성 사업을 살펴봅니다. 위치·높이는 전시용이고 실제 궤도·실시간 위성 추적이 아닙니다.',steps:['지구','한반도 관측','위성 사업']},
+ launch:{name:'우주 · 발사 기반',text:'나로우주센터 일대의 실제 위성 지도를 발사 장면 사진과 함께 관찰합니다. 누리호는 민간 우주 수송 기반입니다.',steps:['한반도','나로우주센터 일대','발사 사진']},
 };
-export function environmentFor(system){return system.id==='dosan'?'underwater':system.id==='kaav'?'coast':system.domains.includes('space')?'space':system.domains.includes('air')?'air':system.domains.includes('sea')?'sea':'land'}
+export function environmentFor(system){return system.id==='dosan'?'underwater':system.id==='kaav'?'coast':system.id==='nuri'?'launch':system.domains.includes('space')?'space':system.domains.includes('air')?'air':system.domains.includes('sea')?'sea':'land'}

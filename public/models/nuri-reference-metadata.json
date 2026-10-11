@@ -1,0 +1,27 @@
+{
+  "author": "DAPA DASHBOARD original geometry",
+  "license": "CC BY 4.0",
+  "units": "metres",
+  "up": "Y",
+  "forward": "-Z",
+  "uncrewed": true,
+  "classification": "Public-source exhibition exterior reconstruction, not manufacturer CAD or engineering simulation",
+  "officialLength": 47.2,
+  "officialMaximumDiameter": 3.5,
+  "source": "https://www.kari.re.kr/eng/contents/176",
+  "min": [
+    -1.7817778587341309,
+    0,
+    -1.7817778587341309
+  ],
+  "max": [
+    1.7817778587341309,
+    47.20000076293945,
+    1.7817778587341309
+  ],
+  "size": [
+    3.5635557174682617,
+    47.20000076293945,
+    3.5635557174682617
+  ]
+}

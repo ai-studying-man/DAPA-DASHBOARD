@@ -1,0 +1,27 @@
+{
+  "license": "CC BY 2.0",
+  "author": "DAPA DASHBOARD original geometry; photo by ROKAF via KAI",
+  "classification": "Public-photo-derived exterior approximation, not manufacturer CAD; cockpit and landing gear are illustrative",
+  "units": "metres",
+  "forward": "-Z",
+  "eye": [
+    0,
+    3.120000002384186,
+    -3.35
+  ],
+  "min": [
+    -4.71999979019165,
+    0,
+    -6.565000057220459
+  ],
+  "max": [
+    4.71999979019165,
+    4.809999942779541,
+    6.565000057220459
+  ],
+  "size": [
+    9.4399995803833,
+    4.809999942779541,
+    13.130000114440918
+  ]
+}

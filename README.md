@@ -85,8 +85,16 @@ npm run qa:touch
 
 `npm run dev` 또는 `npm run build` 후 `npm run preview -- --host 127.0.0.1 --port 4173`으로 확인합니다. [검증·남은 제약](docs/evidence/story-v7/QA.md). 세계 데이터는 현재 폴란드 1개국 공개 계약 사례이며 전체 방산 시장 통계가 아닙니다. 실사 동영상과 모든 장비의 승인된 고정밀 3D 자산은 추가 확보가 필요합니다.
 
+## 실제 지형·탑승 관측 시연
+
+홈의 **실제 지형·탑승 시연** 버튼 또는 `?experience=terrain`으로 진입합니다. 평창 일대의 위성·항공 영상과 실제 고도 지형 위에서 T-80U 공개 모델을 외부·해치·조종수 관측 시점으로 살펴볼 수 있습니다. 실내 재현은 포함하지 않으며 인터넷 연결이 필요합니다. [시연 구성과 자료 출처](docs/TERRAIN-EXPERIENCE.md)를 참고하세요.
+
 ## GitHub Pages
 
 [온라인 대시보드](https://ai-studying-man.github.io/DAPA-DASHBOARD/) · [배포 설정과 실행 방법](docs/DEPLOYMENT.md)
 
 main 브랜치 변경은 GitHub Actions에서 빌드하여 Pages에 배포합니다. 로컬 검사 캡처 docs/evidence는 공개 저장소에 포함하지 않습니다. 현재 공개 자료 범위와 실물 3D의 제약은 기존 안내를 유지합니다.
+
+## 통합 위성 전시
+
+메인 지도는 실제 Esri 영상과 ArcGIS Terrain3D 고도를 사용합니다. 23개 대표 체계와 공개 근거가 있는 6개국 수출 사례를 제공합니다. KAAV·FA-50·도산안창호급·누리호는 공개 자료 기반의 독자 GLB 외형을 지형 위에서 관찰할 수 있습니다. 제조사 CAD·검증된 내부·성능 시뮬레이션은 아닙니다. 상세 범위는 `docs/EXHIBITION-INTEGRATION.md`, 출처는 각 모델의 ATTRIBUTION 문서에 있습니다.

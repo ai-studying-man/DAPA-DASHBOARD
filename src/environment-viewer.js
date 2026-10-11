@@ -1,33 +1,66 @@
-import * as T from 'three';
-import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {loadTerrain,terrainMesh,terrainY,elevation,surfaceHeight,markerHeight} from './terrain.js';
-import {sceneTheme as palette} from './scene-theme.js';
+import {createSatelliteViewer} from './cesium-runtime.js';
 import {environmentFor,environments} from './environment-data.js';
+import {equipmentAssets} from './equipment-assets.js';
+import {ModelViewer} from './model-viewer.js';
+import './satellite-exhibition.css';
+const locations={launch:[127.535,34.431],land:[128.7063,37.6677],plain:[126.94,35.82],coast:[129.426,36.06],sea:[129.7,35.9],underwater:[130.4,36.1],air:[128.2,35.8],space:[127.5,36.2]};
 export class EnvironmentViewer{
- constructor(host,onStatus){
-  this.host=host;this.onStatus=onStatus;this.scene=new T.Scene();this.scene.background=new T.Color(palette.sky);this.camera=new T.PerspectiveCamera(40,1,.1,150);
-  this.renderer=new T.WebGLRenderer({antialias:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.domElement.setAttribute('role','img');host.replaceChildren(this.renderer.domElement);
-  this.label=document.createElement('span');this.label.className='environment-label';host.append(this.label);
-  this.controls=new OrbitControls(this.camera,this.renderer.domElement);this.controls.enablePan=false;this.controls.minDistance=7;this.controls.maxDistance=35;this.controls.maxPolarAngle=Math.PI/2.02;this.controls.addEventListener('change',()=>this.render());
-  this.scene.add(new T.HemisphereLight(palette.skyLight,palette.terrainRock,2));const sun=new T.DirectionalLight(palette.sun,3);sun.position.set(-8,12,6);this.scene.add(sun);this.content=new T.Group();this.scene.add(this.content);
-  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(host);this.reduced=matchMedia('(prefers-reduced-motion: reduce)');this.reduced.addEventListener('change',()=>this.stop());document.addEventListener('visibilitychange',()=>{if(document.hidden)this.stop()});this.renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();this.stop();this.onStatus('3D 환경 연결이 중단되었습니다. 다시 불러오기 버튼을 누르세요.')});
+ constructor(host,onStatus){this.host=host;this.onStatus=onStatus;this.assetViewer=new ModelViewer();this.version=0;this.timers=[];this.reduced=matchMedia('(prefers-reduced-motion: reduce)');}
+ async init(){
+  this.host.innerHTML='<div class="satellite-canvas"></div><div class="scene-location"></div><div class="scene-map-loading" role="status">위성 영상 세부 타일 준비 중…</div><section class="equipment-in-scene"><h4></h4><div class="scene-asset"></div></section><div class="scene-view-controls"><button data-scene-view="peninsula">한반도</button><button data-scene-view="context">활동 환경</button><button data-scene-view="site">장비·현장 관찰</button><button data-scene-view="onboard" disabled>탑승 관측 · 원본 모델 필요</button></div>';
+  Object.assign(this,await createSatelliteViewer(this.host.querySelector('.satellite-canvas')));
+  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(this.host);
+  this.host.addEventListener('click',e=>{const button=e.target.closest('[data-scene-view]');if(button&&!button.disabled){this.stop();this.setView(button.dataset.sceneView)}});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)this.stop()});this.host.dataset.ready='true';
+  this.viewer.scene.postRender.addEventListener(()=>{this.host.querySelector('.scene-map-loading').hidden=this.viewer.scene.globe.tilesLoaded});
+  this.viewer.scene.postRender.addEventListener(()=>this.alignModel());
+  const canvas=this.viewer.canvas;canvas.tabIndex=0;
+  canvas.addEventListener('pointerdown',e=>{this.stop();if(this.view!=='onboard')return;this.drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);canvas.focus()});
+  canvas.addEventListener('pointermove',e=>{if(!this.drag||this.view!=='onboard')return;this.yaw+=(e.clientX-this.drag.x)*.004;this.pitch=Math.max(-.7,Math.min(.6,this.pitch-(e.clientY-this.drag.y)*.003));this.drag={x:e.clientX,y:e.clientY};this.updateEye()});
+  for(const name of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(name,()=>{this.drag=null});
+  canvas.addEventListener('keydown',e=>{if(this.view!=='onboard'||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();this.yaw+=(e.key==='ArrowLeft'?-.1:e.key==='ArrowRight'?.1:0);this.pitch=Math.max(-.7,Math.min(.6,this.pitch+(e.key==='ArrowUp'?.1:e.key==='ArrowDown'?-.1:0)));this.updateEye()});
  }
- async init(){this.data=await loadTerrain();this.region=await fetch('./data/region.json').then(r=>{if(!r.ok)throw new Error('해안선 자료 연결 실패');return r.json()});this.host.dataset.ready='true'}
- setSystem(system,preset){this.stop();this.system=system;this.mode=preset||environmentFor(system);this.host.dataset.environment=this.mode;this.renderer.domElement.setAttribute('aria-label',system.name+' · '+environments[this.mode].name+' · 공개 고도 기반 환경. 이동 표시는 설명용 마커입니다.');this.content.traverse(o=>{o.geometry?.dispose();o.material?.dispose()});this.content.clear();
-  this.content.add(terrainMesh(this.data,{base:.12,bathymetry:this.mode==='underwater'}));
-  const water=new T.Mesh(new T.PlaneGeometry(32,32),new T.MeshStandardMaterial({color:palette.waterSurface,roughness:.45,transparent:this.mode==='underwater',opacity:this.mode==='underwater'?.3:1,depthWrite:this.mode!=='underwater',side:T.DoubleSide}));water.rotation.x=-Math.PI/2;water.position.y=.015;this.content.add(water);
-  for(const feature of this.region.filter(f=>['South Korea','North Korea'].includes(f.name)))for(const polygon of feature.polygons){const points=polygon[0].map(([lon,lat])=>new T.Vector3((lon-127.5)*1.25,terrainY(this.data,lon,lat,.12)+.025,-(lat-37.3)*1.6));this.content.add(new T.Line(new T.BufferGeometry().setFromPoints(points),new T.LineBasicMaterial({color:palette.outline,transparent:true,opacity:.65})))}
-  if(['air','space'].includes(this.mode)){const layer=new T.Mesh(new T.PlaneGeometry(10,17),new T.MeshBasicMaterial({color:this.mode==='air'?palette.air:palette.space,transparent:true,opacity:.07,side:T.DoubleSide,depthWrite:false}));layer.rotation.x=-Math.PI/2;layer.position.y=this.mode==='air'?3.3:5;this.content.add(layer)}
-  this.path=new T.Line(new T.BufferGeometry().setFromPoints(Array.from({length:65},(_,i)=>this.position(i/64))),new T.LineDashedMaterial({color:palette[this.mode==='underwater'?'sea':this.mode==='plain'||this.mode==='coast'?'land':this.mode]||palette.connection,dashSize:.16,gapSize:.1}));this.path.computeLineDistances();this.content.add(this.path);
-  this.marker=new T.Mesh(new T.SphereGeometry(.12,20,16),new T.MeshStandardMaterial({color:palette.connection,roughness:.35}));this.marker.position.copy(this.position(0));this.content.add(this.marker);this.label.textContent=system.name+' · 설명용 위치';this.home();this.onStatus('환경 준비 완료 · 재생 버튼으로 살펴보세요.');this.render();
+ async setSystem(system,preset){
+  const version=++this.version;this.stop();this.system=system;this.mode=preset||environmentFor(system);this.host.dataset.environment=this.mode;delete this.host.dataset.model;this.viewer.entities.removeAll();if(this.model){this.viewer.scene.primitives.remove(this.model);this.model=null;}if(this.water){this.viewer.scene.primitives.remove(this.water);this.water=null;}
+  this.coords=locations[this.mode];const asset=equipmentAssets[system.id],C=this.C;
+  this.host.querySelector('.scene-location').replaceChildren();const title=document.createElement('strong');title.textContent=system.name+' · '+environments[this.mode].name;
+  const note=document.createElement('small');note.textContent=(this.mode==='coast'?'포항 동해 연안 · 해상 출발 관찰':this.mode==='space'?'지구 관측 환경 · 실제 궤도 표시 아님':this.mode==='air'?'한반도 상공 · 전시용 관측 위치':'실제 위성·항공 영상과 고도 · 전시용 위치');this.host.querySelector('.scene-location').append(title,note);
+  this.host.querySelector('.equipment-in-scene h4').textContent=system.name+' · '+(asset?.kind==='3d'?'공개 3D 외형':asset?.kind==='photo'?'실물 사진':asset?.kind==='illustration'?'공개 개념도':'공개 자료');
+  this.assetViewer.attach(this.host.querySelector('.scene-asset'),system);
+  const altitude=this.mode==='air'?3500:this.mode==='space'?450000:0;this.altitude=altitude;
+  this.anchor=C.Cartesian3.fromDegrees(...this.coords,altitude);
+  this.setView('context');
+  if(asset?.model){
+   const points=[C.Cartographic.fromDegrees(...this.coords)];await C.sampleTerrainMostDetailed(this.viewer.terrainProvider,points);this.surface=points[0];this.surfaceHeight=points[0].height;
+   if(version!==this.version)return;this.anchor=C.Cartesian3.fromDegrees(...this.coords,altitude+(points[0].height||0)+-(asset.waterline||0));
+   this.frame=C.Transforms.eastNorthUpToFixedFrame(this.anchor);
+   const model=await C.Model.fromGltfAsync({url:new URL(asset.model,document.baseURI).href,modelMatrix:this.frame,forwardAxis:C.Axis.X,scale:asset.scale||1});
+   if(version!==this.version){model.destroy();return;}this.model=this.viewer.scene.primitives.add(model);
+   this.host.dataset.model='photo-reconstruction';note.textContent+=' · '+asset.modelLabel;const credit=document.createElement('a');credit.href=asset.modelAttribution||'./models/kaav-reference-ATTRIBUTION.md';credit.target='_blank';credit.rel='noopener noreferrer';credit.textContent=' · 외형 재구성 '+(asset.modelLicense||'CC BY-SA 2.0')+' / 근거';note.append(credit);
+   await this.waitForSurface();if(version!==this.version)return;
+   if(['coast','underwater','sea'].includes(this.mode))this.addWater();
+  }
+  this.marker=this.viewer.entities.add({position:this.anchor,label:{text:system.name+' · 전시 관측 기준점',font:'13px sans-serif',fillColor:C.Color.WHITE,outlineColor:C.Color.BLACK,outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,showBackground:true,pixelOffset:new C.Cartesian2(0,-15),disableDepthTestDistance:Infinity},point:{pixelSize:6,color:C.Color.fromCssColorString('#ace3c9'),disableDepthTestDistance:Infinity}});
+  const onboard=this.host.querySelector('[data-scene-view="onboard"]');onboard.disabled=!asset?.model||!asset.eye;onboard.textContent=onboard.disabled?(system.id==='nuri'?'무인 발사체 · 탑승 없음':'탑승 관측 · 원본 모델 필요'):asset.eyeLabel||'해치 관측 · 추정 시점';
+  this.setView(asset?.model?'site':'context');this.onStatus('환경 준비 완료 · '+(asset?.model?'공개 사진 기반 외형 재구성 · 제조사 CAD·검증된 실내가 아닙니다.':asset?.kind==='3d'?'지도와 공개 3D 외형을 같은 화면에서 관찰합니다. 3D 외형은 외부 뷰어입니다.':asset?.kind==='photo'?'실물 사진을 지도와 함께 표시합니다. 이 체계의 지형 위 3D·탑승 실내는 미구현입니다.':'정확한 장비 외형 자료가 아직 확보되지 않았습니다.'));
  }
- position(t){let lon,lat,y;switch(this.mode){case'land':lon=128+t*.5;lat=37.3+t*.5;y=markerHeight(this.data,lon,lat,.12);break;case'plain':lon=126.8+t*.35;lat=35.6+t*.3;y=markerHeight(this.data,lon,lat,.12);break;case'coast':lon=126.0+t*.8;lat=35.5;y=markerHeight(this.data,lon,lat,.12);break;case'air':lon=126.6+t*2;lat=35.5+t*2;y=3.8+Math.sin(t*Math.PI)*.3;break;case'space':lon=126+t*3;lat=38+t;y=5.3+Math.sin(t*Math.PI)*.4;break;default:lon=130.2+t;lat=36+t;y=this.mode==='underwater'?Math.max(-.9,surfaceHeight(this.data,lon,lat,.12)+.2):.17}
-  return new T.Vector3((lon-127.5)*1.25,y,-(lat-37.3)*1.6)
+ waitForSurface(){const C=this.C,scene=this.viewer.scene,center=C.Cartographic.fromDegrees(...this.coords);return new Promise(resolve=>{const finish=()=>{clearTimeout(timeout);remove();resolve()};const timeout=setTimeout(finish,20000);const remove=scene.postRender.addEventListener(()=>{if(Number.isFinite(scene.globe.getHeight(center)))finish()});scene.requestRender()});}
+ addWater(){const C=this.C;this.water=this.viewer.scene.primitives.add(new C.Primitive({geometryInstances:new C.GeometryInstance({geometry:new C.EllipseGeometry({center:C.Cartesian3.fromDegrees(...this.coords),semiMajorAxis:350,semiMinorAxis:350,height:this.surfaceHeight+.02,vertexFormat:C.EllipsoidSurfaceAppearance.VERTEX_FORMAT})}),appearance:new C.EllipsoidSurfaceAppearance({material:C.Material.fromType('Water',{baseWaterColor:C.Color.fromCssColorString('#27616a'),blendColor:C.Color.fromCssColorString('#377780'),normalMap:new URL('./cesium/Assets/Textures/waterNormals.jpg',document.baseURI).href,frequency:300,animationSpeed:0,amplitude:1.5,specularIntensity:.3}),aboveGround:true}),asynchronous:false}));}
+ alignModel(){if(!this.model||!this.surface)return;const C=this.C,asset=equipmentAssets[this.system.id],height=this.viewer.scene.globe.getHeight(this.surface);if(!Number.isFinite(height)||Math.abs(height-this.surfaceHeight)<.1)return;const previous=this.anchor;this.surfaceHeight=height;this.anchor=C.Cartesian3.fromDegrees(...this.coords,height+this.altitude-(asset.waterline||0));this.frame=C.Transforms.eastNorthUpToFixedFrame(this.anchor);this.model.modelMatrix=this.frame;if(this.water){this.viewer.scene.primitives.remove(this.water);this.water=null;this.addWater();this.water.show=['site','onboard'].includes(this.view);}if(this.view==='onboard')this.updateEye();else if(this.view==='site')C.Cartesian3.add(this.viewer.camera.position,C.Cartesian3.subtract(this.anchor,previous,new C.Cartesian3()),this.viewer.camera.position);this.host.dataset.surfaceHeight=String(height);this.viewer.scene.requestRender();}
+ setView(view){
+  if(!this.system)return;const C=this.C,camera=this.viewer.camera;camera.cancelFlight();camera.lookAtTransform(C.Matrix4.IDENTITY);const space=this.mode==='space',asset=equipmentAssets[this.system.id];this.view=view;if(this.marker)this.marker.show=!this.model||!['site','onboard'].includes(view);if(this.water)this.water.show=['site','onboard'].includes(view);this.viewer.scene.screenSpaceCameraController.enableInputs=view!=='onboard';
+  if(view==='peninsula')camera.setView({destination:C.Cartesian3.fromDegrees(127.5,36.2,space?14000000:1000000),orientation:{heading:0,pitch:-Math.PI/2,roll:0}});
+  else if(view==='onboard'){
+   const asset=equipmentAssets[this.system.id];if(!asset?.model||!asset.eye)return;this.yaw=0;this.pitch=-.05;this.updateEye();this.onStatus((asset.eyeLabel||'해치 관측')+' · 외형 기준 추정 관측 위치 · 드래그·방향키로 둘러보기 · 검증된 내부 구조 아님');
+  }else{
+   const target=space?C.Cartesian3.fromDegrees(127.5,36.2):this.model&&view==='site'?C.Matrix4.multiplyByPoint(this.frame,new C.Cartesian3(0,0,asset?.focusHeight||1.5),new C.Cartesian3()):this.anchor;camera.lookAt(target,new C.HeadingPitchRange(C.Math.toRadians(this.model&&view==='site'?145:35),C.Math.toRadians(space?-70:-30),space?12000000:view==='site'?(this.model?(asset?.range||15):['air'].includes(this.mode)?15000:2400):22000));camera.lookAtTransform(C.Matrix4.IDENTITY);
+  }
+  this.host.dataset.view=view;this.host.querySelectorAll('[data-scene-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.sceneView===view)));this.viewer.scene.requestRender();
  }
- home(){this.controls.target.set(0,1,-.9);this.camera.position.set(7,11,14);if(this.mode==='underwater'){this.controls.target.set(1,-.25,-1);this.camera.position.set(9,7,12)}this.resize();this.controls.update();this.render()}
- resize(){const w=this.host.clientWidth,h=this.host.clientHeight;if(!w||!h)return;this.camera.aspect=w/h;this.camera.updateProjectionMatrix();this.renderer.setSize(w,h);const base=Math.max(24,17/Math.max(this.camera.aspect,.5));const direction=this.camera.position.clone().sub(this.controls.target).normalize();this.camera.position.copy(this.controls.target).addScaledVector(direction,base);this.render()}
- play(){this.stop();if(!this.marker||!this.system||document.hidden||!this.host.closest('dialog')?.open)return;if(this.reduced.matches){this.onStatus('모션 감소 설정 · '+environments[this.mode].steps.join(' → '));return}const start=performance.now();let phase=-1;const tick=now=>{if(!this.host.isConnected||this.host.hidden||!this.host.closest('dialog')?.open)return this.stop();const t=Math.min((now-start)/8000,1),index=Math.min(2,Math.floor(t*3));this.marker.position.copy(this.position(t));if(index!==phase){phase=index;this.onStatus((index+1)+' / 3 · '+environments[this.mode].steps[index])}this.draw();if(t<1)this.animation=requestAnimationFrame(tick);else{this.animation=0;this.onStatus('환경 시연 완료 · 장비 동작·성능을 재현한 애니메이션은 아닙니다.')}};this.animation=requestAnimationFrame(tick)}
- stop(){cancelAnimationFrame(this.animation);this.animation=0}
- render(){if(this.frame)return;this.frame=requestAnimationFrame(()=>{this.frame=0;this.draw()})}
- draw(){this.renderer.render(this.scene,this.camera);if(!this.marker)return;const v=this.marker.position.clone().project(this.camera);this.label.hidden=v.z>1||Math.abs(v.x)>1||Math.abs(v.y)>1;this.label.style.left=(v.x*.5+.5)*this.host.clientWidth+'px';this.label.style.top=(-v.y*.5+.5)*this.host.clientHeight+'px'}
+ updateEye(){const C=this.C,asset=equipmentAssets[this.system.id];this.viewer.camera.setView({destination:C.Matrix4.multiplyByPoint(this.frame,new C.Cartesian3(...asset.eye),new C.Cartesian3()),orientation:{heading:this.yaw,pitch:this.pitch,roll:0}});this.viewer.scene.requestRender();}
+ play(){this.stop();if(!this.system||document.hidden)return;if(this.reduced.matches){this.onStatus('모션 감소 설정 · 관람 시점 버튼으로 직접 탐색하세요.');return;}this.animation=1;const stops=[['peninsula','한반도에서 활동 영역 확인'],['context','실제 지형과 장비 외형 자료 관찰'],['site','현장 관측과 공개 사업 근거 확인']];stops.forEach(([view,text],i)=>this.timers.push(setTimeout(()=>{if(!this.host.closest('dialog')?.open)return this.stop();this.setView(view);this.onStatus((i+1)+' / 3 · '+text)},i*5000)));this.timers.push(setTimeout(()=>{this.stop();this.onStatus('환경 시연 완료 · 카메라 관람 시연입니다. 장비 운용·성능·실제 궤도를 재현하지 않습니다.')},15000));}
+ stop(){this.timers.forEach(clearTimeout);this.timers=[];this.animation=0;this.assetViewer.stop();this.viewer?.camera.cancelFlight();}
+ home(){this.stop();this.setView('context');this.assetViewer.home();}
+ resize(){this.viewer?.resize();this.viewer?.scene.requestRender();}
+ destroy(){this.stop();this.version++;this.observer?.disconnect();this.viewer?.destroy();}
 }

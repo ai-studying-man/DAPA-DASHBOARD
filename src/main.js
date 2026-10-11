@@ -19,7 +19,7 @@ import { shell } from './shell.js';
 const $ = (selector) => document.querySelector(selector);
 const params = new URLSearchParams(location.search);
 const state = { home: !params.has('system'), region: null, classification: 'branch', mode: 'korea', selected: systems.some((s) => s.id === params.get('system')) ? params.get('system') : 'k2', domain: 'all', branch: '전체', query: '', layout: 'auto', dock: 'auto', density: 'standard' };
-let demoMode='environment', demoOpener,environmentViewer,environmentPromise,environmentPreset,demoVersion=0;
+let demoMode='environment', demoOpener,environmentViewer,environmentPromise,environmentPreset,demoVersion=0,environmentSyncVersion=0;
 let viewer, viewerPromise, tourIndex=0, tourAdvanceTimer, voiceMessage='버튼을 누르면 한국어 음성으로 안내합니다.';
 const voice=new SpeechGuide(message=>{voiceMessage=message;document.querySelectorAll('[data-voice-status]').forEach(e=>e.textContent=message)});
 let storyController, menuHidden=false, menuBeforeDemo=false;
@@ -50,9 +50,9 @@ function render() {
   $('#collection').innerHTML = items.length ? items.map((s) => card(s, state.selected)).join('') : '<div class="empty-inline">검색 결과가 없습니다. 검색어를 바꾸거나 필터를 초기화해 주세요.</div>';
   $('#collection-count').textContent = String(items.length).padStart(2, '0');
   const events = items.flatMap((s) => s.events);
-  $('#result-count').textContent = state.mode === 'world' ? `${new Set(events.map((e) => e.country)).size}개국 · ${events.length}개 계약 사건` : `${items.length}개 체계 · 선택해서 탐색`;
+  $('#result-count').textContent = state.mode === 'world' ? `${new Set(events.map((e) => e.country)).size}개국 · ${events.length}개 공개 수출 사건` : `${items.length}개 체계 · 선택해서 탐색`;
   $('#detail').innerHTML = detail(selected, state.mode);
-  if(!state.home && selected) syncViewer();
+  if(!state.home && selected && !$('#system-demo').open) syncViewer();
   document.querySelectorAll('[data-voice-status]').forEach(e=>e.textContent=voiceMessage);
   const isMap = ['korea', 'world'].includes(state.mode);
   $('#map-host').hidden = !isMap; $('#map-toolbar').hidden = !isMap;
@@ -64,7 +64,7 @@ function render() {
   if (state.mode === 'list') $('#list-view').innerHTML = items.length ? `<div class="catalog-intro"><h2>이름을 몰라도 찾아보세요</h2><p>영역이나 군을 선택하면 관련 체계를 모아볼 수 있습니다.</p></div><div class="catalog-grid">${items.map((s) => card(s, state.selected)).join('')}</div>` : '<div class="empty"><h2>검색 결과가 없습니다</h2><p>다른 검색어나 영역으로 찾아보세요.</p><button class="action" data-clear>필터 초기화</button></div>';
   $('#stage-badge').textContent = { korea: 'PENINSULA / 3D', world: 'GLOBAL CONNECTIONS', graph: 'KNOWLEDGE GRAPH', list: 'SYSTEM COLLECTION', timeline: 'PUBLIC RECORD / TIMELINE' }[state.mode];
   $('#map-disclaimer').hidden = state.mode === 'timeline';
-  $('#map-disclaimer').textContent = state.mode === 'world' ? '연결선은 계약 관계입니다 · 실제 운송 경로가 아닙니다 · 수록 사례 1개국' : state.mode === 'graph' ? '공개 근거와 설명용 분류의 연결 · 완전한 전체 사업 온톨로지가 아닙니다' : state.mode === 'list' ? '공개자료로 확인한 대표 사례 · 선택 항목의 근거와 발표일을 확인하세요' : '공개 고도 기반 지형 · 높이 과장 · 장비 위치는 전시용 · 실제 배치·궤도가 아닙니다';
+  $('#map-disclaimer').textContent = state.mode === 'world' ? `연결선은 공개 수출 관계 · 실제 운송 경로 아님 · 수록 ${new Set(systems.flatMap(s=>s.events.map(e=>e.country))).size}개국` : state.mode === 'graph' ? '공개 근거와 설명용 분류의 연결 · 완전한 전체 사업 온톨로지가 아닙니다' : state.mode === 'list' ? '공개자료로 확인한 대표 사례 · 선택 항목의 근거와 발표일을 확인하세요' : '실제 위성·항공 영상과 고도 지형 · 장비 위치는 전시용 · 실제 배치·궤도 아님';
   if (mapReady) map.requestedMode=state.mode;
   if (mapReady && isMap) {
     if (map.mode !== state.mode) {
@@ -88,7 +88,9 @@ function clearFilters() { stopVoice(); state.region=null; state.domain = 'all'; 
 function setMode(mode) { transitionPage($('.main')); $('.shell').dataset.menuOpen='false'; stopVoice(); state.home = false; state.mode = mode; render(); layout(); $('.main').scrollTop = 0; }
 function select(id) { transitionPage($('.main')); stopVoice(); state.home = false; state.selected = id; render(); layout(); $('.detail-panel').scrollTop=0; $('.main').scrollTop=0; requestAnimationFrame(()=>{if($('.shell').dataset.stack==='true')$('.detail-panel').scrollIntoView({block:'start'})}); }
 function closeSettings() { $('#settings').close(); $('#settings-open').focus(); }
-if (params.has('showcase')) {
+if (params.get('experience') === 'terrain') {
+  import('./terrain-experience.js').then(({ mountTerrainExperience }) => mountTerrainExperience($('#app')));
+} else if (params.has('showcase')) {
   $('#app').innerHTML = showcase();
 } else {
   if (!$('.shell')) $('#app').innerHTML = shell();
@@ -101,7 +103,7 @@ if (params.has('showcase')) {
     if(button.hasAttribute('data-demo-open'))openDemo();
     if(button.dataset.demoMode)changeDemoMode(button.dataset.demoMode);
     if(button.hasAttribute('data-demo-play')){if(await changeDemoMode('environment')){environmentViewer?.play();if(environmentViewer?.animation&&!document.hidden)setDemoFocus(true)}}
-    if(button.hasAttribute('data-demo-stop')){setDemoFocus(false);demoVersion++;if(demoMode==='environment'){environmentViewer?.setSystem(systems.find(s=>s.id===state.selected),environmentPreset)}else viewer?.home();$('#demo-play-status').textContent='초기 장면으로 돌아왔습니다.'}
+    if(button.hasAttribute('data-demo-stop')){setDemoFocus(false);demoVersion++;if(demoMode==='environment'){await syncEnvironment()}else viewer?.home();$('#demo-play-status').textContent='초기 장면으로 돌아왔습니다.'}
     if(button.dataset.environmentPreset){environmentPreset=button.dataset.environmentPreset;await changeDemoMode('environment')}
     if(button.hasAttribute('data-environment-retry'))location.reload();
     if(button.dataset.demoRelated){state.region=null;state.branch='전체';state.domain='all';state.query='';select(button.dataset.demoRelated);openDemo()}
@@ -157,7 +159,7 @@ if (params.has('showcase')) {
   $('#branch').addEventListener('change', (event) => { stopVoice(); state.branch = event.target.value; render(); });
   $('#settings').addEventListener('change', (event) => { if (['layout', 'dock', 'density'].includes(event.target.name)) { state[event.target.name] = event.target.value; layout(); } });
   $('#settings').addEventListener('cancel', () => $('#settings-open').focus());
-  $('#system-demo').addEventListener('close',()=>{$('.shell').dataset.demoOpen='false';menuHidden=menuBeforeDemo;setDemoFocus(false);updateMenu();layout();demoVersion++;environmentViewer?.stop();viewer?.stop();stopVoice();syncViewer();if(demoOpener?.isConnected)demoOpener.focus();else $('#detail [data-demo-open]')?.focus()});
+  $('#system-demo').addEventListener('close',()=>{$('.shell').dataset.demoOpen='false';menuHidden=menuBeforeDemo;setDemoFocus(false);updateMenu();layout();demoVersion++;environmentSyncVersion++;environmentViewer?.stop();viewer?.stop();stopVoice();syncViewer();if(demoOpener?.isConnected)demoOpener.focus();else $('#detail [data-demo-open]')?.focus()});
   $('#voice-tour').addEventListener('close',()=>{stopVoice();syncViewer();$('#settings-open').focus()});
   $('.classification-tabs').addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();state.classification=(e.key==='Home'||e.key==='ArrowLeft')?'branch':'environment';render();$('[data-classification="'+state.classification+'"]').focus()}});
   addEventListener('pagehide',()=>stopVoice());
@@ -170,10 +172,10 @@ function ensureMap() {
   if(mapReady || mapLoading) return;
   mapLoading = true;
   const status = (message, error) => {
-    const element = $('#map-status'); element.hidden = !error && message === '지도 준비 완료'; element.textContent = message;
+    const element = $('#map-status'); element.hidden = !error; element.textContent = message;
     if(error) element.insertAdjacentHTML('beforeend', '<div class="cluster"><button id="map-retry" class="action">다시 불러오기</button><button id="map-list" class="action">도감으로 보기</button></div>');
   };
-  import('./map.js').then(async ({ AtlasMap }) => {
+  import('./satellite-map.js').then(async ({ AtlasMap }) => {
     try { map = new AtlasMap($('#map-host'), id=>{select(id);openDemo()}, status, chooseRegion); await map.init(); mapReady = true;
       if (state.mode === 'korea') { map.update(filtered(), state.selected); map.resize(); }
       else render(); }
@@ -207,15 +209,27 @@ function speakTour(){clearTimeout(tourAdvanceTimer);voice.speak(narration(system
 
 function openDemo(){
  if(!state.selected)return;stopVoice();environmentViewer?.stop();environmentPreset=null;demoMode='environment';const dialog=$('#system-demo');if(!dialog.open){menuBeforeDemo=menuHidden;menuHidden=true;$('.shell').dataset.demoOpen='true';updateMenu();layout();demoOpener=document.activeElement;dialog.showModal();transitionPage(dialog)}setDemoFocus(false);
- const system=systems.find(s=>s.id===state.selected);$('#demo-title').textContent=system.name+' · 체계 시연';$('#demo-inspector').innerHTML=demoInspector(system);$('.demo-body').scrollTop=0;changeDemoMode(demoMode);syncViewer();
+ const system=systems.find(s=>s.id===state.selected);$('#demo-title').textContent=system.name+' · 체계 시연';$('#demo-inspector').innerHTML=demoInspector(system);$('.demo-body').scrollTop=0;changeDemoMode(demoMode);
 }
 async function syncEnvironment(){
- const selected=state.selected,host=$('#demo-environment-host');if(!$('#system-demo').open||demoMode!=='environment')return;
- try{environmentPromise??=import('./environment-viewer.js').then(async({EnvironmentViewer})=>{const instance=new EnvironmentViewer(host,message=>{$('#demo-play-status').textContent=message;if(message.startsWith('환경 시연 완료')||message.startsWith('환경 준비 완료'))setDemoFocus(false)});await instance.init();return instance});environmentViewer=await environmentPromise;
-  if($('#system-demo').open&&demoMode==='environment'&&state.selected===selected){const system=systems.find(s=>s.id===selected),mode=environmentPreset||environmentFor(system);environmentViewer.setSystem(system,mode);$('#environment-heading').textContent=system.name+' · '+environments[mode].name;$('#environment-summary').textContent=environments[mode].text;$('#terrain-presets').hidden=environmentFor(system)!=='land';document.querySelectorAll('[data-environment-preset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.environmentPreset===mode)));}
- }catch(error){host.textContent=error.message;$('#demo-play-status').textContent='환경 자료 연결 실패 · 아래 다시 불러오기를 사용하세요.';environmentPromise=null;}
+ const version=++environmentSyncVersion,selected=state.selected,preset=environmentPreset,host=$('#demo-environment-host');
+ if(!$('#system-demo').open||demoMode!=='environment')return false;
+ try{
+  environmentPromise??=import('./environment-viewer.js').then(async({EnvironmentViewer})=>{
+   const instance=new EnvironmentViewer(host,message=>{if(!$('#system-demo').open||demoMode!=='environment')return;$('#demo-play-status').textContent=message;if(message.startsWith('환경 시연 완료')||message.startsWith('환경 준비 완료'))setDemoFocus(false)});
+   await instance.init();return instance;
+  });
+  environmentViewer=await environmentPromise;
+  if(version!==environmentSyncVersion||!$('#system-demo').open||demoMode!=='environment'||state.selected!==selected)return false;
+  const system=systems.find(s=>s.id===selected),mode=preset||environmentFor(system);
+  await environmentViewer.setSystem(system,mode);
+  if(version!==environmentSyncVersion||!$('#system-demo').open||demoMode!=='environment'||state.selected!==selected)return false;
+  $('#environment-heading').textContent=system.name+' · '+environments[mode].name;$('#environment-summary').textContent=environments[mode].text;
+  $('#terrain-presets').hidden=environmentFor(system)!=='land';document.querySelectorAll('[data-environment-preset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.environmentPreset===mode)));
+  return true;
+ }catch(error){if(version===environmentSyncVersion){host.textContent=error.message;$('#demo-play-status').textContent='환경 자료 연결 실패 · 아래 다시 불러오기를 사용하세요.';environmentPromise=null;}return false;}
 }
-async function changeDemoMode(mode){const version=++demoVersion,selected=state.selected;demoMode=mode;setDemoFocus(false);environmentViewer?.stop();const environment=mode==='environment';$('#demo-environment-host').hidden=!environment;$('#demo-model-host').hidden=environment;$('#environment-tools').hidden=!environment;$('#environment-footnote').hidden=!environment;document.querySelectorAll('[data-demo-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.demoMode===mode)));$('#demo-mode-description').hidden=environment;$('#demo-mode-description').textContent=demoModes.find(m=>m.id===mode).text;$('#demo-play-status').textContent=environment?'환경 준비 중…':mode==='role'?'역할과 공개 근거를 확인하세요.':equipmentAssets[state.selected]?.kind==='3d'?'드래그·확대로 공개 3D 외형을 살펴보세요.':equipmentAssets[state.selected]?.kind==='photo'?'실제 사진 자료입니다. 회전 기능은 제공하지 않습니다.':'정확한 외형 자료를 준비하고 있습니다.';if(environment)await syncEnvironment();else syncViewer();return version===demoVersion&&$('#system-demo').open&&demoMode===mode&&state.selected===selected;}
+async function changeDemoMode(mode){const version=++demoVersion,selected=state.selected;demoMode=mode;setDemoFocus(false);environmentViewer?.stop();const environment=mode==='environment';$('#demo-environment-host').hidden=!environment;$('#demo-model-host').hidden=environment;$('#environment-tools').hidden=!environment;$('#environment-footnote').hidden=!environment;document.querySelectorAll('[data-demo-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.demoMode===mode)));$('#demo-mode-description').hidden=environment;$('#demo-mode-description').textContent=demoModes.find(m=>m.id===mode).text;$('#demo-play-status').textContent=environment?'환경 준비 중…':mode==='role'?'역할과 공개 근거를 확인하세요.':equipmentAssets[state.selected]?.kind==='3d'?'드래그·확대로 공개 3D 외형을 살펴보세요.':equipmentAssets[state.selected]?.kind==='photo'?'실제 사진 자료입니다. 회전 기능은 제공하지 않습니다.':'정확한 외형 자료를 준비하고 있습니다.';const ready=environment?await syncEnvironment():(environmentSyncVersion++,syncViewer(),true);return ready&&version===demoVersion&&$('#system-demo').open&&demoMode===mode&&state.selected===selected;}
 
 function updateMenu(){const shell=$('.shell');if(!shell)return;shell.dataset.menuHidden=String(menuHidden);const button=$('#menu-toggle');const expanded=state.home?shell.dataset.menuOpen==='true':!menuHidden;button?.setAttribute('aria-expanded',String(expanded));button?.setAttribute('aria-label',expanded?'메뉴 숨기기':'메뉴 보기');}
 function setDemoFocus(value){const dialog=$('#system-demo');if(!dialog)return;dialog.dataset.playing=String(value);const button=$('[data-demo-info]');button?.setAttribute('aria-expanded',String(!value));if(button)button.textContent=value?'연계 체계 보기':'시연에 집중하기';requestAnimationFrame(()=>environmentViewer?.resize());}

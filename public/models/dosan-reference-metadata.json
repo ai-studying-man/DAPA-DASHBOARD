@@ -1,0 +1,25 @@
+{
+  "min": [
+    -6.253242015838623,
+    0,
+    -41.75
+  ],
+  "max": [
+    6.253242015838623,
+    20.599998474121094,
+    43.82604217529297
+  ],
+  "size": [
+    12.506484031677246,
+    20.599998474121094,
+    85.57604217529297
+  ],
+  "deckEye": [
+    0,
+    17.750000071525573,
+    -18.5
+  ],
+  "units": "metres",
+  "forward": "-Z",
+  "classification": "Estimated exterior reconstruction from public ROK Ministry of National Defense photograph. Not manufacturer CAD, not a verified individual hull, bridge, interior, underwater stern detail or performance model."
+}
