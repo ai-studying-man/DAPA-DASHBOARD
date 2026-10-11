@@ -12,6 +12,7 @@ import './fonts.css';
 import './styles.css';
 import './responsive.css';
 import './story.css';
+import './exhibition-polish.css';
 import { systems, modes } from './data.js';
 import { card, detail, graph, showcase } from './components.js';
 import { shell } from './shell.js';
