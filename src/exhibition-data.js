@@ -1,3 +1,4 @@
+import { catalogProfiles } from './catalog-expansion.js';
 const org = (name, type, role, source) => ({ name, type, role, source });
 export const extraSources = {
   dosan:{title:'국내 독자 설계·건조 도산안창호함 취역',publisher:'방위사업청',date:'2021-08-13',url:'https://www.dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=13631&menuSeq=3069',locator:'인도·인수·취역식 및 당시 전력화 계획'},
@@ -19,6 +20,8 @@ export const profiles = {
   '425': { role:'우주에서 지구를 관찰하는 군 정찰위성 사업입니다.', focus:'우주 관측 기술과 연구개발 협력', organizations:[org('한국항공우주연구원 · 국방과학연구소','연구기관','공개자료의 연구개발 협력','satellite'),org('방위사업청','사업기관','425사업 1호기 개발 성과 발표','satellite')] },
   smallsat: { role:'작은 위성들을 활용해 한반도와 주변 해역을 관찰하는 개발사업입니다. 국민 안전 분야 활용도 계획합니다.', focus:'국방·우주·해양 분야의 공동 활용', organizations:[org('국방과학연구소','연구기관','총괄연구기관','smallsat'),org('한국항공우주연구원 · 전자통신연구원 등','연구기관','공개된 연구 참여기관','smallsat'),org('방위사업청 · 우주항공청 · 해양경찰청','사업기관','다부처 협력사업','smallsat')] },
 };
+Object.assign(profiles, catalogProfiles);
+
 // City-level public industrial links, separate from the fictional exhibit placement.
 export const regions = [
   {id:'sacheon',name:'경남 사천',theme:'항공 산업',coords:[128.07,35.0,0.56],systems:['fa50'],source:'kai',description:'KAI 공식 소개에 공개된 사천 본사와 항공기 사업을 연결했습니다.'},

@@ -1,0 +1,243 @@
+[
+  {
+    "id": "kaav",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/7/7e/2010.7.7_%ED%95%B4%EB%B3%91_1%EC%82%AC%EB%8B%A8_KAAV%ED%95%9C%EA%B5%AD%ED%98%95%EC%83%81%EB%A5%99%EB%8F%8C%EA%B2%A9%EC%9E%A5%EA%B0%91%EC%B0%A8_%EC%83%81%EB%A5%99%ED%9B%88%EB%A0%A8_%287445513192%29.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3A2010.7.7%20%ED%95%B4%EB%B3%91%201%EC%82%AC%EB%8B%A8%20KAAV%ED%95%9C%EA%B5%AD%ED%98%95%EC%83%81%EB%A5%99%EB%8F%8C%EA%B2%A9%EC%9E%A5%EA%B0%91%EC%B0%A8%20%EC%83%81%EB%A5%99%ED%9B%88%EB%A0%A8%20(7445513192).jpg",
+    "author": "대한민국 국군 Republic of Korea Armed Forces",
+    "license": "CC BY-SA 2.0",
+    "output": "./media/equipment/kaav.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 471,
+      "bytes": 88322,
+      "sha256": "80a0bc0ceff9561b0f48b05ca882c5397057416d10555729cc65a8b22832ceea"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "k10",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/0/0a/K10_ARV.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AK10%20ARV.jpg",
+    "author": "권순삼, 국방시민연대 (Defense Citizen Network)",
+    "license": "CC BY-SA 2.0 kr",
+    "output": "./media/equipment/k10.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1000,
+      "height": 664,
+      "bytes": 114908,
+      "sha256": "d6d26325a0b5f1e8337bea709dd8b9870b21ee5c625b29453ac03265acecc51a"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "k808",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/f/fc/ROKA_K808_APC_river_crossing_training_-_March_2021.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AROKA%20K808%20APC%20river%20crossing%20training%20-%20March%202021.jpg",
+    "author": "국방부 - ROK Ministry of National Defense",
+    "license": "KOGL Type 1",
+    "output": "./media/equipment/k808.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 726,
+      "bytes": 101094,
+      "sha256": "a6f1fbb22fafdcad1ff3056b87870f250d3ee3b3e5181ec8511ab00536e2cbc6"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "redback",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Hanwha_AS21_Redback_Australian_IFV.png",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AHanwha%20AS21%20Redback%20Australian%20IFV.png",
+    "author": "Fabrice Ram",
+    "license": "CC0",
+    "output": "./media/equipment/redback.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 906,
+      "bytes": 77978,
+      "sha256": "cb3b1e613cbf2649723dfa08d5f93dd2473d6cb2e40946a8bf38cc4c14f83745"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "kf21",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/0/0c/KF-21_Boramae_First_Production.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AKF-21%20Boramae%20First%20Production.jpg",
+    "author": "대한민국 국방부 - Ministry of National Defense of the Republic of Korea",
+    "license": "KOGL Type 1",
+    "output": "./media/equipment/kf21.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 853,
+      "bytes": 85522,
+      "sha256": "498b06fd7dce8c4e44e7b0edf468763d4cad5a22c45c8dd749165aa74a13587c"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "surion",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/9/95/KUH-1_Surion_Prototype_in_KAI.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AKUH-1%20Surion%20Prototype%20in%20KAI.jpg",
+    "author": "Korea Aerospace Industries",
+    "license": "CC BY 2.0",
+    "output": "./media/equipment/surion.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 852,
+      "bytes": 119890,
+      "sha256": "375f35b094d3014bf5663328afb14a3a9ce9d813e2ca492a3da4dd68f98cc86f"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "lah",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/a/a3/KAI_LAH-1_Miron_Armed_Helicopter_-_1.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AKAI%20LAH-1%20Miron%20Armed%20Helicopter%20-%201.jpg",
+    "author": "방위사업청 - Defense Acquisition Program Administration (DAPA)",
+    "license": "KOGL Type 1",
+    "output": "./media/equipment/lah.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 745,
+      "bytes": 67024,
+      "sha256": "5c214e78a6433b2941366c94731aad2ee4034633b5d8f73b10a8eb2774fc2e3e"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "t50",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/5/51/KAI_T-50_Golden_Eagle_-_54277090749.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AKAI%20T-50%20Golden%20Eagle%20-%2054277090749.jpg",
+    "author": "Michael Gaylard",
+    "license": "CC BY 2.0",
+    "output": "./media/equipment/t50.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 960,
+      "bytes": 46550,
+      "sha256": "88fb52c4649f3a5e1eb0332f1594306d4f873255779910e0c3b15551596cf559"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "cheongung",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/d/d1/M-SAM_Block-2_battery.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AM-SAM%20Block-2%20battery.jpg",
+    "author": "방위사업청 - Defense Acquisition Program Administration (DAPA)",
+    "license": "KOGL Type 1",
+    "output": "./media/equipment/cheongung.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 855,
+      "bytes": 159908,
+      "sha256": "5da28f7cceb8509a5ede5f1a2205ac1ae29a1f9a97a6b19f77ab307ffdff0091"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "k21",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/c/c9/2014.4.1_%EC%9C%A1%EA%B5%B0_%EC%88%98%EB%8F%84%EA%B8%B0%EA%B3%84%ED%99%94%EB%B3%B4%EB%B3%91%EC%82%AC%EB%8B%A8_K-21_%EC%9E%A5%EA%B0%91%EC%B0%A8_%EC%82%AC%EA%B2%A9%EC%A7%91%EC%A4%91%ED%9B%88%EB%A0%A8_Republic_of_Korea_Army_%2813592630584%29.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3A2014.4.1%20%EC%9C%A1%EA%B5%B0%20%EC%88%98%EB%8F%84%EA%B8%B0%EA%B3%84%ED%99%94%EB%B3%B4%EB%B3%91%EC%82%AC%EB%8B%A8%20K-21%20%EC%9E%A5%EA%B0%91%EC%B0%A8%20%EC%82%AC%EA%B2%A9%EC%A7%91%EC%A4%91%ED%9B%88%EB%A0%A8%20Republic%20of%20Korea%20Army%20(13592630584).jpg",
+    "author": "대한민국 국군 Republic of Korea Armed Forces",
+    "license": "CC BY-SA 2.0",
+    "output": "./media/equipment/k21.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 518,
+      "bytes": 157640,
+      "sha256": "e45d78dcbf95f0d95c7eac6f82a6d2dbc8c02ac967cec498a5c18d3aaa6a78d5"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "kt1",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/1/18/Demonstration_Flight_of_ROKAF_New_Light_Trainer_KT-1_%27Woongbi%27.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3ADemonstration%20Flight%20of%20ROKAF%20New%20Light%20Trainer%20KT-1%20'Woongbi'.jpg",
+    "author": "Doo Ho Kim",
+    "license": "CC BY-SA 2.0",
+    "output": "./media/equipment/kt1.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 857,
+      "bytes": 25978,
+      "sha256": "ce2373b5eb6311e09406102a559a25b97dca21f878997a6edae7ffec8926a79f"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "hansando",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/9/9d/ROKS_Hansando_Auckland_2025.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AROKS%20Hansando%20Auckland%202025.jpg",
+    "author": "Paora",
+    "license": "CC0",
+    "output": "./media/equipment/hansando.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 1280,
+      "bytes": 219722,
+      "sha256": "56dc3f300e1e198322ab81177ca3f6adb4a36a6958ef21faf0060fe36c87eef0"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "nuri",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/3/3d/KSLV-II_Nuri_Launch_2021-10-21.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AKSLV-II%20Nuri%20Launch%202021-10-21.jpg",
+    "author": "한국항공우주연구원 (Korea Aerospace Research Institute)",
+    "license": "KOGL Type 1",
+    "output": "./media/equipment/nuri.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 749,
+      "height": 1280,
+      "bytes": 77294,
+      "sha256": "e7749fdd91c69381ee8a0deec8c6a53f14b2ab0ddb76c137457c0c246690dfc7"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "muav",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/1/16/Korean_Air_KUS-FS_MUAV.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AKorean%20Air%20KUS-FS%20MUAV.jpg",
+    "author": "방위사업청 - Defense Acquisition Program Administration (DAPA)",
+    "license": "KOGL Type 1",
+    "output": "./media/equipment/muav.webp",
+    "processing": "EXIF orientation applied; proportional resize inside 1280 by 1280 without enlargement; WebP quality 86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1275,
+      "height": 716,
+      "bytes": 43108,
+      "sha256": "bab756fd16b6439f11535cfa4bd20ebaa6aefd4f02b4299a16c4ddc5ed5220b2"
+    },
+    "verifiedAt": "2026-10-12"
+  },
+  {
+    "id": "k9",
+    "sourceImage": "https://upload.wikimedia.org/wikipedia/commons/f/f0/K-9_%EC%9E%90%EC%A3%BC%ED%8F%AC_%287445556056%29_%282%29.jpg",
+    "downloadImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/K-9_%EC%9E%90%EC%A3%BC%ED%8F%AC_%287445556056%29_%282%29.jpg/1280px-K-9_%EC%9E%90%EC%A3%BC%ED%8F%AC_%287445556056%29_%282%29.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File%3AK-9%20%EC%9E%90%EC%A3%BC%ED%8F%AC%20(7445556056)%20(2).jpg",
+    "author": "대한민국 국군 Republic of Korea Armed Forces",
+    "license": "CC BY-SA 2.0",
+    "output": "./media/equipment/k9.webp",
+    "processing": "Wikimedia 1280px thumbnail fetched HTTP200 after original endpoint HTTP429; EXIF orientation applied; WebP quality86; no crop, recolor or AI modification",
+    "derivative": {
+      "width": 1280,
+      "height": 702,
+      "bytes": 327644,
+      "sha256": "7130e2318171f530f1b63ebafe1b0d68d4318586558952a1d292daebe01e5d44"
+    },
+    "verifiedAt": "2026-10-12"
+  }
+]
