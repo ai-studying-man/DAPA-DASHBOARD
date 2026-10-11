@@ -51,7 +51,7 @@ export class AtlasMap {
     this.resize(); this.home();
   }
   async init() {
-    const response = await fetch('/data/region.json');
+    const response = await fetch('./data/region.json');
     if (!response.ok) throw new Error('지도 데이터를 불러오지 못했습니다.');
     this.region = await response.json();this.terrain=await loadTerrain();
     await this.load('korea');
@@ -68,7 +68,7 @@ export class AtlasMap {
     this.requestedMode = mode;
     if (mode === 'world' && !this.world) {
       this.onStatus('세계 지도 준비 중…', false);
-      this.worldPromise ??= fetch('/data/world.json').then((response) => {
+      this.worldPromise ??= fetch('./data/world.json').then((response) => {
         if (!response.ok) throw new Error('세계 지도 데이터를 불러오지 못했습니다.');
         return response.json();
       });

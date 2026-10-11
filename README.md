@@ -84,3 +84,9 @@ npm run qa:touch
 홈 → 한반도 3D → 세계 계약 사례 → 체계 선택의 네 장면으로 구성합니다. 실제 FA-50 사진과 실시간 3D 지도를 중심에 두고, 기업·사업·출처 상세는 펼쳐서 확인합니다. 부드러운 native 스크롤, 장면 공개, 페이지 전환, 모션 감소를 지원합니다. 홈 메뉴는 기본 숨김이며 전시 재생 중 부가 패널을 접고 종료 시 복원합니다. 2400px 이상 대형 가로 화면은 별도 확대 배치를 사용합니다.
 
 `npm run dev` 또는 `npm run build` 후 `npm run preview -- --host 127.0.0.1 --port 4173`으로 확인합니다. [검증·남은 제약](docs/evidence/story-v7/QA.md). 세계 데이터는 현재 폴란드 1개국 공개 계약 사례이며 전체 방산 시장 통계가 아닙니다. 실사 동영상과 모든 장비의 승인된 고정밀 3D 자산은 추가 확보가 필요합니다.
+
+## GitHub Pages
+
+[온라인 대시보드](https://ai-studying-man.github.io/DAPA-DASHBOARD/) · [배포 설정과 실행 방법](docs/DEPLOYMENT.md)
+
+main 브랜치 변경은 GitHub Actions에서 빌드하여 Pages에 배포합니다. 로컬 검사 캡처 docs/evidence는 공개 저장소에 포함하지 않습니다. 현재 공개 자료 범위와 실물 3D의 제약은 기존 안내를 유지합니다.

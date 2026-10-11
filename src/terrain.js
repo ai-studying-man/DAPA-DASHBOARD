@@ -1,7 +1,7 @@
 import * as T from 'three';
 import {sceneTheme as palette} from './scene-theme.js';
 let terrainPromise;
-export function loadTerrain(){return terrainPromise??=fetch('/data/terrain.json').then(r=>{if(!r.ok)throw new Error('한반도 고도 자료를 불러오지 못했습니다.');return r.json()})}
+export function loadTerrain(){return terrainPromise??=fetch('./data/terrain.json').then(r=>{if(!r.ok)throw new Error('한반도 고도 자료를 불러오지 못했습니다.');return r.json()})}
 export function elevation(data,lon,lat){const {bounds:b,width:w,height:h,values}=data;const x=Math.max(0,Math.min(w-1,(lon-b.west)/(b.east-b.west)*(w-1))),y=Math.max(0,Math.min(h-1,(b.north-lat)/(b.north-b.south)*(h-1)));const i=Math.floor(x),j=Math.floor(y),a=values[j*w+i],c=values[j*w+Math.min(i+1,w-1)],d=values[Math.min(j+1,h-1)*w+i],e=values[Math.min(j+1,h-1)*w+Math.min(i+1,w-1)];return (a+(c-a)*(x-i))*(1-(y-j))+(d+(e-d)*(x-i))*(y-j)}
 export const terrainY=(data,lon,lat,base=.47)=>base+Math.max(0,elevation(data,lon,lat))*.0008;
 export function terrainMesh(data,{base=.47,bathymetry=false}={}){

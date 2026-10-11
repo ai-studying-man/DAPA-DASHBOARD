@@ -1,6 +1,6 @@
 const {chromium}=require(process.cwd()+'/node_modules/playwright');const AxeBuilder=require(process.cwd()+'/node_modules/@axe-core/playwright').default;const fs=require('fs');const assert=require('node:assert/strict');
-const URL='http://127.0.0.1:4173',DIR='docs/evidence/story-v7/current';
-(async()=>{const b=await chromium.launch({channel:'chrome',headless:false});const report={checks:[],errors:[],axe:[],captures:[]};let p;
+const URL=process.env.QA_URL||'http://127.0.0.1:4173',DIR=process.env.QA_EVIDENCE_DIR||'docs/evidence/story-v7/current';
+(async()=>{fs.mkdirSync(DIR,{recursive:true});const b=await chromium.launch({channel:'chrome',headless:false});const report={checks:[],errors:[],axe:[],captures:[]};let p;
 const shot=async name=>{const path=DIR+'/'+name+'.png';await p.screenshot({path});report.captures.push(path)};
 try{for(const size of [{width:375,height:844},{width:768,height:1024},{width:1280,height:900},{width:1080,height:1920},{width:3840,height:2160}]){const c=await b.newContext({viewport:size,hasTouch:true});p=await c.newPage();p.on('pageerror',e=>report.errors.push(e.message));await p.goto(URL,{waitUntil:'domcontentloaded'});await p.locator('.hero-photo img').evaluate(e=>e.decode());assert.equal(await p.locator('.mode-nav').isVisible(),false);await shot('hero-'+size.width);
 for(const id of ['story-korea-section','story-world-section','story-discover']){await p.locator('.story-chapters [data-story-jump='+id+']').tap();await p.waitForTimeout(850);if(id!=='story-discover')await p.locator('#'+(id==='story-korea-section'?'story-korea':'story-world')+'[data-ready=true]').waitFor();await shot(id+'-'+size.width);}
