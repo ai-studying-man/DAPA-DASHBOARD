@@ -3,6 +3,8 @@ import {environmentFor,environments} from './environment-data.js';
 import {equipmentAssets} from './equipment-assets.js';
 import { demoInspector, demoModes } from './system-demo.js';
 import { SpeechGuide } from './voice.js';
+import {ExhibitGuide} from './exhibit-guide.js';
+import './exhibit-guide.css';
 import { narration, regionPicker } from './exhibition.js';
 import { regions, profiles, tourStops } from './exhibition-data.js';
 import './exhibition.css';
@@ -23,7 +25,7 @@ const state = { home: !params.has('system'), region: null, classification: 'bran
 let demoMode='environment', demoOpener,environmentViewer,environmentPromise,environmentPreset,demoVersion=0,environmentSyncVersion=0;
 let viewer, viewerPromise, tourIndex=0, tourAdvanceTimer, voiceMessage='버튼을 누르면 한국어 음성으로 안내합니다.';
 const voice=new SpeechGuide(message=>{voiceMessage=message;document.querySelectorAll('[data-voice-status]').forEach(e=>e.textContent=message)});
-let storyController, menuHidden=false, menuBeforeDemo=false;
+let storyController, guide, menuHidden=false, menuBeforeDemo=false;
 let map, mapReady = false, mapLoading = false, toastTimer;
 function toast(message) {
   $('#toast').textContent = message; $('#toast').hidden = false;
@@ -95,6 +97,7 @@ if (params.get('experience') === 'terrain') {
   $('#app').innerHTML = showcase();
 } else {
   if (!$('.shell')) $('#app').innerHTML = shell();
+  guide=new ExhibitGuide($('#system-demo'),voice,async component=>{const selected=state.selected,version=guide.version;await guide.ready;const ready=demoMode==='environment'&&environmentViewer?.model?true:await changeDemoMode('environment');if(!ready||selected!==state.selected||version!==guide.version||!$('#system-demo').open)return false;if(component)environmentViewer.inspect(component);else environmentViewer.setView('site');return true;});
   render(); layout();
   storyController=initStory({onSystem:id=>{select(id);openDemo()},onRegion:chooseRegion});
   document.addEventListener('click', async (event) => {
@@ -111,7 +114,7 @@ if (params.get('experience') === 'terrain') {
     if(button.dataset.classification) { state.classification=button.dataset.classification;render(); }
     if(button.dataset.region) chooseRegion(button.dataset.region);
     if(button.hasAttribute('data-region-clear')) clearFilters();
-    if(button.hasAttribute('data-listen')) voice.speak(narration(systems.find(s=>s.id===state.selected)));
+    if(button.hasAttribute('data-listen')){if($('#system-demo').open&&guide.data)guide.speak();else{voice.setLanguage('ko');voice.speak(narration(systems.find(s=>s.id===state.selected)));}}
     if(button.hasAttribute('data-voice-stop')) stopVoice();
     if(button.hasAttribute('data-model-home')){if(demoMode==='environment'&&$('#system-demo').open)environmentViewer?.home();else viewer?.home();}
     if(button.dataset.tourStep!==undefined) tourStep(Number(button.dataset.tourStep));
@@ -184,7 +187,7 @@ function ensureMap() {
   }).catch(() => status('지도 프로그램을 불러오지 못했습니다.', true));
 }
 
-function stopVoice(){clearTimeout(tourAdvanceTimer);voice.stop()}
+function stopVoice(){clearTimeout(tourAdvanceTimer);guide?.stop();voice.stop()}
 function chooseRegion(id){if(!regions.some(r=>r.id===id))return;stopVoice();state.region=id;state.branch='전체';state.domain='all';state.query='';state.selected=regions.find(r=>r.id===id).systems[0];setMode('korea');$('.detail-panel').scrollTop=0;}
 async function syncViewer(){
   if($('#system-demo').open&&demoMode==='environment')return syncEnvironment();
@@ -204,13 +207,13 @@ function tourStep(index){stopVoice();tourIndex=index;state.selected=tourStops[in
   document.querySelectorAll('[data-tour-step]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.tourStep)===index)));
   $('#tour-prev').disabled=index===0;$('#tour-next').disabled=index===tourStops.length-1;speakTour();
 }
-function speakTour(){clearTimeout(tourAdvanceTimer);voice.speak(narration(systems.find(s=>s.id===state.selected)),()=>{
+function speakTour(){clearTimeout(tourAdvanceTimer);voice.setLanguage('ko');voice.speak(narration(systems.find(s=>s.id===state.selected)),()=>{
   if($('#voice-tour').open&&$('#tour-auto').checked&&tourIndex<tourStops.length-1)tourAdvanceTimer=setTimeout(()=>{if($('#voice-tour').open&&$('#tour-auto').checked)tourStep(tourIndex+1)},1800);
 });}
 
 function openDemo(){
  if(!state.selected)return;stopVoice();environmentViewer?.stop();environmentPreset=null;demoMode='environment';const dialog=$('#system-demo');if(!dialog.open){menuBeforeDemo=menuHidden;menuHidden=true;$('.shell').dataset.demoOpen='true';updateMenu();layout();demoOpener=document.activeElement;dialog.showModal();transitionPage(dialog)}setDemoFocus(false);
- const system=systems.find(s=>s.id===state.selected);$('#demo-title').textContent=system.name+' · 체계 시연';$('#demo-inspector').innerHTML=demoInspector(system);$('.demo-body').scrollTop=0;changeDemoMode(demoMode);
+ const system=systems.find(s=>s.id===state.selected);$('#demo-title').textContent=system.name+' · 체계 시연';$('#demo-inspector').innerHTML=demoInspector(system);guide.mount(system);$('.demo-body').scrollTop=0;guide.ready=changeDemoMode(demoMode);
 }
 async function syncEnvironment(){
  const version=++environmentSyncVersion,selected=state.selected,preset=environmentPreset,host=$('#demo-environment-host');
