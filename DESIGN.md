@@ -130,3 +130,16 @@ MapLabelLayout: 한반도에서체계이름이겹치면화면좌표·실제font�
 SceneViewControls도최소48px, actionradius r2. 모바일사진자료는toolbar2행높이+s10 위에배치하여서로의터치영역을가리지않는다.
 
 SourceTerm: Warning Lights/L/G Panel/Side Stick/Throttle Grip 및붙는조사어절은nowrap으로기술명중간분절을막는다. 카드폭보다짧은검증된기술명에만적용한다.
+
+## 군별 대표 실사 전시 v10
+
+기존 Toss 참고의 밝은 표면·StorySection·Action·48px focus·native dialog를 재사용한다. 대표 체계는 육군 K2, 해군 도산안창호급, 공군 FA-50, 해병대 KAAV이며 홈의 대표 관람 섹션에서 실제 사진으로 선택한다. RepresentativeCard는 media radius story-radius, 표면 panel, 제목 t3, 군·짧은 설명 t1, 출처 t0. 4열→태블릿2열→600px이하1열, 이미지16:9 object-fit:cover; 정확한 전체 외형은 원본/시연에서 contain으로 보여준다. 콘텐츠 축은 한 장면 한 메시지이며 기업·사업·수출·사용권은 details로 단계 공개한다.
+
+RepresentativeDialog는 native modal, header/scroll-owned body/footer로 구성한다. 최대폭 1200px, 높이90dvh; 2400px이상2000px. 실제 영상16:9 contain, 세로에서 전체 영상을 자르지 않는다. 선택군4개는 Action/aria-pressed, 관람 단계는 실제 영상·3D 지도/외형·사업/수출. 3D 동작은 기존 체계 시연으로 이어진다. 공개 사진 기반 모델과 실제 영상의 종류·원본·저작자를 항상 구분한다. 날짜는 촬영/공개 사실과 자료 확인을 분리한다.
+
+영상은 사용자가 재생을 누른 후만 로드하고 자동 소리/자동 순환을 하지 않는다. 로컬·공개 스트림은 native video controls/playsinline/preload none, 공식 외부 영상은 iframe과 원문 링크를 제공한다. 영상 준비·로드 실패·네트워크 차단 시 실제 사진·글·원문 대안을 유지한다. 새 체계 선택/닫기/다른 관람 단계/탭 비활성에서는 기존 영상 정지 또는 iframe 제거. 새로운 미디어의 loadeddata와 iframe load는 각각 다르며 iframe load를 재생 성공으로 표시하지 않는다. 모바일·세로에서 버튼을 영상 위에 겹치지 않는다.
+
+beui center-morph-modal의 controlled open/close·focus restore·reduced-motion 원칙을 native dialog로 적용한다. 진입은 기존 page-duration 320ms opacity/translate, 모션 감소에서는 정지 표면. 닫기 후 실제 opener로 초점 복귀, 3D 전환에서는 새 dialog 초점을 방해하지 않는다. 소리 없는 상황에도 역할·자료 범위·출처를 글로 제공한다. 공식 영상의 자체 자막 유무와 앱 안내를 구분하고 없는 대사를 생성하여 붙이지 않는다. 제조사 CAD·확보되지 않은 실내·자산 다운로드 사용권은 추정하지 않는다.
+RepresentativeDialog backdrop는 기존 native dialog와 같은 rgb(23 43 77 / .3)를 --modal-backdrop로 명명한다. Play affordance는 기존 s2/s8/shade 그림자를 사용하고 cover hover는 기존 motion-hero-scale 토큰을 공유한다.
+RepresentativeMedia는 width min(100%,40dvh×16/9)로 높이도 제한해 PC에서 영상 컨트롤과 다음 동작을 볼 수 있게 한다. 큰 가로 화면의 군 선택·보조 동작은 t4/64px로 확대한다. 대표 시연은 ?representative=id 주소로 공유하고, 닫으면 이전 URL·초점을 복원한다. 체계 선택 때 현재 대표 주소만 갱신하고, 3D 전환 때 기존 system 주소 체계로 이어진다.
+Native 영상의 첫 실제 playing에서 설명 패널을 자동 접고(관람자가 펼친 설명은 버퍼링·재개 때 유지), pause/ended/stop/error이면 복원한다. 외부 iframe은 사용자 연결 요청에만 집중 상태로 진입하며 load를 실제 playing으로 취급하지 않는다. 집중 버튼 aria-controls는 실제 representative-context와 연결한다.

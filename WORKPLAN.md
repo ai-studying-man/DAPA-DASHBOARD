@@ -22,3 +22,10 @@
 - [x] 로컬 Git·원격 저장소·인증·Pages 상태 확인: 원격은 공개 빈 저장소, 인증 사용자는 ai-studying-man.
 - [x] 배포 경로 호환 및 main 자동 배포 workflow 구성·로컬 하위 경로 검증.
 - [x] 원격 push·Pages 활성화·실제 공개 URL의 지도/이미지/시연 검증.
+
+## 군별 대표 시연 v10
+- [x] 대표4체계 선정 및 기존 Cesium/자료/공식 원문 범위 확인.
+- [x] 영상·사진·기업·사업·수출·자료 사용권 확보와 manifest 작성.
+- [x] 대표 카드·영상 관람·기존 3D 연결·출처/실패/정지 동작 구현.
+- [x] production build·실제 브라우저 4체계/5크기/미디어 검증·독립 기능/시각 검토 통과.
+- 배포: main 자동 배포 workflow로 공개하며 실행 SHA·결과와 공개 URL 검증은 docs/evidence/representatives-v10/deployment.json에 기록.

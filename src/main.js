@@ -1,3 +1,4 @@
+import './representative.css';
 import { initStory, transitionPage } from './story-controller.js';
 import {environmentFor,environments} from './environment-data.js';
 import {equipmentAssets} from './equipment-assets.js';
@@ -25,6 +26,8 @@ const state = { home: !params.has('system'), region: null, classification: 'bran
 let demoMode='environment', demoOpener,environmentViewer,environmentPromise,environmentPreset,demoVersion=0,environmentSyncVersion=0;
 let viewer, viewerPromise, tourIndex=0, tourAdvanceTimer, voiceMessage='버튼을 누르면 한국어 음성으로 안내합니다.';
 const voice=new SpeechGuide(message=>{voiceMessage=message;document.querySelectorAll('[data-voice-status]').forEach(e=>e.textContent=message)});
+let representativePromise;
+function ensureRepresentatives(){return representativePromise??=import('./representative-exhibit.js').then(({initRepresentativeExhibit})=>initRepresentativeExhibit({onOpen:()=>{stopVoice();environmentViewer?.stop()},onInspect:id=>{state.region=null;state.branch='전체';state.domain='all';state.query='';select(id);openDemo()}}))}
 let storyController, guide, menuHidden=false, menuBeforeDemo=false;
 let map, mapReady = false, mapLoading = false, toastTimer;
 function toast(message) {
@@ -100,8 +103,11 @@ if (params.get('experience') === 'terrain') {
   guide=new ExhibitGuide($('#system-demo'),voice,async component=>{const selected=state.selected,version=guide.version;await guide.ready;const ready=demoMode==='environment'&&environmentViewer?.model?true:await changeDemoMode('environment');if(!ready||selected!==state.selected||version!==guide.version||!$('#system-demo').open)return false;if(component)environmentViewer.inspect(component);else environmentViewer.setView('site');return true;});
   render(); layout();
   storyController=initStory({onSystem:id=>{select(id);openDemo()},onRegion:chooseRegion});
+  if(params.has('representative'))ensureRepresentatives().then(controller=>controller.open(params.get('representative')));
   document.addEventListener('click', async (event) => {
     const button = event.target.closest('button'); if (!button || button.disabled) return;
+    const representativeId=button.dataset.representative||(button.closest('.hero-branches')?({'육군':'k2','해군':'dosan','공군':'fa50','해병대':'kaav'})[button.dataset.startBranch]:null);
+    if(representativeId){(await ensureRepresentatives()).open(representativeId,button);return;}
     if(button.dataset.storySystem){state.region=null;state.branch='전체';state.domain='all';state.query='';select(button.dataset.storySystem);openDemo()}
     if(button.hasAttribute('data-demo-info')){setDemoFocus($('#system-demo').dataset.playing!=='true')}
     if(button.hasAttribute('data-demo-open'))openDemo();
