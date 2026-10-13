@@ -7,13 +7,20 @@ export function loadCesium(){
   const script=document.createElement('script');script.src=base+'Cesium.js';script.onload=()=>resolve(window.Cesium);script.onerror=()=>{engine=null;reject(new Error('위성 지도 엔진 연결 실패'))};document.head.append(script);
  });return engine;
 }
-export async function createSatelliteViewer(host){
+export async function createSatelliteViewer(host,{photorealistic=false}={}){
  const C=await loadCesium();
  const [imagery,terrain]=await Promise.all([
   C.ArcGisMapServerImageryProvider.fromUrl('https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'),
   C.ArcGISTiledElevationTerrainProvider.fromUrl('https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer'),
  ]);
- const viewer=new C.Viewer(host,{baseLayer:new C.ImageryLayer(imagery),terrainProvider:terrain,animation:false,timeline:false,baseLayerPicker:false,geocoder:false,homeButton:false,sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,infoBox:false,selectionIndicator:false,requestRenderMode:true,maximumRenderTimeChange:Infinity});
+ const viewer=new C.Viewer(host,{baseLayer:new C.ImageryLayer(imagery),terrainProvider:terrain,animation:false,timeline:false,baseLayerPicker:false,geocoder:false,homeButton:false,sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,infoBox:false,selectionIndicator:false,shadows:photorealistic,requestRenderMode:true,maximumRenderTimeChange:Infinity});
  viewer.clock.currentTime=C.JulianDate.fromIso8601('2026-06-15T02:00:00Z');viewer.scene.highDynamicRange=true;viewer.resolutionScale=Math.min(devicePixelRatio||1,1.5);viewer.scene.verticalExaggeration=1;viewer.scene.globe.depthTestAgainstTerrain=true;viewer.scene.screenSpaceCameraController.minimumZoomDistance=2;
+ if(photorealistic){const scene=viewer.scene;
+ scene.light=new C.SunLight({intensity:1.4});
+ scene.globe.enableLighting=true;scene.globe.shadows=C.ShadowMode.RECEIVE_ONLY;
+ scene.globe.maximumScreenSpaceError=1.5;
+ scene.shadowMap.softShadows=true;scene.shadowMap.size=innerWidth<700?1024:2048;
+ scene.postProcessStages.fxaa.enabled=true;
+ scene.atmosphere.dynamicLighting=C.DynamicAtmosphereLightingType.SUNLIGHT;}
  return {C,viewer};
 }

@@ -143,3 +143,7 @@ beui center-morph-modal의 controlled open/close·focus restore·reduced-motion 
 RepresentativeDialog backdrop는 기존 native dialog와 같은 rgb(23 43 77 / .3)를 --modal-backdrop로 명명한다. Play affordance는 기존 s2/s8/shade 그림자를 사용하고 cover hover는 기존 motion-hero-scale 토큰을 공유한다.
 RepresentativeMedia는 width min(100%,40dvh×16/9)로 높이도 제한해 PC에서 영상 컨트롤과 다음 동작을 볼 수 있게 한다. 큰 가로 화면의 군 선택·보조 동작은 t4/64px로 확대한다. 대표 시연은 ?representative=id 주소로 공유하고, 닫으면 이전 URL·초점을 복원한다. 체계 선택 때 현재 대표 주소만 갱신하고, 3D 전환 때 기존 system 주소 체계로 이어진다.
 Native 영상의 첫 실제 playing에서 설명 패널을 자동 접고(관람자가 펼친 설명은 버퍼링·재개 때 유지), pause/ended/stop/error이면 복원한다. 외부 iframe은 사용자 연결 요청에만 집중 상태로 진입하며 load를 실제 playing으로 취급하지 않는다. 집중 버튼 aria-controls는 실제 representative-context와 연결한다.
+
+## 온라인 실사 장면 v11
+CesiumJS의 실제 위성 영상·고도1:1을 유지하며 태양광, 모델 그림자, FXAA와 물리 기반 환경 반사를 적용한다. Poly Haven Greg Zaal의 CC0 Kiara 6 Afternoon KTX2를 모델 반사광으로 사용하고 한국 지형 사진으로 표현하지 않는다. 원문 조명 근거는 public/lighting/ATTRIBUTION.md에 기록한다. 기존 native Action·48px 컨트롤과 지도/외형/사진 비교는 유지한다. 모델 원본 GLB와 사진의 자산 범위를 바꾸어 표시하지 않는다. 지상 모델은 지형 높이, 공중 체계는 전시 고도, 수면 체계는 수선 기준으로 배치한다. 하드웨어 해상도별 그림자맵 1024/2048과 on-demand render를 사용하여 유휴 GPU 작업을 줄인다.
+현장 관측 기준점은 로컬 GLB 유무와 무관하게 공개 고도를 샘플링해 지면 높이에 둔다. 세부 지형 갱신 시 기준점·마커·근접 카메라도 함께 보정하며 관측 좌표의 분류는 전시용으로 유지한다.

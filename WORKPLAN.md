@@ -29,3 +29,9 @@
 - [x] 대표 카드·영상 관람·기존 3D 연결·출처/실패/정지 동작 구현.
 - [x] production build·실제 브라우저 4체계/5크기/미디어 검증·독립 기능/시각 검토 통과.
 - 배포: main 자동 배포 workflow로 공개하며 실행 SHA·결과와 공개 URL 검증은 docs/evidence/representatives-v10/deployment.json에 기록.
+
+## 온라인 실사 장면 v11
+- [x] 기존 GLB·위성/고도 통합과 공개 3D 데이터·사용권 조사.
+- [x] CC0 HDR·태양광·그림자·실제 지형 품질 및 K2 기준점 고도 적용.
+- [x] 실제 브라우저 5크기/153상태·고도 회귀 검사·독립 기능/화면 검토.
+- main 자동 배포 및 공개 검증 실행 결과는 docs/evidence/realism-v11/deployment.json에 기록.
