@@ -130,3 +130,21 @@ MapLabelLayout: 한반도에서체계이름이겹치면화면좌표·실제font�
 SceneViewControls도최소48px, actionradius r2. 모바일사진자료는toolbar2행높이+s10 위에배치하여서로의터치영역을가리지않는다.
 
 SourceTerm: Warning Lights/L/G Panel/Side Stick/Throttle Grip 및붙는조사어절은nowrap으로기술명중간분절을막는다. 카드폭보다짧은검증된기술명에만적용한다.
+
+## v10 · Portrait welcome kiosk (2026-10-14)
+Reference: approved `docs/design-drafts/home-v5/k-defense-home-mission-below-video.png`, with final user amendments: 체험관 label; annotation-style 방산 수출 above 세계 9위. Implement real text, logo and video, never the mockup as a background.
+- Persona: child and first-time visitor. First action is one compact next button, language choices at bottom. Following story explains what equipment does and public export relationships in everyday Korean.
+- Welcome width 941px maximum, side gutter 48px (20px mobile); centered portrait composition even on landscape PC. White surface, existing blue/text tokens. On tall kiosks first screen fills available height; on short displays native vertical scrolling retains every control.
+- Type: title clamp 32–112px, rank clamp 40–80px, annotation 14–28px, mission 18–40px, header 16–32px. Title two lines; rank annotation left aligned inside a centered inline block.
+- Media primitive: fixed 16:9, radius 24px, actual MP4 and still poster. Native-compatible muted autoplay loop playsinline; visible 48px playback/sound actions, error status. Video pauses offscreen, on hidden document, dialogs or leaving home. User pause persists during re-entry. Sound is opt-in.
+- Compact next: blue, 400px maximum/50% width and 80px height on portrait desktop, 56px height minimum on mobile. On 375px width use intrinsic fit with 200px minimum. Bottom language controls each 80px tall on desktop, 48px minimum on mobile; focus ring inherited. Language selection translates welcome text only; following Korean catalog and separately localized 3D narration retain their own language controls. This scope is provided to assistive technology through the language group aria-describedby and a localized sr-only span; no visible footer explanation.
+- Header actual DAPA logo artwork, no AI redraw. Raster reference provenance is preserved in asset documentation; original manufacturer CAD remains unavailable.
+- Story chapter controls start after welcome. First screen has no previous/home/menu clutter. Following pages offer 처음 and chapter links. Existing Lenis/native touch/reduced-motion behavior stays; no parallax on video.
+- Ranking evidence: SIPRI Trends in International Arms Transfers 2025, 2021–2025 major arms suppliers, South Korea ninth. Not contract dollars or military-power rank. Main visible caption removed by user; source retained in documentation/story source details. Top-four exporter ambition is a goal, not attained rank.
+- Required states: muted playing, user pause, sound on, blocked playback retry, video failure, selected language, keyboard focus, mobile wrapping, following story navigation. Parent final QA owns actual browser evidence.
+
+### v10 reference scale correction
+At widths >=601px use kiosk width941/gutter48, title112 maximum with 11vw responsive scaling, rank80, mission40 maximum with 4vw scaling; header32 and emblem84. Video stays16:9, maximum845px wide. Welcome top48/header96/contentgap32/title margins24/48 place media near y510 in 941×1672 viewport. Next400 maximum/50% and80 height; four language buttons equal-width28px labels/80 height. Existing375px presentation retains its readable32px title, compact controls and native overflow.
+
+### v10 functional video chrome
+Approved reference player label appears upper-left; actual playback chrome is a bottom black-to-transparent gradient (--kiosk-video-shade:#000), white text (--on-accent). Native play/pause and mute buttons remain48px touch targets; current/total mm:ss reflects HTMLVideoElement; native range input seeks the real media. Slider minimum48px touch height, disabled before finite duration is known. A localized status reflects actual muted state and loop flag. On mobile timeline wraps to its own row; no fake timeline, static duration or decorative playback indicators. Video label/status translated with welcome language.

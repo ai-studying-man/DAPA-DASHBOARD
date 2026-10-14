@@ -11,7 +11,7 @@ export function initStoryMotion(root,story,onState){
  const hero=story.querySelector('.hero-photo img'),media=[...story.querySelectorAll('.story-map')];
  let home=false,lenis=null,frame=0,active=false;
  function cancelAnimations(){for(const animation of animations)animation.cancel();animations.clear()}
- function finalState(){hero.style.removeProperty('--hero-y');hero.style.removeProperty('--hero-scale');for(const item of media)item.style.removeProperty('--media-y')}
+ function finalState(){hero?.style.removeProperty('--hero-y');hero?.style.removeProperty('--hero-scale');for(const item of media)item.style.removeProperty('--media-y')}
  function show(element){
   if(element.classList.contains('revealed'))return;
   element.classList.add('revealed');observer.unobserve(element);
@@ -40,7 +40,7 @@ export function initStoryMotion(root,story,onState){
  function update(){
   if(!active||reduced.matches)return;
   const rb=root.getBoundingClientRect(),r=story.querySelector('.story-hero').getBoundingClientRect();
-  if(r.bottom>rb.top&&r.top<rb.bottom){const progress=Math.min(1,Math.max(0,(rb.top-r.top)/Math.max(1,r.height)));hero.style.setProperty('--hero-scale',String(tokens.heroScale-(tokens.heroScale-1)*progress));hero.style.setProperty('--hero-y',`${Math.min(tokens.heroTravel,progress*tokens.heroTravel)}px`)}
+  if(hero&&r.bottom>rb.top&&r.top<rb.bottom){const progress=Math.min(1,Math.max(0,(rb.top-r.top)/Math.max(1,r.height)));hero.style.setProperty('--hero-scale',String(tokens.heroScale-(tokens.heroScale-1)*progress));hero.style.setProperty('--hero-y',`${Math.min(tokens.heroTravel,progress*tokens.heroTravel)}px`)}
   for(const item of media){const rect=item.getBoundingClientRect();if(rect.bottom>rb.top&&rect.top<rb.bottom){const progress=Math.min(1,Math.max(0,(rb.bottom-rect.top)/(rb.height+rect.height)));item.style.setProperty('--media-y',`${(progress-.5)*tokens.mediaShift}px`)}}
  }
  root.addEventListener('focusin',event=>{const element=event.target.closest('[data-reveal],h1,h2');if(element){element.classList.add('revealed');observer.unobserve(element);for(const animation of animations){const target=animation.effect.target;if(element.contains(target)||target===element){animation.cancel();animations.delete(animation)}}}},{signal:events.signal});

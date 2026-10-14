@@ -1,3 +1,4 @@
+import { initKioskWelcome } from './kiosk-welcome.js';
 import { systems } from './data.js';
 import { initStoryMotion } from './story-motion.js';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -11,6 +12,7 @@ export function transitionPage(element){
 export function initStory({onSystem,onRegion}){
  const root=document.querySelector('.main'),shell=document.querySelector('.shell');
  if(!root||!document.querySelector('.story'))return;
+ const kiosk=initKioskWelcome();
  const maps=new Map();let frame=0,home=shell.dataset.home==='true';
  const sections=[...document.querySelectorAll('.story-section')];
  const motion=initStoryMotion(root,document.querySelector('.story'),()=>{if(!motion.isActive()){cancelAnimationFrame(frame);frame=0}else schedule()});
@@ -47,5 +49,5 @@ export function initStory({onSystem,onRegion}){
  const resize=new ResizeObserver(()=>{for(const item of maps.values())fit(item);schedule()});resize.observe(root);
  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0}else schedule()});
  reduced.addEventListener('change',()=>{document.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('revealed'));for(const item of maps.values())fit(item);schedule()});
- motion.setHome(home);schedule();return{setHome(value){home=value;motion.setHome(value);if(!home){cancelAnimationFrame(frame);frame=0}else{for(const host of document.querySelectorAll('[data-story-map]')){const r=host.getBoundingClientRect(),rb=root.getBoundingClientRect();if(r.bottom>rb.top&&r.top<rb.bottom)load(host)}schedule()}}};
+ motion.setHome(home);schedule();return{setHome(value){home=value;kiosk.setHome(value);motion.setHome(value);if(!home){cancelAnimationFrame(frame);frame=0}else{for(const host of document.querySelectorAll('[data-story-map]')){const r=host.getBoundingClientRect(),rb=root.getBoundingClientRect();if(r.bottom>rb.top&&r.top<rb.bottom)load(host)}schedule()}}};
 }

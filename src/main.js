@@ -53,7 +53,7 @@ function render() {
   $('#collection').innerHTML = items.length ? items.map((s) => card(s, state.selected)).join('') : '<div class="empty-inline">검색 결과가 없습니다. 검색어를 바꾸거나 필터를 초기화해 주세요.</div>';
   $('#collection-count').textContent = String(items.length).padStart(2, '0');
   const events = items.flatMap((s) => s.events);
-  $('#result-count').textContent = state.mode === 'world' ? `${new Set(events.map((e) => e.country)).size}개국 · ${events.length}개 공개 수출 사건` : `${items.length}개 체계 · 선택해서 탐색`;
+  $('#result-count').textContent = state.mode === 'world' ? `${new Set(events.map((e) => e.country)).size}개국 · ${events.length}개 공개된 수출 이야기` : `${items.length}개 체계 · 선택해서 탐색`;
   $('#detail').innerHTML = detail(selected, state.mode);
   if(!state.home && selected && !$('#system-demo').open) syncViewer();
   document.querySelectorAll('[data-voice-status]').forEach(e=>e.textContent=voiceMessage);
@@ -65,9 +65,9 @@ function render() {
   if(!state.home && isMap) ensureMap();
   if (state.mode === 'graph') $('#graph-view').innerHTML = graph(selected);
   if (state.mode === 'list') $('#list-view').innerHTML = items.length ? `<div class="catalog-intro"><h2>이름을 몰라도 찾아보세요</h2><p>영역이나 군을 선택하면 관련 체계를 모아볼 수 있습니다.</p></div><div class="catalog-grid">${items.map((s) => card(s, state.selected)).join('')}</div>` : '<div class="empty"><h2>검색 결과가 없습니다</h2><p>다른 검색어나 영역으로 찾아보세요.</p><button class="action" data-clear>필터 초기화</button></div>';
-  $('#stage-badge').textContent = { korea: 'PENINSULA / 3D', world: 'GLOBAL CONNECTIONS', graph: 'KNOWLEDGE GRAPH', list: 'SYSTEM COLLECTION', timeline: 'PUBLIC RECORD / TIMELINE' }[state.mode];
+  $('#stage-badge').textContent = { korea: '한반도 입체 지도', world: '세계로 이어지는 수출', graph: '기업과 사업의 연결', list: '장비 모아보기', timeline: '과거·현재·미래 이야기' }[state.mode];
   $('#map-disclaimer').hidden = state.mode === 'timeline';
-  $('#map-disclaimer').textContent = state.mode === 'world' ? `연결선은 공개 수출 관계 · 실제 운송 경로 아님 · 수록 ${new Set(systems.flatMap(s=>s.events.map(e=>e.country))).size}개국` : state.mode === 'graph' ? '공개 근거와 설명용 분류의 연결 · 완전한 전체 사업 온톨로지가 아닙니다' : state.mode === 'list' ? '공개자료로 확인한 대표 사례 · 선택 항목의 근거와 발표일을 확인하세요' : '실제 위성·항공 영상과 고도 지형 · 장비 위치는 전시용 · 실제 배치·궤도 아님';
+  $('#map-disclaimer').textContent = state.mode === 'world' ? `연결선은 공개 수출 관계 · 실제 운송 경로 아님 · 수록 ${new Set(systems.flatMap(s=>s.events.map(e=>e.country))).size}개국` : state.mode === 'graph' ? '공개 근거와 설명용 분류의 연결 · 모든 사업을 담은 것은 아니에요' : state.mode === 'list' ? '공개자료로 확인한 대표 사례 · 선택 항목의 근거와 발표일을 확인하세요' : '실제 위성·항공 영상과 고도 지형 · 장비 위치는 전시용 · 실제 배치·궤도 아님';
   if (mapReady) map.requestedMode=state.mode;
   if (mapReady && isMap) {
     if (map.mode !== state.mode) {
