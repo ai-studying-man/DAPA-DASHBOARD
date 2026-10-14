@@ -148,3 +148,21 @@ At widths >=601px use kiosk width941/gutter48, title112 maximum with 11vw respon
 
 ### v10 functional video chrome
 Approved reference player label appears upper-left; actual playback chrome is a bottom black-to-transparent gradient (--kiosk-video-shade:#000), white text (--on-accent). Native play/pause and mute buttons remain48px touch targets; current/total mm:ss reflects HTMLVideoElement; native range input seeks the real media. Slider minimum48px touch height, disabled before finite duration is known. A localized status reflects actual muted state and loop flag. On mobile timeline wraps to its own row; no fake timeline, static duration or decorative playback indicators. Video label/status translated with welcome language.
+
+
+## 군별 대표 실사 전시 v10
+
+기존 Toss 참고의 밝은 표면·StorySection·Action·48px focus·native dialog를 재사용한다. 대표 체계는 육군 K2, 해군 도산안창호급, 공군 FA-50, 해병대 KAAV이며 홈의 대표 관람 섹션에서 실제 사진으로 선택한다. RepresentativeCard는 media radius story-radius, 표면 panel, 제목 t3, 군·짧은 설명 t1, 출처 t0. 4열→태블릿2열→600px이하1열, 이미지16:9 object-fit:cover; 정확한 전체 외형은 원본/시연에서 contain으로 보여준다. 콘텐츠 축은 한 장면 한 메시지이며 기업·사업·수출·사용권은 details로 단계 공개한다.
+
+RepresentativeDialog는 native modal, header/scroll-owned body/footer로 구성한다. 최대폭 1200px, 높이90dvh; 2400px이상2000px. 실제 영상16:9 contain, 세로에서 전체 영상을 자르지 않는다. 선택군4개는 Action/aria-pressed, 관람 단계는 실제 영상·3D 지도/외형·사업/수출. 3D 동작은 기존 체계 시연으로 이어진다. 공개 사진 기반 모델과 실제 영상의 종류·원본·저작자를 항상 구분한다. 날짜는 촬영/공개 사실과 자료 확인을 분리한다.
+
+영상은 사용자가 재생을 누른 후만 로드하고 자동 소리/자동 순환을 하지 않는다. 로컬·공개 스트림은 native video controls/playsinline/preload none, 공식 외부 영상은 iframe과 원문 링크를 제공한다. 영상 준비·로드 실패·네트워크 차단 시 실제 사진·글·원문 대안을 유지한다. 새 체계 선택/닫기/다른 관람 단계/탭 비활성에서는 기존 영상 정지 또는 iframe 제거. 새로운 미디어의 loadeddata와 iframe load는 각각 다르며 iframe load를 재생 성공으로 표시하지 않는다. 모바일·세로에서 버튼을 영상 위에 겹치지 않는다.
+
+beui center-morph-modal의 controlled open/close·focus restore·reduced-motion 원칙을 native dialog로 적용한다. 진입은 기존 page-duration 320ms opacity/translate, 모션 감소에서는 정지 표면. 닫기 후 실제 opener로 초점 복귀, 3D 전환에서는 새 dialog 초점을 방해하지 않는다. 소리 없는 상황에도 역할·자료 범위·출처를 글로 제공한다. 공식 영상의 자체 자막 유무와 앱 안내를 구분하고 없는 대사를 생성하여 붙이지 않는다. 제조사 CAD·확보되지 않은 실내·자산 다운로드 사용권은 추정하지 않는다.
+RepresentativeDialog backdrop는 기존 native dialog와 같은 rgb(23 43 77 / .3)를 --modal-backdrop로 명명한다. Play affordance는 기존 s2/s8/shade 그림자를 사용하고 cover hover는 기존 motion-hero-scale 토큰을 공유한다.
+RepresentativeMedia는 width min(100%,40dvh×16/9)로 높이도 제한해 PC에서 영상 컨트롤과 다음 동작을 볼 수 있게 한다. 큰 가로 화면의 군 선택·보조 동작은 t4/64px로 확대한다. 대표 시연은 ?representative=id 주소로 공유하고, 닫으면 이전 URL·초점을 복원한다. 체계 선택 때 현재 대표 주소만 갱신하고, 3D 전환 때 기존 system 주소 체계로 이어진다.
+Native 영상의 첫 실제 playing에서 설명 패널을 자동 접고(관람자가 펼친 설명은 버퍼링·재개 때 유지), pause/ended/stop/error이면 복원한다. 외부 iframe은 사용자 연결 요청에만 집중 상태로 진입하며 load를 실제 playing으로 취급하지 않는다. 집중 버튼 aria-controls는 실제 representative-context와 연결한다.
+
+## 온라인 실사 장면 v11
+CesiumJS의 실제 위성 영상·고도1:1을 유지하며 태양광, 모델 그림자, FXAA와 물리 기반 환경 반사를 적용한다. Poly Haven Greg Zaal의 CC0 Kiara 6 Afternoon KTX2를 모델 반사광으로 사용하고 한국 지형 사진으로 표현하지 않는다. 원문 조명 근거는 public/lighting/ATTRIBUTION.md에 기록한다. 기존 native Action·48px 컨트롤과 지도/외형/사진 비교는 유지한다. 모델 원본 GLB와 사진의 자산 범위를 바꾸어 표시하지 않는다. 지상 모델은 지형 높이, 공중 체계는 전시 고도, 수면 체계는 수선 기준으로 배치한다. 하드웨어 해상도별 그림자맵 1024/2048과 on-demand render를 사용하여 유휴 GPU 작업을 줄인다.
+현장 관측 기준점은 로컬 GLB 유무와 무관하게 공개 고도를 샘플링해 지면 높이에 둔다. 세부 지형 갱신 시 기준점·마커·근접 카메라도 함께 보정하며 관측 좌표의 분류는 전시용으로 유지한다.
