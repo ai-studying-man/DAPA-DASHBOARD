@@ -35,3 +35,18 @@
 - [x] CC0 HDR·태양광·그림자·실제 지형 품질 및 K2 기준점 고도 적용.
 - [x] 실제 브라우저 5크기/153상태·고도 회귀 검사·독립 기능/화면 검토.
 - main 자동 배포 및 공개 검증 실행 결과는 docs/evidence/realism-v11/deployment.json에 기록.
+
+## VIP 전시 개선 v13 · 2026-10-14
+- [x] 첨부 제안서와 현재 기능·원격 상태 확인.
+- [x] 인트로·간부 시연 동선 및 기존 집중 모드 보강.
+- [x] 네 언어 콘텐츠·음성·접근성·저장 정책 통합.
+- [x] WebGL 로딩·실패·context lost 복구와 실제 자료 대체 경로 구현 (실제 GPU 손실은 행사 기기 미검증).
+- [x] 공식 수출 계약 카드·자산 권리 상태·미디어 교체 문서.
+- [x] 실제 브라우저 정상·실패·반응형·키보드·회귀 및 수정 후 독립 기능·CJK 화면 검토 PASS. 행사장 GPU/음성 및 실제 200% 확대는 별도 미검증으로 결과 문서에 기록.
+- 이번 요청의 로컬 구현만 수행하며 공개 범위·인증·배포 설정은 변경하지 않는다. 행사장 기기 검증은 장비 미제공으로 별도 미검증.
+
+## Touch / 전군 현황 v14
+- [x] Read Claude review and user clarified exhibition goal; inspect current branches/source/render paths.
+- [x] Add touch-first all-service catalog/dashboard and verified shared branch links.
+- [x] Integrate existing story, menu, search, detail/3D and four locales.
+- [x] Manual rendered verification complete; independent functional/CJK reviews APPROVE/PASS; scope and evidence ledger documented.

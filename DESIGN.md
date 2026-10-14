@@ -166,3 +166,47 @@ Native 영상의 첫 실제 playing에서 설명 패널을 자동 접고(관람�
 ## 온라인 실사 장면 v11
 CesiumJS의 실제 위성 영상·고도1:1을 유지하며 태양광, 모델 그림자, FXAA와 물리 기반 환경 반사를 적용한다. Poly Haven Greg Zaal의 CC0 Kiara 6 Afternoon KTX2를 모델 반사광으로 사용하고 한국 지형 사진으로 표현하지 않는다. 원문 조명 근거는 public/lighting/ATTRIBUTION.md에 기록한다. 기존 native Action·48px 컨트롤과 지도/외형/사진 비교는 유지한다. 모델 원본 GLB와 사진의 자산 범위를 바꾸어 표시하지 않는다. 지상 모델은 지형 높이, 공중 체계는 전시 고도, 수면 체계는 수선 기준으로 배치한다. 하드웨어 해상도별 그림자맵 1024/2048과 on-demand render를 사용하여 유휴 GPU 작업을 줄인다.
 현장 관측 기준점은 로컬 GLB 유무와 무관하게 공개 고도를 샘플링해 지면 높이에 둔다. 세부 지형 갱신 시 기준점·마커·근접 카메라도 함께 보정하며 관측 좌표의 분류는 전시용으로 유지한다.
+
+## VIP presentation v12 · Intro and manual demonstration
+Preserve the approved portrait welcome, ranking annotation, 16:9 media, compact next action and bottom languages. Title now exactly K-방산의 중심, / 방위사업청. Media manifest uses the existing 23.5-second asset until a licensed replacement is supplied; no assumed ten-second file or invented subtitles. Muted autoplay attempts have blocked/error/slow-loading statuses; reduced motion defaults to the still poster with manual play. Ordinary welcome-area clicks delegate to the native next button, excluding interactive descendants and selected text. Keyboard entry uses the same separate button; focus follows the destination heading after the finite transition.
+PresentationRail uses existing panel/line/accent, r3, s4/s3/s2, t1/t3 and 48px controls. It sits after welcome, never obscures the portrait entry. Manual VIP steps reuse K2 actual footage, FA-50 real terrain/3D observation, and existing public export page, with no automatic progression or performance/agency-approval claim. Normal exploration remains available. Global text language select preserves readable four-language names and 48px touch. Small screens wrap controls into rows; native scrolling has one owner. Focus, loading, rejection, reduced motion and normal/VIP selected states are required. Event-specific hardware and professional translation approval remain unverified.
+
+## v13 · Official export proof cards
+Reuse source-card/action/spacing/color tokens. A K2 public evidence group distinguishes signed executive contracts, schedules announced at that time, and delivery evidence not assessed. Two compact cards use semantic description lists and full primary-source links; four-language label resources are maintained with the cards. No additional statistics or assertion of completed deliveries. On narrow displays cards stack, keep clause units intact.
+
+## v12 · 3D scene recovery
+SceneRecovery uses the existing panel, text/muted/accent, radius r3, spacing s4/s6 and 48px Action primitives. Every satellite scene exposes loading, ready, unavailable, initialization-failure, network-failure, load-timeout and context-lost state. A visible status appears immediately; after 10 seconds unresolved loading becomes an actionable recovery card. Recovery offers one deliberate retry, a clearly labeled actual video alternative and return to the dashboard. No automatic retry loop or page reload. The local video includes CGI and is identified as footage, never a working 3D simulation. Context loss stops camera animation and disables scene controls; disposal cancels listeners/timers and invalidates pending asynchronous work. Text follows the active language; native controls keep keyboard focus and readable contrast.
+
+VIP progression: welcome next targets the presentation choice rail; the existing 3D dialog keeps a native next-to-export action available in focused view. It closes the dialog before changing explorer mode and focuses the destination title. No timed or automatic claim of performance.
+
+Localized welcome typography: Latin agency names use --kiosk-title-latin 68px maximum (32px minimum, 7.2vw) to preserve media visibility and avoid oversized multi-line institutional names. Intentional offscreen/hidden playback aborts do not show autoplay-denied errors.
+
+3D focus framing: observation range adapts to the actual canvas aspect ratio using a 1.6 baseline, preventing exterior clipping when the inspection panel collapses into a wide stage. Site/component views refit on resize; onboard view remains under viewer control.
+
+Intro error state retains a separate real poster image and live entry controls. Failure/blocked playback always exposes Play as a retry action; intentional visibility pauses remain silent. Poster and video occupy the same fixed 16:9 primitive.
+
+Scroll ownership: when the app shell is present, html/body do not scroll; .main owns story/explorer scrolling and native dialogs own their internal content. This prevents focus navigation and full-page captures from creating a second page scrollbar. Standalone non-shell routes retain their existing scrolling.
+
+Focused 3D voice controls: a native stop-narration button remains alongside playback, reset, sources and exit controls when the inspector is collapsed. Its label is maintained in all four UI locales.
+
+Ready 3D exteriors frame the model’s real world-space bounding sphere center; the documented asset range remains the minimum. This centers asymmetric source models after wide-stage resize instead of relying only on a guessed focus height.
+
+Focus-mode transitions reset the dialog content scroll to its beginning before resizing, keeping the complete 3D stage visible after activating a control near the bottom.
+
+Lazy environment-module failures use the same localized retry/video/return recovery primitive. Existing renderer recovery panels are retained intact when an asynchronous initialization rejects.
+
+Localized CJK hero titles use the existing 68px locale title cap and a 28px minimum. The short title phrase and its closing punctuation stay together on one line; the agency remains the intentional second line. Korean size is unchanged.
+
+## 전군 공개 체계 현황 v14 · 2026-10-14
+User goal: promotional touch/scroll web app for an eventual DAPA exhibition kiosk, accessible on PC/mobile today. Existing video, 3D, source/locale routes remain intact. Add a separate ForcesDashboard using current Action/FilterChip/SystemCard tokens: panel/elevated/accent-dark layers, t3 card title/t4 section title/t5 metrics, s4/s6 spacing, r2/r3 radii, minimum s12=48px targets. Six branch choices (all/Army/Navy/Air Force/Marines/shared), three→two→one equipment columns, a single .main vertical scroll including selected detail, no hover-dependent action or automatic scene motion. Selected equipment connects to the existing detail/3D modal. Native buttons keep keyboard/focus/pressed states; language, home and menu remain reachable.
+Counts are unique records in the public exhibit catalog, not actual holdings or exhaustive inventory. Multiple branch references can contribute to several group counts but only once to the overall total. Shared means verified multi-branch public examples; joint/space bases are explicitly separate, including civilian Nuri. K9/Chunmoo Marine connection is supported by the government public briefing of 2026-06-24, without adding unit locations or quantities. Touch scrolling uses native pan-y and overscroll containment only for this dashboard; 3D canvas gesture handling stays unchanged. Institutional exhibitor/young visitor/foreign visitor journeys: choose branch→select equipment→read sources/3D; all labels available in four locales. Hardware touch, long-running GPU and audible voice remain event-device verification scope.
+
+Forces mobile header: existing 48px controls form a fixed three-column/two-row grid under 600px; header uses the existing 112px height and t2 compact brand. The language control spans two columns. This prevents toolbar controls from clipping while retaining language/menu/settings/home. Metrics use the short label 군 간 공통 to avoid an orphaned caption at narrow widths.
+
+Forces catalog also includes export variants and development projects. The public-catalog scope states this explicitly; Redback carries an export-variant badge rather than implying domestic Army operation.
+
+Forces localized mobile intro: constrain every intro child to the viewport; place coverage in an independent three-column grid with unbroken numeric values and wrapping captions. Use the short visible equipment-search placeholder while keeping the full accessible search label. Programmatic heading/summary focus uses the existing accent ring rather than browser-default black rectangles.
+
+Forces mobile environment chips place icon above the wrapping localized label, using existing s2 spacing and minimum s12 target. Coverage grid aligns all numerals at the top despite differing caption lengths.
+
+The overview opens with equipment cards only; detail and its external 3D viewer load after equipment selection. Returning to the overview or changing service hides detail and stops its viewer. Existing modal viewers remain available. This keeps overview browsing independent of external 3D loading.
