@@ -1,22 +1,25 @@
+import {translateText} from './i18n.js';
+import {SceneWatch} from './scene-recovery.js';
 import {createSatelliteViewer} from './cesium-runtime.js';
 import {regions} from './exhibition-data.js';
 import {exportLocations} from './export-locations.js';
 import './satellite-exhibition.css';
 export class AtlasMap{
- constructor(host,onSelect,onStatus,onRegion){this.host=host;this.onSelect=onSelect;this.onStatus=onStatus;this.onRegion=onRegion;this.mode='korea';}
+ constructor(host,onSelect,onStatus,onRegion){this.host=host;this.onSelect=onSelect;this.onStatus=onStatus;this.onRegion=onRegion;this.mode='korea';this.version=0;this.language=()=>{if(this.viewer&&this.activeSystems&&!this.watch.failed)this.update(this.activeSystems,this.selectedId)};document.addEventListener('app-language-change',this.language);this.watch=new SceneWatch(host,{onStatus,retry:()=>this.retry(),stop:()=>{if(this.viewer)this.viewer.useDefaultRenderLoop=false}});}
  async init(){
+  const version=++this.version,signal=this.watch.begin();
   const canvasHost=document.createElement('div');canvasHost.className='satellite-canvas';this.host.prepend(canvasHost);
-  Object.assign(this,await createSatelliteViewer(canvasHost));const C=this.C;
-  this.viewer.canvas.setAttribute('aria-label','실제 위성·항공 영상과 고도 지형. 체계 위치는 전시용입니다.');
+  const runtime=await createSatelliteViewer(canvasHost,{watch:this.watch,signal});if(version!==this.version||signal.aborted){runtime.viewer.destroy();return;}Object.assign(this,runtime);const C=this.C;
+  this.viewer.canvas.setAttribute('aria-label',translateText('실제 위성·항공 영상과 고도 지형. 체계 위치는 전시용입니다.'));
   this.handler=new C.ScreenSpaceEventHandler(this.viewer.canvas);
   this.handler.setInputAction(e=>{const entity=this.viewer.scene.pick(e.position)?.id;if(entity?.systemId)this.onSelect(entity.systemId);if(entity?.regionId)this.onRegion?.(entity.regionId)},C.ScreenSpaceEventType.LEFT_CLICK);
   this.labelMeasure=document.createElement('canvas').getContext('2d');this.removeLabelLayout=this.viewer.scene.postRender.addEventListener(()=>this.declutter());
-  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(this.host);this.home();this.onStatus('위성 지도 준비 완료',false);
+  this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(this.host);this.home();this.onStatus('위성 지도 준비 완료',false);this.onReady?.(this);
  }
- async load(mode){this.mode=mode;this.viewer.entities.removeAll();this.home();return true;}
- label(text,color){const C=this.C;return{text,horizontalOrigin:C.HorizontalOrigin.CENTER,verticalOrigin:C.VerticalOrigin.CENTER,font:'600 14px sans-serif',fillColor:C.Color.WHITE,outlineColor:C.Color.BLACK,outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,showBackground:true,backgroundColor:C.Color.fromCssColorString(color).withAlpha(.9),pixelOffset:new C.Cartesian2(0,-18),disableDepthTestDistance:Infinity,distanceDisplayCondition:new C.DistanceDisplayCondition(0,3e7)};}
+ async load(mode){this.mode=mode;if(!this.viewer||this.watch.failed)return false;this.viewer.entities.removeAll();this.home();return true;}
+ label(text,color){const C=this.C;return{text:translateText(text),horizontalOrigin:C.HorizontalOrigin.CENTER,verticalOrigin:C.VerticalOrigin.CENTER,font:'600 14px sans-serif',fillColor:C.Color.WHITE,outlineColor:C.Color.BLACK,outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,showBackground:true,backgroundColor:C.Color.fromCssColorString(color).withAlpha(.9),pixelOffset:new C.Cartesian2(0,-18),disableDepthTestDistance:Infinity,distanceDisplayCondition:new C.DistanceDisplayCondition(0,3e7)};}
  update(systems,selected){
-  this.activeSystems=systems;this.selectedId=selected;this.viewer.entities.removeAll();const C=this.C;
+  this.activeSystems=systems;this.selectedId=selected;if(!this.viewer||this.watch.failed)return;this.viewer.entities.removeAll();const C=this.C;
   if(this.mode==='world'){
    const countries=[...new Set(systems.flatMap(s=>s.events.map(e=>e.country)))];
    for(const country of countries){const coords=exportLocations[country];if(!coords)continue;
@@ -48,10 +51,12 @@ export class AtlasMap{
   }if(changed)this.render();
  }
  home(){if(!this.viewer)return;const C=this.C;this.viewer.camera.cancelFlight();this.viewer.camera.setView({destination:C.Cartesian3.fromDegrees(this.mode==='world'?75:127.6,this.mode==='world'?28:36.5,this.mode==='world'?18000000:1050000),orientation:{heading:0,pitch:C.Math.toRadians(this.mode==='world'?-90:-75),roll:0}});this.render();}
- top(){const C=this.C;this.viewer.camera.setView({orientation:{heading:0,pitch:-Math.PI/2,roll:0}});this.render();}
- zoom(factor){const camera=this.viewer.camera;const amount=camera.positionCartographic.height*Math.abs(1-factor);if(factor<1)camera.zoomIn(amount);else camera.zoomOut(amount);this.render();}
+ top(){if(!this.viewer||this.watch.failed)return;const C=this.C;this.viewer.camera.setView({orientation:{heading:0,pitch:-Math.PI/2,roll:0}});this.render();}
+ zoom(factor){if(!this.viewer||this.watch.failed)return;const camera=this.viewer.camera;const amount=camera.positionCartographic.height*Math.abs(1-factor);if(factor<1)camera.zoomIn(amount);else camera.zoomOut(amount);this.render();}
  resize(){this.viewer?.resize();this.render();}
- render(){this.viewer?.scene.requestRender();}
- setInteractive(value){this.viewer.scene.screenSpaceCameraController.enableInputs=value;this.viewer.canvas.style.touchAction=value?'none':'pan-y';}
- destroy(){this.removeLabelLayout?.();this.observer?.disconnect();this.handler?.destroy();this.viewer?.destroy();}
+ render(){if(this.viewer&&!this.viewer.isDestroyed()&&!this.watch.failed)this.viewer.scene.requestRender();}
+ setInteractive(value){this.interactive=value;if(!this.viewer)return;this.viewer.scene.screenSpaceCameraController.enableInputs=value;this.viewer.canvas.style.touchAction=value?'none':'pan-y';}
+ disposeViewer(){this.removeLabelLayout?.();this.observer?.disconnect();this.handler?.destroy();if(this.viewer&&!this.viewer.isDestroyed())this.viewer.destroy();this.viewer=null;this.host.querySelectorAll('.satellite-canvas').forEach(node=>node.remove());}
+ async retry(){this.disposeViewer();try{await this.init();if(!this.viewer)return;if(this.activeSystems)this.update(this.activeSystems,this.selectedId);this.setInteractive(this.interactive??true)}catch{}}
+ destroy(){document.removeEventListener('app-language-change',this.language);this.version++;this.disposeViewer();this.watch.dispose();}
 }

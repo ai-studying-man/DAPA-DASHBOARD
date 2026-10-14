@@ -1,3 +1,4 @@
+import {refreshLocalization} from './i18n.js';
 import {equipmentAssets} from './equipment-assets.js';
 let sdkPromise;
 function loadSDK(){return sdkPromise??=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js';script.onload=resolve;script.onerror=()=>reject(new Error('viewer unavailable'));document.head.append(script)})}
@@ -22,8 +23,9 @@ export class ModelViewer {
   }
   host.append(stage);
   const caption=document.createElement('p');caption.className='equipment-credit micro';caption.append(document.createTextNode(asset?asset.note+' · 인터넷 연결 필요 · '+asset.author+' · '+asset.license+' · ': '임의 도형을 실제 장비로 표시하지 않습니다. '));
-  if(asset){const a=document.createElement('a');a.href=asset.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='원본·사용 조건 확인';caption.append(a)}host.append(caption);
+  if(asset){const a=document.createElement('a');a.href=asset.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='원본·사용 조건 확인';caption.append(a)}host.append(caption);refreshLocalization();
  }
+ destroy(){this.stop();clearTimeout(this.timeout);this.observer.disconnect();this.frame?.remove();this.frame=null;this.api=null;this.host=null;}
  setMode(){}
  stop(){if(this.frame?.isConnected&&this.frame.contentWindow)this.api?.pause();}
  play(onStatus,role){onStatus(role+' · 이 자산에는 검증된 동작 애니메이션이 없습니다. 외형과 관계를 살펴보세요.');return false}

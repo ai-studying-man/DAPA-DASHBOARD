@@ -1,3 +1,4 @@
+import {getLocale,setLocale,translateText} from './i18n.js';
 import {exhibitGuides,guideLanguages,foreignGuideExample} from './exhibit-guide-data.js';
 
 const words={
@@ -10,9 +11,9 @@ const speechFailed={ko:'음성을 재생하지 못했습니다. 자막으로 부
 
 export class ExhibitGuide{
  constructor(dialog,voice,inspect){
-  this.dialog=dialog;this.voice=voice;this.inspect=inspect;this.language=voice.language||'ko';this.version=0;this.index=-1;
+  this.dialog=dialog;this.voice=voice;this.inspect=inspect;this.language=getLocale();this.version=0;this.index=-1;
   this.panel=document.createElement('section');this.panel.className='exhibit-guide';this.panel.hidden=true;
-  this.panel.addEventListener('change',e=>{if(e.target.matches('[data-guide-language]')){this.stop();this.language=e.target.value;this.voice.setLanguage(this.language);this.render();this.panel.querySelector('[data-guide-language]').focus();this.checkVoices();const c=this.data.components[this.index];if(c)this.inspect({...c,label:c.title[this.language]});}});
+  this.panel.addEventListener('change',e=>{if(e.target.matches('[data-guide-language]')){this.stop();this.language=e.target.value;setLocale(this.language);this.voice.setLanguage(this.language);this.render();this.panel.querySelector('[data-guide-language]').focus();this.checkVoices();const c=this.data.components[this.index];if(c)this.inspect({...c,label:c.title[this.language]});}});
   this.panel.addEventListener('click',e=>{
    const b=e.target.closest('button');if(!b)return;
    if(b.dataset.guideComponent!==undefined)this.select(Number(b.dataset.guideComponent));
@@ -24,11 +25,12 @@ export class ExhibitGuide{
   dialog.addEventListener('click',e=>{if(e.target.closest('[data-demo-mode],[data-demo-stop],[data-demo-play],[data-scene-view],[data-model-home],[data-demo-related]'))this.stop();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)this.stop();});
  }
+ setLanguage(language){if(!words[language])return;this.stop();this.language=language;if(this.data){this.render();this.checkVoices();const component=this.data.components[this.index];if(component&&this.dialog.open)this.inspect({...component,label:component.title[language]});}}
  mount(system){this.stop();this.voice.setLanguage(this.language);this.system=system;this.data=exhibitGuides[system.id];this.index=-1;this.dialog.querySelector('.demo-inspector').prepend(this.panel);this.panel.hidden=!this.data;if(this.data){this.render();this.checkVoices();}}
  render(){
   const w=words[this.language],locale=guideLanguages[this.language].locale,c=this.data.components[this.index];
   this.panel.lang=locale;
-  this.panel.innerHTML=`<div class="guide-heading"><h3>${w.heading}</h3><label>${w.language}<select data-guide-language>${Object.entries(guideLanguages).map(([code,l])=>`<option value="${code}" ${code===this.language?'selected':''}>${l.label}</option>`).join('')}</select></label></div><p class="micro" data-guide-voice role="status">${w.ready}</p><div class="guide-components" role="group" aria-label="${w.heading}"><button type="button" class="action" data-guide-component="-1" aria-pressed="${this.index===-1}">${w.intro}</button>${this.data.components.map((p,i)=>`<button type="button" class="action" data-guide-component="${i}" aria-pressed="${this.index===i}">${i+1}. ${p.title[this.language]}</button>`).join('')}</div><div class="guide-caption"><strong>${c?c.title[this.language]:this.system.english}</strong><p data-guide-caption>${this.caption()}</p>${c?`<a href="${c.source}" target="_blank" rel="noopener noreferrer">${w.source}</a>`:''}</div><div class="voice-controls"><button type="button" class="primary-action" data-guide-play>${w.play}</button><button type="button" class="action" data-guide-listen>${w.listen}</button><button type="button" class="action" data-guide-stop>${w.stop}</button></div><p class="micro">${w.scope}</p><details class="guide-example"><summary>${w.example} · ${this.data.benchmark.title}</summary><p>${this.data.benchmark.text[this.language]}</p><a href="${this.data.benchmark.url}" target="_blank" rel="noopener noreferrer">${this.data.benchmark.title}</a></details>`;
+  this.panel.innerHTML=`<div class="guide-heading"><h3>${w.heading}</h3><label>${w.language}<select data-guide-language>${Object.entries(guideLanguages).map(([code,l])=>`<option value="${code}" ${code===this.language?'selected':''}>${l.label}</option>`).join('')}</select></label></div><p class="micro" data-guide-voice role="status">${w.ready}</p><div class="guide-components" role="group" aria-label="${w.heading}"><button type="button" class="action" data-guide-component="-1" aria-pressed="${this.index===-1}">${w.intro}</button>${this.data.components.map((p,i)=>`<button type="button" class="action" data-guide-component="${i}" aria-pressed="${this.index===i}">${i+1}. ${p.title[this.language]}</button>`).join('')}</div><div class="guide-caption"><strong>${c?c.title[this.language]:translateText(this.system.name+' · '+this.system.subtitle)}</strong><p data-guide-caption>${this.caption()}</p>${c?`<a href="${c.source}" target="_blank" rel="noopener noreferrer">${w.source}</a>`:''}</div><div class="voice-controls"><button type="button" class="primary-action" data-guide-play>${w.play}</button><button type="button" class="action" data-guide-listen>${w.listen}</button><button type="button" class="action" data-guide-stop>${w.stop}</button></div><p class="micro">${w.scope}</p><details class="guide-example"><summary>${w.example} · ${this.data.benchmark.title}</summary><p>${this.data.benchmark.text[this.language]}</p><a href="${this.data.benchmark.url}" target="_blank" rel="noopener noreferrer">${this.data.benchmark.title}</a></details>`;
   this.panel.insertAdjacentHTML('beforeend',`<details class="guide-example"><summary>${w.example} · ${foreignGuideExample.title}</summary><p>${foreignGuideExample.text[this.language]}</p><a href="${foreignGuideExample.url}" target="_blank" rel="noopener noreferrer">${foreignGuideExample.title}</a></details>`);
  }
  caption(){return this.index<0?this.data.intro[this.language]:this.data.components[this.index].text[this.language];}

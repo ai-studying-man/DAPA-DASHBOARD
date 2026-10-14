@@ -9,8 +9,8 @@ export function initStoryMotion(root,story,onState){
  const tokens={duration:time('--motion-reveal'),stagger:time('--motion-stagger'),shift:number('--motion-shift'),heroShift:number('--motion-hero-shift'),heroScale:number('--motion-hero-scale'),heroTravel:number('--motion-hero-travel'),mediaShift:number('--motion-media-shift'),ease:style.getPropertyValue('--motion-spring').trim()};
  const events=new AbortController(),animations=new Set();
  const hero=story.querySelector('.hero-photo img'),media=[...story.querySelectorAll('.story-map')];
- let home=false,lenis=null,frame=0,active=false;
- function cancelAnimations(){for(const animation of animations)animation.cancel();animations.clear()}
+ let home=false,lenis=null,frame=0,active=false,focusTimer;
+ function cancelAnimations(){clearTimeout(focusTimer);for(const animation of animations)animation.cancel();animations.clear()}
  function finalState(){hero?.style.removeProperty('--hero-y');hero?.style.removeProperty('--hero-scale');for(const item of media)item.style.removeProperty('--media-y')}
  function show(element){
   if(element.classList.contains('revealed'))return;
@@ -48,12 +48,13 @@ export function initStoryMotion(root,story,onState){
  document.addEventListener('visibilitychange',sync,{signal:events.signal});
  reduced.addEventListener('change',sync,{signal:events.signal});
  const dialogs=new MutationObserver(sync);dialogs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['open']});
- function scrollTo(element){
+ function scrollTo(element,onComplete){
+  clearTimeout(focusTimer);
   if(!active)return;
   const padding=parseFloat(getComputedStyle(root).scrollPaddingTop)||0;
   const top=element.getBoundingClientRect().top-root.getBoundingClientRect().top+root.scrollTop-padding;
-  if(lenis)lenis.scrollTo(top,{duration:.9,easing,lock:false});
-  else root.scrollTo({top,behavior:reduced.matches?'instant':'smooth'});
+  if(lenis)lenis.scrollTo(top,{duration:.9,easing,lock:false,onComplete});
+  else{root.scrollTo({top,behavior:reduced.matches?'instant':'smooth'});if(onComplete){if(reduced.matches)onComplete();else focusTimer=setTimeout(onComplete,900)}}
  }
  root.addEventListener('click',event=>{
   const anchor=event.target.closest('a[href^="#"]');
