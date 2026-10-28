@@ -1,0 +1,5 @@
+// Local exhibition reconstructions. Dimensions are modeling targets, not certified measurements.
+export const vehicleModels={
+ k2:{model:'./models/k2-exhibit.glb',modelLabel:'공개자료 참고 전시용 외형 · 제조사 CAD 아님',modelAttribution:'./models/k2-exhibit-ATTRIBUTION.md',modelLicense:'CC BY 3.0',range:20,focusHeight:1.6,studio:true,referencePhoto:'./media/representatives/k2.jpg',referenceUrl:'https://www.hyundai-rotem.co.kr/en/business/defense/details.do?productCt03=defense0101',photoCredit:'KBS VIEW – theDEEP · CC BY 3.0',photoUrl:'https://commons.wikimedia.org/wiki/File:K2_Black_Panther_20161106.jpg'},
+ k9:{model:'./models/k9-exhibit.glb',modelLabel:'공개자료 참고 전시용 외형 · 제조사 CAD 아님',modelAttribution:'./models/k9-exhibit-ATTRIBUTION.md',modelLicense:'CC BY-SA 2.0',range:23,focusHeight:2,studio:true,referencePhoto:'./media/equipment/k9.webp',referenceUrl:'https://www.hanwhaaerospace.com/eng/whatwedo/product/land.do',photoCredit:'대한민국 국군 · CC BY-SA 2.0',photoUrl:'https://commons.wikimedia.org/wiki/File%3AK-9%20%EC%9E%90%EC%A3%BC%ED%8F%AC%20(7445556056)%20(2).jpg'}
+};

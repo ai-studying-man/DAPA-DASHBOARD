@@ -1,3 +1,4 @@
+import {vehicleModels} from './vehicle-models.js';
 import { catalogAssets } from './catalog-assets.js';
 // Verified public assets; photographs and external 3D are deliberately distinct.
 export const equipmentAssets={
@@ -15,3 +16,5 @@ Object.assign(equipmentAssets.kaav,{
 Object.assign(equipmentAssets.fa50,{image:'./media/fa50-1280.webp',model:'./models/fa50-reference.glb',modelLabel:'공개 사진 기반 외형 재구성 · 제조사 CAD 아님',modelAttribution:'./models/fa50-reference-ATTRIBUTION.md',modelLicense:'CC BY 2.0',range:32,focusHeight:2,eye:[0,3.35,3.12],eyeLabel:'조종석 관측 · 추정 시점',note:'KAI 공개 치수와 실물 사진을 참고한 외형 재구성'});
 Object.assign(equipmentAssets.dosan,{model:'./models/dosan-reference.glb',modelLabel:'공개 사진 기반 외형 재구성 · 제조사 CAD 아님',modelAttribution:'./models/dosan-reference-ATTRIBUTION.md',modelLicense:'CC BY 4.0',waterline:6.5,range:110,focusHeight:8,eye:[0,18.5,17.75],eyeLabel:'함교 외부 · 추정 시점'});
 Object.assign(equipmentAssets.nuri,{model:'./models/nuri-reference.glb',modelLabel:'KARI 공개 치수·사진 기반 외형 재구성',modelAttribution:'./models/nuri-reference-ATTRIBUTION.md',modelLicense:'CC BY 4.0',range:100,focusHeight:24});
+
+for(const [id,model]of Object.entries(vehicleModels))Object.assign(equipmentAssets[id],model);

@@ -1,0 +1,30 @@
+{
+  "classification": "Original exhibition reconstruction from public exterior references; not manufacturer CAD or certified dimensions. No engineering, internal armor, firing or driving physics.",
+  "license": "CC BY-SA 2.0",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "-Z",
+  "source": "https://www.hanwhaaerospace.com/eng/whatwedo/product/land.do",
+  "parts": [
+    "Hull",
+    "Turret",
+    "Gun",
+    "RunningGear",
+    "Markings"
+  ],
+  "pivotAxes": {
+    "Turret": "Y",
+    "Gun": "X"
+  },
+  "modelingTargets": {
+    "hullLength": 7.4,
+    "width": 3.4
+  },
+  "animation": "UI-only illustrative articulation; no real performance parameters",
+  "size": [
+    3.490000009536743,
+    3.7699999809265137,
+    12.109999942779542
+  ],
+  "bytes": 1495760
+}

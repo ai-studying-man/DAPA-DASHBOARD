@@ -1,0 +1,30 @@
+{
+  "classification": "Original exhibition reconstruction from public exterior references; not manufacturer CAD or certified dimensions. No engineering, internal armor, firing or driving physics.",
+  "license": "CC BY 3.0",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "-Z",
+  "source": "https://www.hyundai-rotem.co.kr/en/business/defense/details.do?productCt03=defense0101",
+  "parts": [
+    "Hull",
+    "Turret",
+    "Gun",
+    "RunningGear",
+    "Markings"
+  ],
+  "pivotAxes": {
+    "Turret": "Y",
+    "Gun": "X"
+  },
+  "modelingTargets": {
+    "hullLength": 7.5,
+    "width": 3.6
+  },
+  "animation": "UI-only illustrative articulation; no real performance parameters",
+  "size": [
+    3.690000057220459,
+    3.379999966621399,
+    11.02250008583069
+  ],
+  "bytes": 1507040
+}
