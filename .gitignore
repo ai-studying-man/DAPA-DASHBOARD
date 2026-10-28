@@ -8,3 +8,8 @@ docs/evidence/
 .env
 .env.*
 !.env.example
+
+# Local handoff archives and review captures
+exports/
+.omo/
+/contact-375.png

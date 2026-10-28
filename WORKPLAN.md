@@ -50,3 +50,24 @@
 - [x] Add touch-first all-service catalog/dashboard and verified shared branch links.
 - [x] Integrate existing story, menu, search, detail/3D and four locales.
 - [x] Manual rendered verification complete; independent functional/CJK reviews APPROVE/PASS; scope and evidence ledger documented.
+
+## Mobile viewport slides v15
+- [x] Preserve existing six story chapters and equipment/demo routes.
+- [x] Implement viewport-sized vertical mobile / horizontal desktop-kiosk deck with common heading/content/navigation regions.
+- [x] Observe next/previous, page picker, native mobile scrolling and independent content scroll; compact 667px English home fits.
+- [x] Fresh 19-screen packet, build and independent functional/visual reviews PASS; limits documented.
+
+## Content-led mobile pages v16
+- [x] Separate representative equipment, introductions, maps and choices; balance centered content and action spacing.
+- [x] Observe fourteen pages across three widths plus short KO/EN homes; 44 captures and independent integrity/visual reviews PASS.
+
+## Final caption and spacing polish v17
+- [x] Left-align blue chapter captions, fit title focus outlines to text, redistribute home whitespace.
+- [x] Build and record 47 responsive/short-screen captures; preserve visible 48px controls.
+- [x] Independent integrity and visual reviews PASS; six source hashes and 47 captures recorded.
+
+## K2 / K9 articulated exhibition models v18
+- [x] Read supplied modeling guide; audit existing meshes and public manufacturer sources; prioritize K2/K9.
+- [x] Author distinct local GLB models with stable part names/pivots and provenance.
+- [x] Integrate native inspection controls, illustrative articulation and photo/source comparison.
+- [x] Build and manually observe native responsive/exterior controls; record geographic tile timeout and unexercised fault paths; obtain independent integrity/visual PASS on 30 captures.
