@@ -1,0 +1,32 @@
+{
+  "artifact": {
+    "operation": "inspect_artifact",
+    "provider": {
+      "id": "rea-artifact-graph",
+      "name": "REA safe artifact graph provider",
+      "version": "1"
+    },
+    "subject": {
+      "name": "blender",
+      "digest": {
+        "sha256": "5e15447670804c855fef6033ac9b8fd82696b762095becf0df79b1c2f8034397"
+      },
+      "format": "elf",
+      "architecture": null,
+      "local_path": "/workspace/scratch/27e1c7b36fac/DAPA-DASHBOARD/.local/blender/blender"
+    },
+    "evidenceId": "ev_22265baf6c832593c23405d0779203e3b6c4abb314ef7e12605db4d606958bb8",
+    "error": null,
+    "code": null,
+    "message": null
+  },
+  "source": {
+    "operation": null,
+    "provider": null,
+    "subject": null,
+    "evidenceId": null,
+    "error": "JavaScript application analysis failed",
+    "code": "capability_unavailable",
+    "message": "Linux process ownership inspection requires a procps-compatible ps on REA's PATH before launching a child: Command failed: ps -axo pid=,ppid=,pgid=,uid=,stat=,command=\nfatal library error, lookup self\n"
+  }
+}

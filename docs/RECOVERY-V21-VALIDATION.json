@@ -1,0 +1,101 @@
+{
+  "results": [
+    {
+      "id": "k2",
+      "triangles": 42464,
+      "environment": true,
+      "terrain": true,
+      "parts": 5
+    },
+    {
+      "id": "k9",
+      "triangles": 42084,
+      "environment": true,
+      "terrain": true,
+      "parts": 5
+    },
+    {
+      "id": "kaav",
+      "triangles": 23482,
+      "environment": true,
+      "terrain": false,
+      "parts": 0
+    },
+    {
+      "id": "fa50",
+      "triangles": 32916,
+      "environment": true,
+      "terrain": true,
+      "parts": 0
+    },
+    {
+      "id": "dosan",
+      "triangles": 8782,
+      "environment": true,
+      "terrain": false,
+      "parts": 0
+    },
+    {
+      "id": "nuri",
+      "triangles": 46928,
+      "environment": true,
+      "terrain": true,
+      "parts": 0
+    }
+  ],
+  "errors": [],
+  "missingModelRetry": true,
+  "mobileLocales": [
+    "ko",
+    "en",
+    "ja",
+    "zh"
+  ],
+  "horizontalOverflow": false,
+  "coverageRows": 23,
+  "gltfValidation": {
+    "k2": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1
+    },
+    "k9": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1
+    }
+  },
+  "surfaceRegression": {
+    "status": "PASS",
+    "normalMapBlueMeanMin": 254,
+    "roughnessGreenMean": 209,
+    "postFix": {
+      "results": [
+        {
+          "id": "k2",
+          "triangles": 42464,
+          "environment": true,
+          "terrain": true,
+          "parts": 5
+        },
+        {
+          "id": "k9",
+          "triangles": 42084,
+          "environment": true,
+          "terrain": true,
+          "parts": 5
+        }
+      ],
+      "errors": [],
+      "missingModelRetry": true,
+      "mobileLocales": [
+        "ko",
+        "en",
+        "ja",
+        "zh"
+      ],
+      "horizontalOverflow": false,
+      "coverageRows": 23
+    }
+  }
+}

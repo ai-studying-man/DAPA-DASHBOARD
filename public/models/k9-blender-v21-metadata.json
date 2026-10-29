@@ -1,0 +1,17 @@
+{
+  "tool": "4.5.3 LTS",
+  "recoveryRevision": 21,
+  "beveledMeshes": 6,
+  "projectedMeshes": 18,
+  "bytes": 1966988,
+  "sha256": "e48461eba0460c8d621863d1232b5f561ba06cc0eafa67f0fda6bd6c113e42ac",
+  "referenceType": "Regenerated AI inferred multiview study",
+  "photorealValidated": false,
+  "parts": [
+    "Hull",
+    "Turret",
+    "Gun",
+    "RunningGear",
+    "Markings"
+  ]
+}

@@ -1,0 +1,606 @@
+[
+  {
+    "id": "dosan",
+    "name": "도산안창호급",
+    "status": "local",
+    "model": "./models/dosan-reference.glb",
+    "photo": "./media/representatives/dosan.png",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:ROKS_Dosan_Ahn_Changho_class_submarine.png",
+    "referenceSheet": null,
+    "modelSource": "./models/dosan-reference-ATTRIBUTION.md",
+    "references": [
+      {
+        "title": "국내 독자 설계·건조 도산안창호함 취역",
+        "url": "https://www.dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=13631&menuSeq=3069",
+        "publisher": "방위사업청"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false,
+    "bytes": 636396,
+    "sha256": "57d252b08fb356cf7bb7542bbb8f6dfa32fd00a225b78601fd90d4bf8acae268"
+  },
+  {
+    "id": "chungnam",
+    "name": "충남함",
+    "status": "pending",
+    "model": null,
+    "photo": null,
+    "photoSource": null,
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "K방산 기술집약체 충남함 해군 인도",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=20423&menuSeq=3069",
+        "publisher": "방위사업청"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "k2",
+    "name": "K2",
+    "status": "local",
+    "model": "./models/k2-blender-v21.glb",
+    "photo": "./media/representatives/k2.jpg",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:K2_Black_Panther_20161106.jpg",
+    "referenceSheet": "./media/model-reference/k2-ai-multiview-v21.png",
+    "modelSource": "./models/k2-blender-v21-ATTRIBUTION.md",
+    "references": [
+      {
+        "title": "폴란드 K2 추가계약 발표 및 기존 이행계약",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=21346&menuSeq=3069",
+        "publisher": "방위사업청"
+      },
+      {
+        "title": "현대로템 연혁",
+        "url": "https://www.hyundai-rotem.co.kr/en/company/history/content.do",
+        "publisher": "현대로템"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false,
+    "bytes": 1947508,
+    "sha256": "ee959988e7084f4811a506441a2e6fe2b720a1e34e84c9079a0d79d89bbce202"
+  },
+  {
+    "id": "k9",
+    "name": "K9",
+    "status": "local",
+    "model": "./models/k9-blender-v21.glb",
+    "photo": "./media/equipment/k9.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AK-9%20%EC%9E%90%EC%A3%BC%ED%8F%AC%20(7445556056)%20(2).jpg",
+    "referenceSheet": "./media/model-reference/k9-ai-multiview-v21.png",
+    "modelSource": "./models/k9-blender-v21-ATTRIBUTION.md",
+    "references": [
+      {
+        "title": "폴란드 K2 추가계약 발표 및 기존 이행계약",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=21346&menuSeq=3069",
+        "publisher": "방위사업청"
+      },
+      {
+        "title": "해병대 공개 장비 사례 · K9·천무",
+        "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148967061",
+        "publisher": "대한민국 정책브리핑 · 청와대"
+      },
+      {
+        "title": "루마니아 K9·K10 공급 계약",
+        "url": "https://www.hanwhaaerospace.com/kor/media/newsroom/view.do?seq=417",
+        "publisher": "한화에어로스페이스"
+      },
+      {
+        "title": "이집트 K9 패키지 계약",
+        "url": "https://www.hanwhaaerospace.com/eng/media/newsroom/view.do?seq=277",
+        "publisher": "한화에어로스페이스"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false,
+    "bytes": 1966988,
+    "sha256": "e48461eba0460c8d621863d1232b5f561ba06cc0eafa67f0fda6bd6c113e42ac"
+  },
+  {
+    "id": "chunmoo",
+    "name": "천무",
+    "status": "photo",
+    "model": null,
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a1/K239_Chunmoo_Image1.jpg",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:K239_Chunmoo_Image1.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "폴란드 K2 추가계약 발표 및 기존 이행계약",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=21346&menuSeq=3069",
+        "publisher": "방위사업청"
+      },
+      {
+        "title": "해병대 공개 장비 사례 · K9·천무",
+        "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148967061",
+        "publisher": "대한민국 정책브리핑 · 청와대"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "fa50",
+    "name": "FA-50",
+    "status": "local",
+    "model": "./models/fa50-reference.glb",
+    "photo": "./media/fa50-1280.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Light_Combat_FA-50_Fighting_Eagle.jpg",
+    "referenceSheet": null,
+    "modelSource": "./models/fa50-reference-ATTRIBUTION.md",
+    "references": [
+      {
+        "title": "폴란드 K2 추가계약 발표 및 기존 이행계약",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=21346&menuSeq=3069",
+        "publisher": "방위사업청"
+      },
+      {
+        "title": "말레이시아 FA-50 18대 계약",
+        "url": "https://www.korea.net/NewsFocus/Sci-Tech/view?articleId=229354",
+        "publisher": "대한민국 정부 Korea.net"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false,
+    "bytes": 935508,
+    "sha256": "803c26659d274b3a5fc59b3ae053b99920f3d84d233681eee724dd3afa934017"
+  },
+  {
+    "id": "muav",
+    "name": "MUAV",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/muav.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AKorean%20Air%20KUS-FS%20MUAV.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "감시·정찰능력 향상과 미래 방산수출에 기여한다",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=18746&menuSeq=3069",
+        "publisher": "방위사업청"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "kaav",
+    "name": "상륙돌격장갑차",
+    "status": "local",
+    "model": "./models/kaav-reference.glb",
+    "photo": "./media/equipment/kaav.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3A2010.7.7%20%ED%95%B4%EB%B3%91%201%EC%82%AC%EB%8B%A8%20KAAV%ED%95%9C%EA%B5%AD%ED%98%95%EC%83%81%EB%A5%99%EB%8F%8C%EA%B2%A9%EC%9E%A5%EA%B0%91%EC%B0%A8%20%EC%83%81%EB%A5%99%ED%9B%88%EB%A0%A8%20(7445513192).jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "상륙돌격장갑차 원격사격통제체계 전력화 완료",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=18573&menuSeq=3069",
+        "publisher": "방위사업청"
+      },
+      {
+        "title": "Global Capabilities 공식 브로슈어",
+        "url": "https://www.hanwhaaerospace.com/assets/content/library/download/Hanwha_Aerospace_Brochure_EN.pdf",
+        "publisher": "한화에어로스페이스"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false,
+    "bytes": 1696944,
+    "sha256": "21157e1ebe67e1dce8a9963774358e1cb1b86947f78189b732be6ce01779d5da"
+  },
+  {
+    "id": "425",
+    "name": "425사업",
+    "status": "pending",
+    "model": null,
+    "photo": null,
+    "photoSource": null,
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "킬체인의 눈, 본격 임무 시작!",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=19681&menuSeq=3069",
+        "publisher": "방위사업청"
+      },
+      {
+        "title": "425사업 5호 정찰위성 목표 궤도 진입",
+        "url": "https://www.korea.net/NewsFocus/policies/view?articleId=281615&koreanId=281592",
+        "publisher": "대한민국 정부 Korea.net · 국방부 발표 인용"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "smallsat",
+    "name": "초소형위성체계",
+    "status": "pending",
+    "model": null,
+    "photo": null,
+    "photoSource": null,
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "초소형위성체계 개발 정상 추진 중",
+        "url": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=20862&menuSeq=3069",
+        "publisher": "방위사업청"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "k21",
+    "name": "K21",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/k21.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3A2014.4.1%20%EC%9C%A1%EA%B5%B0%20%EC%88%98%EB%8F%84%EA%B8%B0%EA%B3%84%ED%99%94%EB%B3%B4%EB%B3%91%EC%82%AC%EB%8B%A8%20K-21%20%EC%9E%A5%EA%B0%91%EC%B0%A8%20%EC%82%AC%EA%B2%A9%EC%A7%91%EC%A4%91%ED%9B%88%EB%A0%A8%20Republic%20of%20Korea%20Army%20(13592630584).jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "K10·K21 지상 제품",
+        "url": "https://www.hanwhaaerospace.com/kor/whatwedo/product/land.do",
+        "publisher": "한화에어로스페이스"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "k10",
+    "name": "K10",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/k10.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AK10%20ARV.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "K10·K21 지상 제품",
+        "url": "https://www.hanwhaaerospace.com/kor/whatwedo/product/land.do",
+        "publisher": "한화에어로스페이스"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "k808",
+    "name": "K808 백호",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/k808.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AROKA%20K808%20APC%20river%20crossing%20training%20-%20March%202021.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "K808/K806 차륜형장갑차",
+        "url": "https://www.hyundai-rotem.co.kr/en/business/defense/content.do",
+        "publisher": "현대로템"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "redback",
+    "name": "AS21 레드백",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/redback.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AHanwha%20AS21%20Redback%20Australian%20IFV.png",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "Redback 129대 공급 계약",
+        "url": "https://www.minister.defence.gov.au/media-releases/2023-12-08/contracts-signed-infantry-fighting-vehicles",
+        "publisher": "호주 국방부"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "kf21",
+    "name": "KF-21 보라매",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/kf21.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AKF-21%20Boramae%20First%20Production.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "KAI 지속가능성보고서 2025",
+        "url": "https://www.koreaaero.com/EN/data_file/2025_KAI_Sustainability_Report_ENG.pdf",
+        "publisher": "한국항공우주산업"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "surion",
+    "name": "KUH-1 수리온",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/surion.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AKUH-1%20Surion%20Prototype%20in%20KAI.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "KAI 지속가능성보고서 2025",
+        "url": "https://www.koreaaero.com/EN/data_file/2025_KAI_Sustainability_Report_ENG.pdf",
+        "publisher": "한국항공우주산업"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "lah",
+    "name": "LAH",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/lah.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AKAI%20LAH-1%20Miron%20Armed%20Helicopter%20-%201.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "KAI 지속가능성보고서 2025",
+        "url": "https://www.koreaaero.com/EN/data_file/2025_KAI_Sustainability_Report_ENG.pdf",
+        "publisher": "한국항공우주산업"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "t50",
+    "name": "T-50 골든이글",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/t50.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AKAI%20T-50%20Golden%20Eagle%20-%2054277090749.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "KAI 지속가능성보고서 2025",
+        "url": "https://www.koreaaero.com/EN/data_file/2025_KAI_Sustainability_Report_ENG.pdf",
+        "publisher": "한국항공우주산업"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "kt1",
+    "name": "KT-1 웅비",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/kt1.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3ADemonstration%20Flight%20of%20ROKAF%20New%20Light%20Trainer%20KT-1%20'Woongbi'.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "KAI 지속가능성보고서 2025",
+        "url": "https://www.koreaaero.com/EN/data_file/2025_KAI_Sustainability_Report_ENG.pdf",
+        "publisher": "한국항공우주산업"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "nuri",
+    "name": "누리호",
+    "status": "local",
+    "model": "./models/nuri-reference.glb",
+    "photo": "./media/equipment/nuri.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AKSLV-II%20Nuri%20Launch%202021-10-21.jpg",
+    "referenceSheet": null,
+    "modelSource": "./models/nuri-reference-ATTRIBUTION.md",
+    "references": [
+      {
+        "title": "한국형발사체 누리호",
+        "url": "https://www.kari.re.kr/kor/contents/51",
+        "publisher": "한국항공우주연구원"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false,
+    "bytes": 1944576,
+    "sha256": "9e722c958c5c125374f47cadf95877ab4c9b7c3b7003b90024124ba9de58b89c"
+  },
+  {
+    "id": "anasis",
+    "name": "ANASIS-II",
+    "status": "pending",
+    "model": null,
+    "photo": null,
+    "photoSource": null,
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "ANASIS-II 통신체계",
+        "url": "https://www.hanwhasystems.com/en/business/defense/c5i/communication03.do",
+        "publisher": "한화시스템"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "cheongung",
+    "name": "천궁-II",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/cheongung.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AM-SAM%20Block-2%20battery.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "항공·방공 사업 소개",
+        "url": "https://www.hanwha.com/companies/hanwha-aerospace.do?nlsFlag=gnb",
+        "publisher": "한화"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  },
+  {
+    "id": "hansando",
+    "name": "한산도함",
+    "status": "photo",
+    "model": null,
+    "photo": "./media/equipment/hansando.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File%3AROKS%20Hansando%20Auckland%202025.jpg",
+    "referenceSheet": null,
+    "modelSource": null,
+    "references": [
+      {
+        "title": "해상 교육훈련함 한산도함 인도",
+        "url": "https://www.dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=11490&menuSeq=3069",
+        "publisher": "방위사업청"
+      }
+    ],
+    "missing": [
+      "Matched multiview references",
+      "Licensed high-quality mesh and PBR data",
+      "Photo-matched mobile validation"
+    ],
+    "auditDate": "2026-10-29",
+    "photorealValidated": false
+  }
+]

@@ -1,0 +1,12 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {systems} from '../src/data.js';
+import {modelImports} from '../src/model-imports.js';
+const[id,path,...options]=process.argv.slice(2),flags=Object.fromEntries(options.map(o=>{const i=o.indexOf('=');if(!o.startsWith('--')||i<3)throw Error('Use --name=value');return[o.slice(2,i),o.slice(i+1)]}));
+if(!systems.some(s=>s.id===id)||!path||!flags.source||!flags.author||!flags.license||!flags.metersPerUnit)throw Error('Usage: node scripts/register-model.mjs ID FILE.glb --source=https://... --author=Name --license="CC BY 4.0" --metersPerUnit=1 [--dryRun=true]');
+const url=new URL(flags.source),scale=Number(flags.metersPerUnit);if(url.protocol!=='https:'||!Number.isFinite(scale)||scale<=0||scale>1000)throw Error('Invalid HTTPS source or scale');
+const b=await readFile(path);if(b.length<28||b.length>50*1024*1024||b.readUInt32LE(0)!==0x46546c67||b.readUInt32LE(4)!==2||b.readUInt32LE(8)!==b.length||b.readUInt32LE(16)!==0x4e4f534a)throw Error('Invalid glTF 2 GLB');
+const n=b.readUInt32LE(12);if(20+n>b.length)throw Error('Truncated JSON chunk');const j=JSON.parse(b.subarray(20,20+n).toString());if(!j.meshes?.some(m=>m.primitives?.some(p=>p.attributes?.POSITION!==undefined)))throw Error('No mesh positions');for(const r of [...j.buffers||[],...j.images||[]])if(r.uri&&!r.uri.startsWith('data:'))throw Error('Embed all buffers and images');if(j.extensionsRequired?.some(e=>['KHR_draco_mesh_compression','EXT_meshopt_compression','KHR_texture_basisu'].includes(e)))throw Error('Export without a required external decoder');
+const sha=createHash('sha256').update(b).digest('hex'),name=id+'-'+sha.slice(0,12);if(flags.dryRun==='true'){console.log({id,bytes:b.length,sha,scale,dryRun:true});process.exit(0)}
+await writeFile('public/models/'+name+'.glb',b);await writeFile('public/models/'+name+'-ATTRIBUTION.md',`# ${id}\n\nAuthor: ${flags.author}\nSource: ${url.href}\nLicense declared by importer: ${flags.license}\nSHA256: ${sha}\nMetres per unit: ${scale}\nImported: ${new Date().toISOString()}\n\nNo photo-matched or manufacturer validation is implied.\n`);
+modelImports[id]={model:'./models/'+name+'.glb',modelAttribution:'./models/'+name+'-ATTRIBUTION.md',modelLicense:flags.license,modelLabel:'라이선스 자료 기반 외형 · 품질 검증 필요',scale,referenceUrl:url.href,photorealValidated:false};await writeFile('src/model-imports.js','export const modelImports='+JSON.stringify(modelImports,null,2)+';\n');console.log({id,sha});

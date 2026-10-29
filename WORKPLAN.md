@@ -71,3 +71,10 @@
 - [x] Author distinct local GLB models with stable part names/pivots and provenance.
 - [x] Integrate native inspection controls, illustrative articulation and photo/source comparison.
 - [x] Build and manually observe native responsive/exterior controls; record geographic tile timeout and unexercised fault paths; obtain independent integrity/visual PASS on 30 captures.
+
+## Interrupted-work recovery v21 · 2026-10-29
+- Restored source from remote 825b408 after automatic local workspace pruning.
+- Reconstructed six native exhibits, scenic terrain/HDR and 23-system asset status.
+- Regenerated inferred K2/K9 references; rebuilt actual editable Blender files and GLBs with stable part pivots.
+- Re-run validation for this recovery revision; do not reuse old local-only commit claims.
+- Outstanding: approved photo-matched geometry/materials and seventeen further local high-quality meshes.

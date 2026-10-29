@@ -133,3 +133,9 @@ TTS는 브라우저가 제공하는 해당 언어 음성이 필요합니다. 현
 ## WORK 연동 기록
 
 - 2026-10-29 00:33 KST 기준: WORK 모드에서 GitHub 커밋 연동 확인. 다음 작업은 K2 사진 기반 외형·재질 개선.
+
+## 2026-10-29 · 중단 작업 복구 v21
+
+[복구 기록·실제 범위·검증 방법](docs/RECOVERY-V21.md). 자동 작업공간 정리로 없어진 미반영 작업을 원격 main과 대화 기록에서 재구성했습니다. K2/K9에는 새 AI 다면 참조판과 Blender 편집 원본·GLB를 연결했고, 6종 로컬 모델의 Three.js 관람·야외 환경·23종 자산 현황을 복구했습니다. AI 참조는 실측 도면이 아니며, 전 체계 실사화는 미완료입니다.
+
+Blender 원본: `assets/blender/k2-reference-v21.blend`, `assets/blender/k9-reference-v21.blend`. 재생성은 Blender에서 `scripts/blender/build-ground-reference.py -- k2` 또는 `-- k9`. 자산 현황은 `node scripts/audit-model-assets.mjs`, 웹 검증은 `node scripts/qa/recovery.cjs`입니다. 사용권이 확인된 새 GLB 등록은 `node scripts/register-model.mjs`의 사용법과 모델별 출처 조건을 확인하세요.

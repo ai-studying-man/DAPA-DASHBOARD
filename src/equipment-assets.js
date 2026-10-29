@@ -1,3 +1,4 @@
+import {modelImports} from './model-imports.js';
 import {vehicleModels} from './vehicle-models.js';
 import { catalogAssets } from './catalog-assets.js';
 // Verified public assets; photographs and external 3D are deliberately distinct.
@@ -18,3 +19,6 @@ Object.assign(equipmentAssets.dosan,{model:'./models/dosan-reference.glb',modelL
 Object.assign(equipmentAssets.nuri,{model:'./models/nuri-reference.glb',modelLabel:'KARI 공개 치수·사진 기반 외형 재구성',modelAttribution:'./models/nuri-reference-ATTRIBUTION.md',modelLicense:'CC BY 4.0',range:100,focusHeight:24});
 
 for(const [id,model]of Object.entries(vehicleModels))Object.assign(equipmentAssets[id],model);
+
+for(const [id,asset]of Object.entries(modelImports))equipmentAssets[id]={...equipmentAssets[id],...asset};
+for(const asset of Object.values(equipmentAssets))if(asset.model){asset.studio=true;asset.referencePhoto ||= asset.image;asset.photoUrl ||= asset.url;asset.photoCredit ||= [asset.author,asset.license].filter(Boolean).join(' · ');asset.referenceUrl ||= asset.url;}

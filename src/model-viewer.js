@@ -1,3 +1,5 @@
+import {readinessMarkup} from './asset-readiness.js';
+import './asset-readiness.css';
 import {refreshLocalization} from './i18n.js';
 import {equipmentAssets} from './equipment-assets.js';
 let sdkPromise;
@@ -28,7 +30,7 @@ export class ModelViewer {
   }
   host.append(stage);
   const caption=document.createElement('p');caption.className='equipment-credit micro';caption.append(document.createTextNode(asset?asset.note+' · 인터넷 연결 필요 · '+asset.author+' · '+asset.license+' · ': '임의 도형을 실제 장비로 표시하지 않습니다. '));
-  if(asset){const a=document.createElement('a');a.href=asset.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='원본·사용 조건 확인';caption.append(a)}host.append(caption);refreshLocalization();
+  if(asset){const a=document.createElement('a');a.href=asset.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='원본·사용 조건 확인';caption.append(a)}host.append(caption);host.insertAdjacentHTML('beforeend',readinessMarkup());refreshLocalization();
  }
  destroy(){this.version++;this.native?.destroy();this.native=null;this.stop();clearTimeout(this.timeout);this.observer.disconnect();this.frame?.remove();this.frame=null;this.api=null;this.host=null;}
  setMode(){}

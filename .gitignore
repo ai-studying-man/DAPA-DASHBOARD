@@ -13,3 +13,7 @@ docs/evidence/
 exports/
 .omo/
 /contact-375.png
+
+# Local Blender automatic backups
+*.blend1
+*.blend2
