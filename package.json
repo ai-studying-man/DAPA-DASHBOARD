@@ -19,6 +19,8 @@
     "qa:environment-scroll": "node scripts/qa/environment-scroll.cjs",
     "qa:environment-controls": "node scripts/qa/environment-controls.cjs",
     "qa:environment-race": "node scripts/qa/environment-race.cjs",
+    "qa:local-models": "node scripts/qa/local-models.mjs",
+    "qa:models": "node scripts/audit-model-assets.mjs docs/MODEL-ASSET-STATUS.json",
     "qa:terrain": "node scripts/qa/terrain-clearance.mjs",
     "qa:realism": "node scripts/qa/realism.cjs",
     "predev": "node scripts/prepare-cesium.mjs",

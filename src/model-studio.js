@@ -38,6 +38,10 @@ export class ModelStudio{
  }
  enableControls(){
   this.ui.querySelectorAll('input,select,[data-studio-play],[data-studio-stop]').forEach(control=>control.disabled=false);
+  const articulated=Boolean(this.parts.Turret||this.parts.Gun);
+  this.ui.querySelector('[data-studio-play]').disabled=!articulated;
+  this.ui.querySelector('[data-studio-range="explode"]').disabled=this.origins.size<2;
+  this.ui.querySelector('[data-studio-part]').disabled=this.origins.size===0;
   for(const [option,part]of [['mark','Markings']])this.ui.querySelector(`[data-studio-option="${option}"]`).disabled=!this.parts[part];
   this.ui.querySelector('[data-studio-range="turret"]').disabled=!this.parts.Turret;this.ui.querySelector('[data-studio-range="gun"]').disabled=!this.parts.Gun;
   for(const option of this.ui.querySelectorAll('[data-studio-part] option'))option.disabled=option.value!=='all'&&!this.parts[option.value];
@@ -52,7 +56,7 @@ export class ModelStudio{
  resize(){if(!this.renderer||!this.camera)return;const width=this.stage.clientWidth,height=this.stage.clientHeight;if(!width||!height)return;this.renderer.setSize(width,height,false);this.camera.aspect=width/height;this.camera.updateProjectionMatrix();if(this.root)this.setView(this.view||'home');}
  loop(){if(!this.renderer)return;this.previous=undefined;this.renderer.setAnimationLoop(this.visible&&!document.hidden&&!this.failed&&!this.disposed?time=>this.draw(time):null);}
  draw(time){const dt=this.previous===undefined?0:Math.min((time-this.previous)/1000,.05);this.previous=time;
-  if(this.playing){this.elapsed+=dt;if(this.parts.Turret)this.parts.Turret.rotation.y=Math.sin(this.elapsed*.45)*.55;if(this.parts.Gun)this.parts.Gun.rotation.x=(Math.sin(this.elapsed*.65)+1)*.15;this.parts.Turret?.updateMatrixWorld(true);this.selection?.setFromObject(this.selectedPart);for(const [name,part,axis]of [['turret',this.parts.Turret,'y'],['gun',this.parts.Gun,'x']])if(part){const input=this.ui.querySelector(`[data-studio-range="${name}"]`),value=Math.round(T.MathUtils.radToDeg(part.rotation[axis]));if(input.value!==String(value)){input.value=String(value);input.nextElementSibling.textContent=value+'¡Æ';}}}
+  if(this.playing){this.elapsed+=dt;if(this.parts.Turret)this.parts.Turret.rotation.y=Math.sin(this.elapsed*.45)*.55;if(this.parts.Gun)this.parts.Gun.rotation.x=(Math.sin(this.elapsed*.65)+1)*.15;this.parts.Turret?.updateMatrixWorld(true);this.selection?.setFromObject(this.selectedPart);for(const [name,part,axis]of [['turret',this.parts.Turret,'y'],['gun',this.parts.Gun,'x']])if(part){const input=this.ui.querySelector(`[data-studio-range="${name}"]`),value=Math.round(T.MathUtils.radToDeg(part.rotation[axis]));if(input.value!==String(value)){input.value=String(value);input.nextElementSibling.textContent=value+'Â°';}}}
   this.controls.autoRotate=this.auto;this.controls.update(dt);this.renderer.render(this.scene,this.camera);
  }
  bind(){const signal=this.events.signal;

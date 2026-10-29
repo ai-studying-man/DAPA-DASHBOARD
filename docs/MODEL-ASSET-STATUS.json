@@ -1,0 +1,192 @@
+{
+  "systemCount": 23,
+  "localModelCount": 6,
+  "failures": [],
+  "records": [
+    {
+      "id": "dosan",
+      "name": "도산안창호급",
+      "model": "./models/dosan-reference.glb",
+      "status": "untextured-exterior-draft",
+      "photorealismVerified": false,
+      "bytes": 636396,
+      "materials": 5,
+      "images": 0,
+      "textureSlots": []
+    },
+    {
+      "id": "chungnam",
+      "name": "충남함",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "k2",
+      "name": "K2",
+      "model": "./models/k2-exhibit.glb",
+      "status": "untextured-exterior-draft",
+      "photorealismVerified": false,
+      "bytes": 1507040,
+      "materials": 9,
+      "images": 0,
+      "textureSlots": []
+    },
+    {
+      "id": "k9",
+      "name": "K9",
+      "model": "./models/k9-exhibit.glb",
+      "status": "untextured-exterior-draft",
+      "photorealismVerified": false,
+      "bytes": 1495760,
+      "materials": 9,
+      "images": 0,
+      "textureSlots": []
+    },
+    {
+      "id": "chunmoo",
+      "name": "천무",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "fa50",
+      "name": "FA-50",
+      "model": "./models/fa50-reference.glb",
+      "status": "untextured-exterior-draft",
+      "photorealismVerified": false,
+      "bytes": 935508,
+      "materials": 7,
+      "images": 0,
+      "textureSlots": []
+    },
+    {
+      "id": "muav",
+      "name": "MUAV",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "kaav",
+      "name": "상륙돌격장갑차",
+      "model": "./models/kaav-reference.glb",
+      "status": "untextured-exterior-draft",
+      "photorealismVerified": false,
+      "bytes": 1696944,
+      "materials": 8,
+      "images": 0,
+      "textureSlots": []
+    },
+    {
+      "id": "425",
+      "name": "425사업",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "smallsat",
+      "name": "초소형위성체계",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "k21",
+      "name": "K21",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "k10",
+      "name": "K10",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "k808",
+      "name": "K808 백호",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "redback",
+      "name": "AS21 레드백",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "kf21",
+      "name": "KF-21 보라매",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "surion",
+      "name": "KUH-1 수리온",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "lah",
+      "name": "LAH",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "t50",
+      "name": "T-50 골든이글",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "kt1",
+      "name": "KT-1 웅비",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "nuri",
+      "name": "누리호",
+      "model": "./models/nuri-reference.glb",
+      "status": "untextured-exterior-draft",
+      "photorealismVerified": false,
+      "bytes": 1944576,
+      "materials": 7,
+      "images": 0,
+      "textureSlots": []
+    },
+    {
+      "id": "anasis",
+      "name": "ANASIS-II",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "cheongung",
+      "name": "천궁-II",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    },
+    {
+      "id": "hansando",
+      "name": "한산도함",
+      "model": null,
+      "status": "no-local-model",
+      "photorealismVerified": false
+    }
+  ]
+}
