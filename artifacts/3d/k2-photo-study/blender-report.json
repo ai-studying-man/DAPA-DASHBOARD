@@ -1,0 +1,47 @@
+{
+  "blender": "4.5.9 LTS",
+  "source": "public/models/k2-exhibit.glb",
+  "atlas": "docs/modeling/k2/k2-ai-fourview.png",
+  "classification": "AI-inferred four-view photo-reference surface study on approximate geometry; not a scan, manufacturer CAD or validated four-view reconstruction",
+  "sourceCredit": "KBS VIEW \u2013 theDEEP / CC BY 3.0",
+  "sourcePhoto": "https://commons.wikimedia.org/wiki/File:K2_Black_Panther_20161106.jpg",
+  "license": "CC BY 3.0",
+  "projection": "world-space directional projection, not calibrated multi-view reconstruction",
+  "rectangles": {
+    "left": [
+      0.008463541666666666,
+      0.5537109375,
+      0.607421875,
+      0.9697265625
+    ],
+    "top": [
+      0.71875,
+      0.5166015625,
+      0.9127604166666666,
+      0.9912109375
+    ],
+    "front": [
+      0.08333333333333333,
+      0.03515625,
+      0.509765625,
+      0.4794921875
+    ],
+    "rear": [
+      0.6328125,
+      0.0380859375,
+      0.9811197916666666,
+      0.4775390625
+    ]
+  },
+  "parts": [
+    "Hull",
+    "Turret",
+    "Gun",
+    "RunningGear",
+    "Markings"
+  ],
+  "meshObjects": 69,
+  "triangles": 20304,
+  "output": ".local\\modeling\\k2-photo-study.glb",
+  "productionPromoted": false
+}

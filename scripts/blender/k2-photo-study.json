@@ -1,0 +1,15 @@
+{
+  "source": "public/models/k2-exhibit.glb",
+  "atlas": "docs/modeling/k2/k2-ai-fourview.png",
+  "output": ".local/modeling/k2-photo-study",
+  "cells": {
+    "left": [0, 512, 950, 1024],
+    "top": [951, 512, 1536, 1024],
+    "front": [0, 0, 950, 512],
+    "rear": [951, 0, 1536, 512]
+  },
+  "classification": "AI-inferred four-view photo-reference surface study on approximate geometry; not a scan, manufacturer CAD or validated four-view reconstruction",
+  "sourcePhoto": "https://commons.wikimedia.org/wiki/File:K2_Black_Panther_20161106.jpg",
+  "sourceCredit": "KBS VIEW – theDEEP / CC BY 3.0",
+  "license": "CC BY 3.0"
+}
