@@ -1,4 +1,5 @@
 import {vehicleModels,k2PhotoStudy} from './vehicle-models.js';
+import {detailedAssets} from './detailed-assets.js';
 import { catalogAssets } from './catalog-assets.js';
 // Verified public assets; photographs and external 3D are deliberately distinct.
 export const equipmentAssets={
@@ -28,3 +29,5 @@ for(const id of ['kaav','fa50','dosan','nuri']){
 
 // A fixed allowlisted asset only; query values never become model URLs.
 if(new URLSearchParams(globalThis.location?.search||'').get('model')==='photo-study')Object.assign(equipmentAssets.k2,k2PhotoStudy);
+
+for(const [id,asset] of Object.entries(detailedAssets))equipmentAssets[id]={...equipmentAssets[id],...asset};

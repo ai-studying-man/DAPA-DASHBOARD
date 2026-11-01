@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {serviceTerrainHeight as height} from '../src/service-terrain.js';
+for(const branch of ['army','air','marine'])for(let x=-14;x<=14;x++)for(let z=branch==='marine'?0:-14;z<=14;z++)assert.ok(Math.abs(height(branch,x,z))<1e-6,`${branch} nonflat allowed walking area`);
+const b=await readFile('public/models/k2-surface-refinement.glb');
+assert.equal(b.toString('ascii',0,4),'glTF');
+const g=JSON.parse(b.toString('utf8',20,20+b.readUInt32LE(12)));
+for(const part of ['Hull','Turret','Gun','RunningGear','Markings'])assert.ok(g.nodes.some(n=>n.name===part));
+assert.ok(g.materials.length>=5);
+assert.ok(g.images.length>=1);
+console.log(JSON.stringify({bytes:b.length,meshes:g.meshes.length,materials:g.materials.length,walkGrounding:'pass',photorealismVerified:false}));

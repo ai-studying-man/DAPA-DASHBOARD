@@ -1,0 +1,401 @@
+[
+  {
+    "order": 1,
+    "id": "500md",
+    "name": "500MD 헬리콥터",
+    "category": "air",
+    "model": "./models/mvp/500md.glb",
+    "image": "./media/mvp/500md.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Some views crop rotor tips; silhouette consistency and aircraft variant need review.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      7.800000190734863,
+      8.732000350952148,
+      3.4049999713897705
+    ],
+    "range": 15.717600631713868,
+    "altitude": 120
+  },
+  {
+    "order": 2,
+    "id": "ah1s",
+    "name": "AH-1S 코브라 공격헬기",
+    "category": "air",
+    "model": "./models/mvp/ah1s.glb",
+    "image": "./media/mvp/ah1s.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Some views crop rotor tips; silhouette consistency and aircraft variant need review.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      4.099999904632568,
+      13.544000625610352,
+      3.6050000190734863
+    ],
+    "range": 24.379201126098632,
+    "altitude": 120
+  },
+  {
+    "order": 3,
+    "id": "ah64e",
+    "name": "AH64E 아파치가디언 헬리콥터",
+    "category": "air",
+    "model": "./models/mvp/ah64e.glb",
+    "image": "./media/mvp/ah64e.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Some views crop rotor tips; silhouette consistency and aircraft variant need review.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      13.199999809265137,
+      13.544000625610352,
+      4.125000476837158
+    ],
+    "range": 24.379201126098632,
+    "altitude": 120
+  },
+  {
+    "order": 4,
+    "id": "f22",
+    "name": "F-22 랩터(Raptor) 전투기",
+    "category": "foreign",
+    "model": "./models/mvp/f22.glb",
+    "image": "./media/mvp/f22.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      12,
+      18.399999618530273,
+      4
+    ],
+    "range": 33.11999931335449,
+    "altitude": 120
+  },
+  {
+    "order": 5,
+    "id": "f117",
+    "name": "F117 Nighthawk 나이트호크",
+    "category": "foreign",
+    "model": "./models/mvp/f117.glb",
+    "image": "./media/mvp/f117.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      12,
+      16.399999618530273,
+      4
+    ],
+    "range": 29.519999313354493,
+    "altitude": 120
+  },
+  {
+    "order": 6,
+    "id": "k1arv",
+    "name": "K1 응급구난전차",
+    "category": "land",
+    "model": "./models/mvp/k1arv.glb",
+    "image": "./media/mvp/k1arv.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      3.3899998664855957,
+      7.420000076293945,
+      2.6649999618530273
+    ],
+    "range": 13.356000137329103,
+    "altitude": 0
+  },
+  {
+    "order": 7,
+    "id": "k2",
+    "name": "K2 흑표(Black Panther)",
+    "category": "land",
+    "model": "./models/mvp/k2.glb",
+    "image": "./media/mvp/k2.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "photo-informed-existing",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      3.625999927520752,
+      10.84356689453125,
+      3.1428449153900146
+    ],
+    "range": 19.51842041015625,
+    "altitude": 0
+  },
+  {
+    "order": 8,
+    "id": "k9",
+    "name": "K9 천둥 자주포(Thunder)",
+    "category": "land",
+    "model": "./models/mvp/k9.glb",
+    "image": "./media/mvp/k9.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "photo-informed-existing",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      3.4260001182556152,
+      12.04356575012207,
+      3.622844934463501
+    ],
+    "range": 21.678418350219726,
+    "altitude": 0
+  },
+  {
+    "order": 9,
+    "id": "k10cbrn",
+    "name": "K10 화생방제독차(CBRN Decontamination Truck)",
+    "category": "identity-review",
+    "model": "./models/mvp/k10cbrn.glb",
+    "image": "./media/mvp/k10cbrn.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "User label preserved; vehicle identity/variant not independently verified.",
+    "verification": "user-label-unverified",
+    "size": [
+      2.809999942779541,
+      7.5,
+      2.6700000762939453
+    ],
+    "range": 13.5,
+    "altitude": 0
+  },
+  {
+    "order": 10,
+    "id": "k21",
+    "name": "K21 IFV 보병전투장갑차",
+    "category": "land",
+    "model": "./models/mvp/k21.glb",
+    "image": "./media/mvp/k21.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Generated exterior may mix nearby equipment characteristics; match official multi-angle references before reconstruction.",
+    "verification": "use-IFV-identity-not-conflicting-thumbnail",
+    "size": [
+      3.3899998664855957,
+      7.259999752044678,
+      2.3899998664855957
+    ],
+    "range": 13.067999553680421,
+    "altitude": 0
+  },
+  {
+    "order": 11,
+    "id": "k151",
+    "name": "K-151 소형전술차량(Light Tactical Vehicle)",
+    "category": "land",
+    "model": "./models/mvp/k151.glb",
+    "image": "./media/mvp/k151.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      2.4600000381469727,
+      4.949999809265137,
+      2.570000171661377
+    ],
+    "range": 8.909999656677247,
+    "altitude": 0
+  },
+  {
+    "order": 12,
+    "id": "k151at",
+    "name": "K151 소형전술차량 with 현궁",
+    "category": "land",
+    "model": "./models/mvp/k151at.glb",
+    "image": "./media/mvp/k151at.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Generated roof launcher does not yet establish correct Hyeongung configuration; do not approve for model reconstruction.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      2.4600000381469727,
+      5,
+      2.994999885559082
+    ],
+    "range": 9,
+    "altitude": 0
+  },
+  {
+    "order": 13,
+    "id": "k216",
+    "name": "K216 화생방정찰장갑차",
+    "category": "land",
+    "model": "./models/mvp/k216.glb",
+    "image": "./media/mvp/k216.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      3.3899998664855957,
+      7.259999752044678,
+      2.3399999141693115
+    ],
+    "range": 13.067999553680421,
+    "altitude": 0
+  },
+  {
+    "order": 14,
+    "id": "k242",
+    "name": "K242 4.2인치 자주박격포",
+    "category": "land",
+    "model": "./models/mvp/k242.glb",
+    "image": "./media/mvp/k242.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      3.3899998664855957,
+      7.259999752044678,
+      2.8400001525878906
+    ],
+    "range": 13.067999553680421,
+    "altitude": 0
+  },
+  {
+    "order": 15,
+    "id": "k332",
+    "name": "K332 화생방정찰차II",
+    "category": "land",
+    "model": "./models/mvp/k332.glb",
+    "image": "./media/mvp/k332.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "User label preserved; vehicle identity/variant not independently verified.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      2.4600000381469727,
+      5,
+      2.9200000762939453
+    ],
+    "range": 9,
+    "altitude": 0
+  },
+  {
+    "order": 16,
+    "id": "kf21",
+    "name": "KF21 보라매(Boramae)",
+    "category": "air",
+    "model": "./models/mvp/kf21.glb",
+    "image": "./media/mvp/kf21.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Generated exterior may mix nearby equipment characteristics; match official multi-angle references before reconstruction.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      12,
+      16.399999618530273,
+      4
+    ],
+    "range": 29.519999313354493,
+    "altitude": 120
+  },
+  {
+    "order": 17,
+    "id": "km9",
+    "name": "KM9 화생방제독차(CBRN Decontamination Truck)",
+    "category": "land",
+    "model": "./models/mvp/km9.glb",
+    "image": "./media/mvp/km9.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      2.809999942779541,
+      7.5,
+      2.6700000762939453
+    ],
+    "range": 13.5,
+    "altitude": 0
+  },
+  {
+    "order": 18,
+    "id": "km181",
+    "name": "KM181 60미리 박격포",
+    "category": "land",
+    "model": "./models/mvp/km181.glb",
+    "image": "./media/mvp/km181.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      1.388631820678711,
+      1.7051693201065063,
+      1.6354079246520996
+    ],
+    "range": 6,
+    "altitude": 0
+  },
+  {
+    "order": 19,
+    "id": "km187",
+    "name": "KM187 81미리 박격포",
+    "category": "land",
+    "model": "./models/mvp/km187.glb",
+    "image": null,
+    "referenceKind": "pending",
+    "meshStage": "category-mesh-mvp",
+    "review": "형상·재질 검토 필요",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      1.666358232498169,
+      2.046203374862671,
+      1.962489366531372
+    ],
+    "range": 6,
+    "altitude": 0
+  },
+  {
+    "order": 20,
+    "id": "surion",
+    "name": "KUH-1 수리온 헬리콥터",
+    "category": "air",
+    "model": "./models/mvp/surion.glb",
+    "image": "./media/mvp/surion.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Some views crop rotor tips; silhouette consistency and aircraft variant need review.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      13.199999809265137,
+      15.542625427246094,
+      3.700000047683716
+    ],
+    "range": 27.976725769042968,
+    "altitude": 120
+  },
+  {
+    "order": 21,
+    "id": "uh60p",
+    "name": "UH-60P 블랙호크 헬리콥터",
+    "category": "air",
+    "model": "./models/mvp/uh60p.glb",
+    "image": "./media/mvp/uh60p.png",
+    "referenceKind": "ai-generated",
+    "meshStage": "category-mesh-mvp",
+    "review": "Some views crop rotor tips; silhouette consistency and aircraft variant need review.",
+    "verification": "AI-reference-needs-review",
+    "size": [
+      13.199999809265137,
+      15.542625427246094,
+      3.700000047683716
+    ],
+    "range": 27.976725769042968,
+    "altitude": 120
+  }
+]

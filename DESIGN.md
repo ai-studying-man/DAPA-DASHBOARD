@@ -1,5 +1,29 @@
 # K-방산 ATLAS 디자인 시스템
 
+## 제작 경로 정정 · GPT ImageGen + Blender
+Higgsfield API·크레딧을 사용하지 않는다. 생성 이미지는 AI 참고 이미지임을 명시한다. Blender의 실제 부품 메시·UV·재질을 GLB로 내보내 위성 지형에서 관람한다. K9·K21·K216·천무의 기본 자산은 `gpt-blender` 계열이며 이전 SAM 모델로 자동 대체하지 않는다. 사진처럼 보이는 참고 이미지와 360도 모델의 형상 검증을 구분한다. 도장 재질 보완만으로 전체 실사화 완료라고 표시하지 않는다.
+
+## 실제 위성 지형 기본 체험 · 2026-11-02
+관람객의 둘러보기와 시뮬레이션은 실제 Esri 위성·항공 영상과 ArcGIS Terrain3D 고도 위 Cesium 장면을 기본으로 사용한다. 이전 Three.js 창작 언덕은 기본 체험에서 사용하지 않는다. 지상은 공개 평창 광장 일대, 해상은 포항 연안의 전시용 위치, 공중은 전시용 고도, 누리호는 나로우주센터 일대이다. 실제 군 배치·운용 항로라고 표시하지 않는다. 지도 연결 실패는 실패/재시도 상태로 보여주며 창작 지형으로 대체하지 않는다. 장비·자료의 완성도는 실사 검증 완료로 뭉뚱그리지 않고 외형 재구성/세부 공개 자산/제작 중을 구분한다. 미검증 범용 외형은 기본 지도에 실제 장비처럼 배치하지 않고 기존 모델 검토 화면에 보존한다. 위성·고도 저작권 표시는 숨기지 않는다. 기존 밝은 패널, 48px 조작, native 장비선택/세 탭, 4언어, 수동 이동·정지·초기화 유지. 공개 제작자 자산은 원문·라이선스·변환 기록과 실제 사진의 역할을 구분한다.
+
+## 사진 기반 표면·기업 연결 · 2026-11-02
+장비 선택 카드는 중간 메뉴 없이 둘러보기로 직접 진입한다. 체험 상단에는 같은 크기의 세 가지 탭(관찰/시뮬레이션/실제 영상), 이전·다음 장비, 제조사/체계종합·구성품 역할을 표시한다. 기업 필터는 native select이며 확인되지 않은 업체는 추정하지 않는다. 기존 파란 Action/48px, 밝은 표면, Noto Sans KR, reduced-motion 계약 유지. 탭·장비 선택은 기존 WebGL 인스턴스를 반드시 해제한다. 사진 비교는 접을 수 있는 출처 포함 패널이며 사진이 3D인 것처럼 표시하지 않는다. K2·K9는 Blender에서 제작한 사진 색상 참고 PBR(도장·금속·고무·표면 요철·먼지) 개선본을 별도 GLB로 연결한다. 사진측량·정밀 CAD·사진과 동일한 형상·완성된 실사 자산이라고 표시하지 않는다. 원본 형상과 기존 모델 경로는 보존한다. 가상 자연광·지면은 한국 산악 경관을 참고한 창작이며 실측 DEM과 구분한다.
+
+## 관람객 간편 체험 · 2026-10-31
+기본 경로는 홈→장비 선택→세 가지 체험으로 구성한다. 기존 상세 대시보드는 `view=dashboard`로 유지하며 기존 system/experience 링크는 그대로 동작한다. 기존 밝은 표면·파란 강조·Noto Sans KR·48px 터치 토큰을 사용한다. VisitorHeader(홈/뒤로), EquipmentCard(큰 이미지·역할), ExperienceAction(둘러보기/3D 시뮬레이션/실제 영상 보기), Stage(모델/영상), BottomHint를 재사용한다. 제목과 조작은 고정된 화면 구조 안에 놓고 장비 목록만 스크롤한다. 작은 높이에서는 본문 스크롤을 허용해 조작을 자르지 않는다. 전환은 240ms opacity/translateY, reduced-motion에서는 제거한다. 모델 검토 옵션은 기본 숨김이며 기존 검토 경로에서 이용한다. 가상 이동은 단순 전시 체험이며 실제 조종·비행·항해 성능이나 내부를 재현하지 않는다. 영상이 없는 장비에는 미확보 상태와 공통 소개 영상을 명시한다. AI 이미지와 실제 사진은 구분하고 출처는 펼침 정보로 제공한다. 언어 선택은 한국어·영어·일본어·중국어로 핵심 탐색·체험 버튼과 안내를 번역한다. 장비 고유명·출처 원문은 유지한다.
+
+## 전체 21종 외형 MVP · 2026-10-30
+
+기존 밝은 토큰과 Action, ModelStudio를 재사용한다. `view=equipment`는 원본 21종 순서를 유지하는 별도 전시 관람 목록이다. 데스크톱은 목록·3D·이미지 비교, 모바일은 선택→3D→기준 이미지의 세로 흐름이다. 48px 선택·이전·다음 버튼과 native select를 제공한다. 외형 초안, AI 생성 이미지, 제조사 검증 여부를 서로 구분한다. KM187 이미지 미준비·F22/F117 해외 비교·명칭 확인 필요 상태를 명시하고 이미지와 모형의 일치를 검증 완료로 표현하지 않는다. 기존 대시보드 체계 목록을 교체하지 않는다.
+
+## K2·K9 실제 지형 관람 · 2026-10-30
+
+실제 지형 관람의 어두운 terrain 패널·테두리·강조색 토큰과 기존 버튼 행을 유지한다. 장비 선택은 같은 버튼 primitive의 K2/K9 두 항목으로 제공한다. 실제 사진은 출처를 표시한 펼침 정보 안에서 비교 자료로 제공하며, 3D 화면이나 지도 대신 사진을 배경으로 붙이지 않는다. 3D 장비는 미터 단위 GLB, 고도 배율 1의 실제 지도는 네트워크 의존 데이터임을 표시한다. 가려진 형상·재질은 추정이며 제조사 검증 완료로 표현하지 않는다.
+
+## Blender 표면 보정 관람 · 2026-10-30
+
+군별 공간 탐색의 기존 화면·버튼·반응형 구조를 유지한다. 장비 관찰 버튼은 모든 군에서 동일하게 사용하며 선택한 첫 장비를 중심으로 카메라가 이동한다. 해군 장비는 부두와 분리된 수면에 배치한다. 기본은 보정 외형 관람, `surface=legacy`는 기존 전시 주행 비교용이다. 기존 형상을 보정한 전시 모형이며 정밀 복원·실제 DEM·항해·비행 물리는 미검증임을 구현 범위에 표시한다.
+
 ## 자료 연결 관람 v9 · 2026-10-13
 
 기존 v8 밝은 표면과 Action/FilterChip/Status primitive를 유지한다. GuidePanel은 데스크톱에서는 시연 옆 inspector 상단, 모바일에서는 시연 아래 elevated 표면, r3 radius, s5 padding, s3 gap, t1 본문/t3 제목으로 구성한다. 언어 선택은 label이 있는 native select(48px), 부위 선택은 기존 Action의 aria-pressed 상태, 자막은 항상 표시하고 해당 BCP47 lang을 지정한다. KO/EN/JA/ZH 선택은 안내 내용과 TTS에 적용하며 탐색 UI 전체 번역이라고 표시하지 않는다. 브라우저의 해당 언어 음성 유무를 실제 inventory로 표시하고 미설치 시 잘못된 언어 음성으로 대체하지 않는다.
@@ -225,3 +249,13 @@ Preserve approved mobile story pages and existing 3D modal routes. A native GLB 
 
 ## Photo-reference surface study v19
 Keep all default models and navigation unchanged. An explicit `model=photo-study` query enables only a K2 sibling GLB in the same native viewer. Reuse existing badge, note, canvas, source disclosure and 48px controls; introduce no new color or layout tokens. The visible badge identifies AI surface study in KO/EN/JA/ZH; the note states inferred four-view imagery, approximate geometry, remaining projection distortion, no photogrammetry/CAD/finished photoreal model. A genuine UV-textured mesh renders in real time; do not substitute the comparison PNG for the canvas. Basic/default K2 and K9 remain available without the query. This is a reviewable experiment, not a promotion to a finished photo-real asset.
+
+## Service environment experience v20
+New isolated `?view=service` route uses a full-height scene, bounded header, wrapping 48px actions and bottom instructions. Reuse Noto Sans KR, blue accent, white panels and rounded controls. Desktop scene+sidebar; mobile scene above scrollable controls. Scene uses neutral daylight, atmospheric hills, service-specific ground/deck/apron/beach and existing public exterior GLBs. Soldiers are explicitly stylized Blender-authored placeholders, not photoreal uniforms. One selected visitor, four followers; state-based movement only, no Astra/LLM claim. Click-to-walk and keyboard movement, first/third-person camera, pause/reset, reduced-motion starts paused. No actual installation locations, combat tactics, weapon ballistics or verified cockpit representation.
+
+## K2 Blender drive study v21
+Service route Army uses the sibling textured K2 drive study with an explicit 48px action for starting/stopping the authored Blender animation. Reuse existing aria-pressed and disabled patterns. Stop/reset on branch changes, pause with the scene, and initialize stopped including reduced-motion. Army caption states AI texture study / illustrative drive; standard K2 inspection keeps its existing original model. This adds no Astra, Unreal, validated vehicle dynamics or photoreal release claim.
+K2 가까이 보기는 전시 모델의 움직이는 경계를 추적하는 관찰 카메라다. 대원 시선과 별도이며 군별 전환 시 해제한다.
+
+## Surface/landscape review v22
+Explicit surface=refined candidate prioritizes static K2 inspection, hides drive and simplified personnel, and keeps original viewer defaults. Continuous mountain/coast helper replaces giant sphere hills; it is labeled procedural Korean-inspired, not real DEM. Preserve branch navigation and 48px focus/reset actions. Actual satellite/height map route is separately linked; successful remote tile loading must be checked separately.

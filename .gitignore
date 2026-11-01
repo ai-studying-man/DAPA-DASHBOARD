@@ -13,3 +13,12 @@ docs/evidence/
 exports/
 .omo/
 /contact-375.png
+
+# Local render reviews and Blender working files; deployed assets live in public/.
+/artifacts/
+__pycache__/
+*.pyc
+*.blend1
+
+# Rejected historical photo-to-3D candidates, not selected by the visitor app.
+/public/models/*-photo-reconstructed.glb

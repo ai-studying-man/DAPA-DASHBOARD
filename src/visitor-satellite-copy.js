@@ -1,0 +1,7 @@
+const messages={
+ ko:{loading:'실제 위성 영상·고도 지형 준비 중…',map:'주변 위성 지도',close:'장비 가까이',retry:'다시 연결',onboard:'장비 위 관측',outside:'밖에서 보기',fixed:'발사체·우주체계는 고정 외형과 실제 지형을 관찰합니다.',move:'방향키·터치로 전시용 이동 · 실제 운용 성능은 재현하지 않습니다.',pending:'정밀 외형 준비 중 · 위성 지도와 공개 자료를 관찰할 수 있어요.',terrain:'실제 위성·고도 지형',failed:'위성·장비 연결 실패: ',height:'이동 지점의 고도 갱신이 지연됐습니다. 마지막 확인된 고도를 유지합니다.'},
+ en:{loading:'Loading satellite imagery and elevation…',map:'Satellite overview',close:'Close to equipment',retry:'Reconnect',onboard:'Above-equipment view',outside:'Exterior view',fixed:'Observe the static exterior and real terrain.',move:'Exhibition movement with arrows/touch; actual performance is not simulated.',pending:'Detailed exterior in preparation. Explore satellite imagery and public sources.',terrain:'Real satellite imagery and elevation',failed:'Satellite/equipment connection failed: ',height:'Elevation update delayed. Retaining the last verified height.'},
+ ja:{loading:'実際の衛星画像・標高を読み込み中…',map:'周辺の衛星地図',close:'装備に近づく',retry:'再接続',onboard:'装備上方から観察',outside:'外から見る',fixed:'固定された外形と実際の地形を観察します。',move:'矢印・タッチで展示用の移動。実際の運用性能は再現していません。',pending:'詳細外形は制作中です。衛星地図と公開資料をご覧ください。',terrain:'実際の衛星画像・標高',failed:'衛星・装備の接続失敗: ',height:'標高更新が遅れています。直前に確認した高さを維持します。'},
+ zh:{loading:'正在加载真实卫星影像和高程…',map:'周边卫星地图',close:'靠近装备',retry:'重新连接',onboard:'装备上方视角',outside:'外部视角',fixed:'观察固定外形与真实地形。',move:'方向键或触屏用于展览移动，不再现真实操作性能。',pending:'精细外形制作中，可查看卫星地图与公开资料。',terrain:'真实卫星影像与高程',failed:'卫星或装备连接失败：',height:'高程更新延迟，保持上次确认的高度。'},
+};
+export function satelliteCopy(language){return messages[language]||messages.ko}

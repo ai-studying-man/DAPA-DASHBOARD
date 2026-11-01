@@ -1,0 +1,2 @@
+# Generic service exhibition figure
+Original generic figure authored by this project in Blender 4.5.9 LTS using `scripts/blender/service_person.py`. No third-party character mesh, photographed identity, uniform texture or manufacturer asset was included. This is a stylized placeholder, not a verified reproduction of Republic of Korea Armed Forces uniform or equipment. Editable source: `artifacts/3d/service-person.blend`. Web GLB: 47,904 bytes.
