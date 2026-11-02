@@ -35,3 +35,23 @@ K2 기존 검증 산출물은 재생성하지 않는다. 나머지 기존 GLB는
 - 수정 후129개 전체 캡처/9개 개요시트/19개 상호작용 이미지를 다시 생성했다. 두 독립 검토 모두 전체117개 모델·뷰포트를 개요시트로 확인하고 언어·동작감소·긴이름 원본을 직접 확인하여 UI 범위 PASS. 실사 형상 정확도 인증은 아니다.
 - 증거: `docs/modeling/fleet/web/` 전체 캡처와 보고서, `interactions/`, `overview/`. 정면/측면/사선 Blender 실제 렌더117개와 자료 비교보드39개는 같은 상위 폴더 및 `comparisons/`에 보존했다. 렌더 작업은 저장된 Blender를 읽기만 하며 모델을 재생성하지 않았다.
 - 기존 `qa:local-models`, `qa:k2-browser`, `qa:realism` 회귀도 통과. Pages workflow에 전39종 validator 게이트를 추가했다. 다음은 lockfile 재설치/최종 빌드 및 main push 후 공개39종 검증이다.
+
+## 배포 준비 체크포인트 · 2026-11-03
+
+- UI/검증 증거 커밋 `c916ca8`, 모델 생성 `794fa61`, 전체 대상 계약 `ddcde61`.
+- 최종 `npm ci` 성공. `qa:models`, `qa:k2-pipeline`, `qa:fleet-models`, `build` 모두 재통과했다. 기존 의존성 취약점5개와 대형 chunk 경고는 별도 기존 부채로 유지하며 무관한 major 업그레이드는 하지 않았다.
+- 모든 모델은 이미 검증되었으므로 재생성하지 않는다. 다음 단계는 원격을 다시 fetch해 변경을 보존하고 main 일반 push, GitHub Actions SHA 및 공개 build-info 일치 후 전39종의 실제 공개 브라우저 검증이다.
+
+```powershell
+git status --short
+git fetch origin
+git log -5 --oneline
+gh run list --workflow deploy-pages.yml --limit 3
+$env:QA_URL='https://ai-studying-man.github.io/DAPA-DASHBOARD/'
+$env:QA_OUT='artifacts/3d/fleet/pages'
+$env:QA_WIDTHS='375,1280'
+$env:QA_FPS='1'
+node scripts/qa/fleet-browser.mjs
+node scripts/qa/fleet-interactions.mjs
+node scripts/qa/fleet-keyboard.mjs
+```
