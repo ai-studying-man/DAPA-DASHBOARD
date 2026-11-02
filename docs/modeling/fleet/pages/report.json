@@ -1,0 +1,880 @@
+{
+  "base": "https://ai-studying-man.github.io/DAPA-DASHBOARD/",
+  "results": [
+    {
+      "id": "dosan",
+      "width": 375,
+      "motion": [
+        "Turntable"
+      ],
+      "parts": 1,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059993999,
+        "p95FrameMs": 16.800000000000182
+      }
+    },
+    {
+      "id": "chungnam",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "TurretTraverse",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.012002400480085,
+        "p95FrameMs": 16.799999999999272
+      }
+    },
+    {
+      "id": "k2",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "TurretTraverse",
+        "BarrelElevation"
+      ],
+      "parts": 5,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000109
+      }
+    },
+    {
+      "id": "k9",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView",
+        "TurretTraverse",
+        "BarrelElevation"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.899999999999636
+      }
+    },
+    {
+      "id": "chunmoo",
+      "width": 375,
+      "motion": [
+        "Turntable"
+      ],
+      "parts": 1,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.799999999999272
+      }
+    },
+    {
+      "id": "fa50",
+      "width": 375,
+      "motion": [
+        "Turntable"
+      ],
+      "parts": 1,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "muav",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "PropellerStudy",
+        "ExplodedView"
+      ],
+      "parts": 5,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.98800239952005,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "kaav",
+      "width": 375,
+      "motion": [
+        "Turntable"
+      ],
+      "parts": 1,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059993987,
+        "p95FrameMs": 16.799999999999272
+      }
+    },
+    {
+      "id": "425",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 3,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059993987,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "smallsat",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 3,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059993987,
+        "p95FrameMs": 16.799999999999272
+      }
+    },
+    {
+      "id": "k21",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView",
+        "TurretTraverse",
+        "BarrelElevation"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.00600060005992,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k10",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059993965,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k808",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "redback",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView",
+        "TurretTraverse",
+        "BarrelElevation"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.00600060005992,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "kf21",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.994000599940094,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "surion",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "RotorStudy",
+        "ExplodedView"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.98800239952027,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "lah",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "RotorStudy",
+        "ExplodedView"
+      ],
+      "parts": 3,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "t50",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.900000000001455
+      }
+    },
+    {
+      "id": "kt1",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "PropellerStudy",
+        "ExplodedView"
+      ],
+      "parts": 5,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.00600060005992,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "nuri",
+      "width": 375,
+      "motion": [
+        "Turntable"
+      ],
+      "parts": 1,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "anasis",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 3,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.98800239952027,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "cheongung",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 3,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.006000600060354,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "hansando",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 3,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.988002399519836,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "500md",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "RotorStudy",
+        "ExplodedView"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.98800239952027,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "ah1s",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "RotorStudy",
+        "ExplodedView"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "ah64e",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "RotorStudy",
+        "ExplodedView"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.79999999998836
+      }
+    },
+    {
+      "id": "f22",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "f117",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k1arv",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k10cbrn",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059993965,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k151",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.00600060005948,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k151at",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.01200240047992,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k216",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.006000600060354,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k242",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059994053,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "k332",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.98800239952027,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "km9",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "ExplodedView"
+      ],
+      "parts": 2,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "km181",
+      "width": 375,
+      "motion": [
+        "Turntable"
+      ],
+      "parts": 1,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.99400059993965,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "km187",
+      "width": 375,
+      "motion": [
+        "Turntable"
+      ],
+      "parts": 1,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 59.988002399519395,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "uh60p",
+      "width": 375,
+      "motion": [
+        "Turntable",
+        "RotorStudy",
+        "ExplodedView"
+      ],
+      "parts": 4,
+      "overflow": false,
+      "timing": {
+        "renderedFrames": 60,
+        "fps": 60.00600060005948,
+        "p95FrameMs": 16.80000000000291
+      }
+    },
+    {
+      "id": "dosan",
+      "width": 1280,
+      "motion": [],
+      "parts": 1,
+      "overflow": false
+    },
+    {
+      "id": "chungnam",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k2",
+      "width": 1280,
+      "motion": [],
+      "parts": 5,
+      "overflow": false
+    },
+    {
+      "id": "k9",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "chunmoo",
+      "width": 1280,
+      "motion": [],
+      "parts": 1,
+      "overflow": false
+    },
+    {
+      "id": "fa50",
+      "width": 1280,
+      "motion": [],
+      "parts": 1,
+      "overflow": false
+    },
+    {
+      "id": "muav",
+      "width": 1280,
+      "motion": [],
+      "parts": 5,
+      "overflow": false
+    },
+    {
+      "id": "kaav",
+      "width": 1280,
+      "motion": [],
+      "parts": 1,
+      "overflow": false
+    },
+    {
+      "id": "425",
+      "width": 1280,
+      "motion": [],
+      "parts": 3,
+      "overflow": false
+    },
+    {
+      "id": "smallsat",
+      "width": 1280,
+      "motion": [],
+      "parts": 3,
+      "overflow": false
+    },
+    {
+      "id": "k21",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "k10",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k808",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "redback",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "kf21",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "surion",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "lah",
+      "width": 1280,
+      "motion": [],
+      "parts": 3,
+      "overflow": false
+    },
+    {
+      "id": "t50",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "kt1",
+      "width": 1280,
+      "motion": [],
+      "parts": 5,
+      "overflow": false
+    },
+    {
+      "id": "nuri",
+      "width": 1280,
+      "motion": [],
+      "parts": 1,
+      "overflow": false
+    },
+    {
+      "id": "anasis",
+      "width": 1280,
+      "motion": [],
+      "parts": 3,
+      "overflow": false
+    },
+    {
+      "id": "cheongung",
+      "width": 1280,
+      "motion": [],
+      "parts": 3,
+      "overflow": false
+    },
+    {
+      "id": "hansando",
+      "width": 1280,
+      "motion": [],
+      "parts": 3,
+      "overflow": false
+    },
+    {
+      "id": "500md",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "ah1s",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "ah64e",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    },
+    {
+      "id": "f22",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "f117",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k1arv",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k10cbrn",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k151",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k151at",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k216",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k242",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "k332",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "km9",
+      "width": 1280,
+      "motion": [],
+      "parts": 2,
+      "overflow": false
+    },
+    {
+      "id": "km181",
+      "width": 1280,
+      "motion": [],
+      "parts": 1,
+      "overflow": false
+    },
+    {
+      "id": "km187",
+      "width": 1280,
+      "motion": [],
+      "parts": 1,
+      "overflow": false
+    },
+    {
+      "id": "uh60p",
+      "width": 1280,
+      "motion": [],
+      "parts": 4,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "allSystems": 39,
+  "allClips": true,
+  "reducedMotion": true,
+  "lowPower": true,
+  "filters": true,
+  "locales": 4,
+  "lifecycle": true
+}

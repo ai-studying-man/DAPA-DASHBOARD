@@ -1,0 +1,15 @@
+{
+  "motion": [
+    "Turntable",
+    "TurretTraverse",
+    "BarrelElevation",
+    "ExplodedView",
+    "RotorStudy",
+    "PropellerStudy"
+  ],
+  "nativeTouch": true,
+  "reducedDuringPlayback": true,
+  "fallbackRetry": true,
+  "historyRestore": true,
+  "errors": []
+}

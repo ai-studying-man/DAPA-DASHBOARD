@@ -55,3 +55,27 @@ node scripts/qa/fleet-browser.mjs
 node scripts/qa/fleet-interactions.mjs
 node scripts/qa/fleet-keyboard.mjs
 ```
+
+## 공개 Pages 전체 검증 완료 · 2026-11-03
+
+- 배포 확인 SHA `f0d69c9dc746f0783d59e4b3a07eeb3f50c329a5`. Actions https://github.com/ai-studying-man/DAPA-DASHBOARD/actions/runs/41473851470 성공. 공개 build-info.json HTTP200과 SHA 일치를 확인했다.
+- 공개 URL: https://ai-studying-man.github.io/DAPA-DASHBOARD/?view=fleet
+- `QA_URL=https://ai-studying-man.github.io/DAPA-DASHBOARD/ QA_WIDTHS=375,1280 QA_FPS=1 node scripts/qa/fleet-browser.mjs` 실제 실행 성공. **전39종×모바일/데스크톱=78개 모델 화면,87모션,등록 자료 decode,부품 선택,4언어/분류/저사양/reduced-motion,교체/폐기,overflow0/pageerror0**.
+- `fleet-interactions.mjs`, `fleet-keyboard.mjs`도 공개 사이트에서 통과. native touch,6모션 전후 프레임,재생 중 동작 감소,404/재시도,뒤로가기,연속키보드 장비변경과 포커스를 확인했다.
+- 39종 각각 실제 렌더callback60프레임을 관찰했다. 이 PC Chrome의 375px viewport에서 약59.99~60.01fps, p95약16.8ms였다. 실제 휴대폰·저성능 GPU·장시간 성능이나 움직이는 실제 장비의 재현을 보장하는 수치가 아니다.
+- 공개 증거 원문·캡처: `docs/modeling/fleet/pages/report.json`, 같은 폴더의78+상태8개 PNG, `interactions/`. 로컬117+언어/상태12개는 `web/`에서 별도 보존한다.
+- 기존 코드/원본 자산 삭제·강제 push 없이39종 모두 제작·관찰 파이프라인을 적용했다. 이 단계는 전시용 외형/PBR/교육용 리깅/GLB/웹/배포 범위다. 모든 체계의 실측·실사 품질 검증, 미확보 다각도 실사, AO 베이크, LOD/KTX2 및 현장 장시간 검증은 별도 후속 과제로 명시한다.
+- 더 이상 K2 품질 게이트 때문에 다른 체계를 보류하지 않는다. 이미39종 모두 진행했다. 다음 작업은 감사 JSON의 개별 체계와 비교 보드를 읽고 필요한 한 종의 형상·UV·자료를 보완하는 것이다. 검증한 전체 모델을 다시 만들지 않는다.
+
+```powershell
+git status --short
+git log -6 --oneline
+npm run qa:fleet-models
+Get-Content docs/FLEET-ASSET-STATUS.json
+# 필요한 ID 한 종만 보정 후 생성·검증
+./.local/tools/blender-4.5.9-windows-x64/blender.exe --background --factory-startup --python-exit-code 1 --python blender/fleet/build.py -- --only k808
+npm run models:fleet:optimize
+npm run qa:fleet-models
+```
+
+K2는 기존 `blender/k2/` 파이프라인을 별도로 유지한다. 이 공개 검증 증거를 기록하는 후속 커밋은 런타임·모델을 변경하지 않는다. 후속 Pages 게시에도 최종 SHA 일치를 확인한다.
