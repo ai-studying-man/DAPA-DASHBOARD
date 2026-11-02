@@ -1,0 +1,56 @@
+{
+  "base": "https://ai-studying-man.github.io/DAPA-DASHBOARD/",
+  "checks": [
+    {
+      "width": 375,
+      "models": [
+        {
+          "url": "https://ai-studying-man.github.io/DAPA-DASHBOARD/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "https://ai-studying-man.github.io/DAPA-DASHBOARD/models/k2-pipeline.glb",
+          "status": 200
+        }
+      ],
+      "timing": {
+        "frames": 60,
+        "fps": 60.944641950320765,
+        "p95FrameMs": 16.800000000000182
+      },
+      "errors": [],
+      "failedResources": [],
+      "referencePhoto": true,
+      "opened": true,
+      "played": true,
+      "stopped": true,
+      "closed": true
+    },
+    {
+      "width": 1280,
+      "models": [
+        {
+          "url": "https://ai-studying-man.github.io/DAPA-DASHBOARD/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "https://ai-studying-man.github.io/DAPA-DASHBOARD/models/k2-pipeline.glb",
+          "status": 200
+        }
+      ],
+      "timing": {
+        "frames": 60,
+        "fps": 55.141990626012614,
+        "p95FrameMs": 17.200000000000045
+      },
+      "errors": [],
+      "failedResources": [],
+      "referencePhoto": true,
+      "opened": true,
+      "played": true,
+      "stopped": true,
+      "closed": true
+    }
+  ],
+  "scope": "Chrome viewport emulation; not physical mobile GPU or deployment terrain validation"
+}

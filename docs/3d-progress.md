@@ -106,3 +106,24 @@ $env:QA_URL='https://ai-studying-man.github.io/DAPA-DASHBOARD/'
 $env:QA_OUT='artifacts/3d/k2-pipeline/pages'
 node scripts/qa/k2-pages.mjs
 ```
+
+## 2026-11-02 · 체크포인트 4 / 공개 Pages 검증 완료
+
+- 배포 커밋 `67ab273b3b29071445d2d167431a0edf1f03d919`.
+- GitHub Actions https://github.com/ai-studying-man/DAPA-DASHBOARD/actions/runs/41465731939 성공. npm ci/빌드/기존 모델 감사/K2 validator 게이트와 Pages 배포를 모두 통과했다.
+- 공개 https://ai-studying-man.github.io/DAPA-DASHBOARD/build-info.json 에서 HTTP200 및 위 SHA 일치 확인.
+- `QA_URL=https://ai-studying-man.github.io/DAPA-DASHBOARD/ QA_OUT=artifacts/3d/k2-pipeline/pages node scripts/qa/k2-pages.mjs` 실제 실행 성공. 375/1280px에서 대시보드→3D 시연→장비 외형→클립 선택/재생/정지→닫기·해제를 확인했다. 두 뷰포트 모두 후보 GLB HTTP200, pageerror0. 배포 하위 경로에서 모델/스크립트/이미지 로딩에 404가 없었다.
+- 공개 사이트 증거와 브라우저 원문 보고서: `docs/modeling/k2/pipeline/web/pages/`. 동작 감소/터치/404 재시도/4언어는 앞선 후보 브라우저 QA 범위다. 실제 위성 타일·실기기 GPU·장시간 키오스크 전체를 인증한 결과가 아니다.
+- 원본 3개 GLB SHA 보존과 기본 자산 선택 유지. 기존 작업 삭제·강제 push 없음.
+- **현재 완료 범위:** K2 재현 가능한 Blender·PBR·부품 리깅·교육용 애니메이션·GLB 최적화·Three.js 후보 통합·공개 배포.
+- **미완료:** 정면/측면/상면/후면의 무가림 허가 참조 세트 확보, 실루엣·세부 부품 정밀 재구축/사진 정합, AO 베이크 및 실사 품질 게이트. MD 순서에 따라 K9 확장/나머지 체계 확장은 시작하지 않았다. 이번 단계로 전체 지시서 완료를 주장하지 않는다.
+- 다음 작업: 아래 보존 검증 후 `docs/3D-PIPELINE.md`의 형상 문제 목록과 실사 참조 확보부터 진행. 검증한 모델을 무조건 재생성하지 말 것. K2 품질 게이트가 통과하면 그때 K9에 파이프라인을 재사용한다.
+
+```powershell
+git status --short
+git log -6 --oneline
+npm run qa:k2-pipeline
+Get-Content docs/3D-PIPELINE.md
+```
+
+이 증거 기록 문서의 후속 커밋은 모델·런타임을 바꾸지 않는다. 후속 Pages 실행에도 공개 build-info SHA 일치를 확인한다.
