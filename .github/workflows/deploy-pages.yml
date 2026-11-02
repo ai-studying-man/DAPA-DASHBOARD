@@ -36,6 +36,7 @@ jobs:
         run: |
           npm run qa:models
           npm run qa:k2-pipeline
+          npm run qa:fleet-models
       - name: Record deployed commit
         env:
           BUILD_SHA: ${{ github.sha }}

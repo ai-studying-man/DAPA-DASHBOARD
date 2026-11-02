@@ -21,3 +21,4 @@
  .studio-part{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s2);line-height:1.6}.studio-part select{width:100%}
 }
 .system-demo:has(.model-studio) .demo-body:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:var(--r1)}
+.equipment-name-phrase{white-space:nowrap}

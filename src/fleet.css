@@ -1,0 +1,10 @@
+.fleet-language{display:grid;gap:var(--s2);font-size:var(--t1)}
+.fleet-language select{min-height:var(--s12);padding:var(--s2);border:1px solid var(--line);border-radius:var(--r2);background:var(--panel);color:var(--text)}
+.fleet-summary{font-size:var(--t1);color:var(--muted)}
+.fleet-experience .model-studio .studio-articulation,.fleet-experience .model-studio .studio-range{display:grid}
+.fleet-experience .studio-articulation{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fleet-experience .model-studio .studio-range[hidden]{display:none}
+.fleet-experience .mvp-reference a{color:var(--accent);text-decoration:underline;overflow-wrap:anywhere}
+.fleet-experience h1,.fleet-experience p,.fleet-experience label,.fleet-experience strong{word-break:keep-all;overflow-wrap:anywhere}
+.fleet-experience .mvp-reference img{object-fit:contain;height:auto}
+@media(max-width:700px){.fleet-experience .studio-articulation{grid-template-columns:minmax(0,1fr)}.fleet-experience .mvp-header{align-items:center}.fleet-language{margin-left:auto}}

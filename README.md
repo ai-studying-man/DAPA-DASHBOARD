@@ -151,3 +151,19 @@ node scripts/qa/k2-pages.mjs
 ```
 
 `qa:realism`은 자산의 표시·로딩 회귀 검사입니다. 통과를 실사 품질 인증으로 해석하지 않습니다.
+
+## 전체39종 제작·관찰
+
+[전체39종 3D 열기](https://ai-studying-man.github.io/DAPA-DASHBOARD/?view=fleet) — 기존23종과 장비목록21종을 중복 없이 합쳤습니다. PBR 외형 연구 모형과 교육용 부품·모션을 제공하며 실측 CAD·제조사 검증·실사화 완료로 표시하지 않습니다. 해외 비교·명칭 확인·위성 개념형도 구분합니다.
+
+[진행·재개 기록](docs/FLEET-PROGRESS.md), [체계별 검증](docs/FLEET-ASSET-STATUS.json), [Blender 재현](blender/fleet/README.md), [세 시점·참고 비교](docs/modeling/fleet/comparisons).
+
+```sh
+npm run qa:fleet-models
+npm run build
+npm run preview
+# 별도 터미널: QA_URL로 다른 로컬/배포 URL을 지정할 수도 있습니다.
+npm run qa:fleet-browser
+node scripts/qa/fleet-interactions.mjs
+node scripts/qa/fleet-keyboard.mjs
+```

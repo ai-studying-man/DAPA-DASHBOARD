@@ -28,7 +28,7 @@ export class ModelStudio{
     const url=new URL(this.asset.model,document.baseURI),response=await fetch(url,{signal:this.request.signal});if(!response.ok)throw new Error('GLB HTTP '+response.status);
     const data=await response.arrayBuffer();this.request.signal.throwIfAborted();const gltf=await new GLTFLoader().parseAsync(data,new URL('.',url).href);
     if(this.disposed||this.request.signal.aborted){release(gltf.scene);return;}
-    this.root=gltf.scene;this.scene.add(this.root);this.parts=Object.fromEntries(['Hull','Turret','Gun','RunningGear','Markings'].map(name=>[name,this.root.getObjectByName(name)]));
+    this.root=gltf.scene;this.scene.add(this.root);this.parts=Object.fromEntries((this.asset.parts||['Hull','Turret','Gun','RunningGear','Markings']).map(name=>[name,this.root.getObjectByName(name)]));
     this.origins=new Map(Object.values(this.parts).filter(Boolean).map(part=>[part,part.position.clone()]));this.root.traverse(object=>{if(object.isMesh){object.castShadow=true;object.receiveShadow=true}});
     const bounds=new T.Box3().setFromObject(this.root);if(bounds.isEmpty())throw new Error('Empty GLB');this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.baseRadius=this.radius;
     const floor=new T.Mesh(new T.PlaneGeometry(this.radius*12,this.radius*12),new T.MeshStandardMaterial({color:style.getPropertyValue('--elevated').trim()||'#f2f4f6',roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=bounds.min.y-.015;floor.receiveShadow=true;this.scene.add(floor);
@@ -38,6 +38,7 @@ export class ModelStudio{
   }catch{if(!this.disposed)this.fail()}
  }
  enableControls(){
+  if(this.failed||this.disposed)return;
   this.ui.querySelectorAll('input,select,[data-studio-play],[data-studio-stop]').forEach(control=>control.disabled=false);
   const articulated=Boolean(this.parts.Turret||this.parts.Gun);
   this.ui.querySelector('[data-studio-play]').disabled=this.reduced.matches||(!articulated&&!this.motion?.clips.length);
@@ -46,6 +47,7 @@ export class ModelStudio{
   this.ui.querySelector('[data-studio-part]').disabled=this.origins.size===0;
   for(const [option,part]of [['mark','Markings']])this.ui.querySelector(`[data-studio-option="${option}"]`).disabled=!this.parts[part];
   this.ui.querySelector('[data-studio-range="turret"]').disabled=!this.parts.Turret;this.ui.querySelector('[data-studio-range="gun"]').disabled=!this.parts.Gun;
+  if(this.asset.fleet)for(const [range,part]of [['turret','Turret'],['gun','Gun']])this.ui.querySelector(`[data-studio-range="${range}"]`).parentElement.hidden=!this.parts[part];
   for(const option of this.ui.querySelectorAll('[data-studio-part] option'))option.disabled=option.value!=='all'&&!this.parts[option.value];
  }
  setView(name){
@@ -77,5 +79,5 @@ export class ModelStudio{
  resetParts(){this.motion?.stop();this.playing=false;this.elapsed=0;if(!this.root)return;for(const [part,origin]of this.origins){part.position.copy(origin);if(part===this.parts.Turret||part===this.parts.Gun)part.rotation.set(0,0,0);}this.ui.querySelector('[data-studio-play]').setAttribute('aria-pressed','false');for(const input of this.ui.querySelectorAll('[data-studio-range]')){input.value='0';input.nextElementSibling.textContent=input.dataset.studioRange==='explode'?'0%':'0°';}this.enableControls();const bounds=new T.Box3().setFromObject(this.root);this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.setView(this.view);if(this.selectedPart)this.selection.setFromObject(this.selectedPart);}
  stop(){this.resetParts();this.auto=false;if(this.ui)this.ui.querySelector('[data-studio-option="auto"]').checked=false;this.renderer?.setAnimationLoop(null);}
  fail(){this.failed=true;this.playing=false;this.renderer?.setAnimationLoop(null);this.status.textContent=t('error');this.ui.dataset.ready='false';this.ui.querySelector('[data-studio-retry]').hidden=false;for(const input of this.ui.querySelectorAll('input,select,[data-studio-play],[data-studio-stop]'))input.disabled=true;}
- destroy(){this.disposed=true;this.request.abort();this.events.abort();this.observer?.disconnect();this.intersection?.disconnect();this.renderer?.setAnimationLoop(null);this.motion?.destroy();this.controls?.dispose();release(this.scene);this.renderer?.dispose();this.renderer?.domElement.remove();}
+ destroy(){if(this.disposed)return;this.disposed=true;this.request.abort();this.events.abort();this.observer?.disconnect();this.intersection?.disconnect();this.renderer?.setAnimationLoop(null);this.motion?.destroy();this.controls?.dispose();release(this.scene);this.renderer?.dispose();this.renderer?.forceContextLoss();this.renderer?.domElement.remove();}
 }

@@ -30,7 +30,11 @@
     "models:k2:optimize": "node scripts/optimize-k2.mjs",
     "qa:k2-pipeline": "node scripts/qa/k2-pipeline.mjs",
     "qa:k2-browser": "node scripts/qa/k2-browser.mjs",
-    "qa:k2-evidence": "node scripts/qa/k2-evidence.mjs"
+    "qa:k2-evidence": "node scripts/qa/k2-evidence.mjs",
+    "models:fleet:prepare": "node scripts/prepare-fleet.mjs",
+    "models:fleet:optimize": "node scripts/optimize-fleet.mjs",
+    "qa:fleet-models": "node scripts/qa/fleet-models.mjs",
+    "qa:fleet-browser": "node scripts/qa/fleet-browser.mjs"
   },
   "dependencies": {
     "@fontsource/noto-sans-kr": "5.2.6",
@@ -41,6 +45,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
     "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
     "@gltf-transform/functions": "^4.5.1",
     "gltf-validator": "^2.0.0-dev.3.10",
     "lighthouse": "^13.5.0",

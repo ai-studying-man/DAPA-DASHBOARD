@@ -24,3 +24,14 @@ K2 기존 검증 산출물은 재생성하지 않는다. 나머지 기존 GLB는
 - 체계별 실제 Cycles 렌더38개: `docs/modeling/fleet/`. K2 비교 렌더는 기존 `docs/modeling/k2/pipeline/` 재사용.
 - Python 규칙 검사 4개 파일 위반0. `npm run qa:models`, `npm run qa:k2-pipeline` 회귀 통과. 빌드 성공, 기존 대형 chunk 경고 유지.
 - 재개: 검증 모델을 일괄 재생성하지 말 것. `node scripts/qa/fleet-models.mjs` 후 전체 뷰어 브라우저 검증부터 이어간다. 생성기 기본 실행은 완료한 항목을 건너뛰고 `--only ID`로 필요한 항목만 수정한다.
+
+## 전체 관찰 UI 체크포인트 · 2026-11-03
+
+- 모델 생성 커밋 `794fa61`. `?view=fleet`에서39종 전체를 선택하며 기존 지도/21종 검토/기존 모델 경로는 유지한다. 체험관 상단 및 장비 출처 패널에 현재 장비·언어를 유지하는 전체3D 링크를 제공한다.
+- 실제 소유한 부품만 select에 등록. 회전/부품 분리·재조립/포탑/포신/로터/프로펠러는 전시용이며 실제 운용·성능·내부 조립을 뜻하지 않는다. 위성 개념형, 해외 비교2종, 명칭 확인 항목, 사진/AI/이미지미확보와 사용 조건을 구분한다.
+- production `fleet-browser.mjs`: 전39종×375/768/1280=117개 모델 화면, 추가 언어/동작감소12개 화면. 총129개 캡처. 87클립 모두 실제 position/quaternion 변화, 원본별 부품 선택, 이미지decode, 원본폐기/캔버스교체,4분류/4언어/저사양/reduced-motion, overflow0/pageerror0 통과.
+- `fleet-interactions.mjs`:6종 모션의 정지/중간/복원18프레임, native touch, 재생 중 reduced-motion 중단,404/재시도,뒤로가기 복원 통과.
+- 독립 검토2건에서 키보드 장비 변경 시 포커스 소실과 영문 괄호설명의 줄바꿈을 찾았다. 포커스 소실을 수정 전 실패 테스트로 재현했고 동등 조작자 포커스를 복원해 `fleet-keyboard.mjs`가 연속 ArrowDown/분류/언어/다음 버튼에서 통과했다. 괄호 설명은 공통 escaped markup으로 묶고 실제 전체 이름은 접근성에 유지했다.
+- 수정 후129개 전체 캡처/9개 개요시트/19개 상호작용 이미지를 다시 생성했다. 두 독립 검토 모두 전체117개 모델·뷰포트를 개요시트로 확인하고 언어·동작감소·긴이름 원본을 직접 확인하여 UI 범위 PASS. 실사 형상 정확도 인증은 아니다.
+- 증거: `docs/modeling/fleet/web/` 전체 캡처와 보고서, `interactions/`, `overview/`. 정면/측면/사선 Blender 실제 렌더117개와 자료 비교보드39개는 같은 상위 폴더 및 `comparisons/`에 보존했다. 렌더 작업은 저장된 Blender를 읽기만 하며 모델을 재생성하지 않았다.
+- 기존 `qa:local-models`, `qa:k2-browser`, `qa:realism` 회귀도 통과. Pages workflow에 전39종 validator 게이트를 추가했다. 다음은 lockfile 재설치/최종 빌드 및 main push 후 공개39종 검증이다.
