@@ -37,10 +37,10 @@ function inspect(id,bytes){
  // A normal-map bitmap accidentally assigned to baseColor cannot be identified
  // from metadata alone. Pixel inspection and a neutral-light render are required.
  const names=new Set((gltf.nodes||[]).map(node=>node.name));
- if(['k2','k9'].includes(id))for(const name of ['Hull','Turret','Gun','RunningGear','Markings'])if(!names.has(name))fail(id,`Missing articulation group ${name}`);
+ if(['k2','k9'].includes(id))for(const name of ['Hull','Turret','Gun','RunningGear'])if(!names.has(name))fail(id,`Missing articulation group ${name}`);
  return {bytes:bytes.length,materials:materials.length,images:gltf.images?.length||0,textureSlots,
   status:(gltf.images?.length||0)?'textured-reconstruction-needs-visual-review':'untextured-exterior-draft',
-  photorealismVerified:false};
+  optionalMarkings:names.has('Markings'),photorealismVerified:false};
 }
 const records=[];
 for(const system of systems){

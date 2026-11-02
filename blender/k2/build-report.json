@@ -1,0 +1,15 @@
+{
+  "blender": "4.5.9 LTS",
+  "source": "public/models/k2-surface-refinement.glb",
+  "clips": [
+    "Turntable",
+    "TurretTraverse",
+    "BarrelElevation"
+  ],
+  "fps": 30,
+  "durationSeconds": 4,
+  "geometryRebuilt": false,
+  "authoredSurfaceMaps": true,
+  "photorealismVerified": false,
+  "physicsValidated": false
+}

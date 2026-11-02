@@ -1,65 +1,415 @@
 {
   "systemCount": 23,
-  "localModelCount": 6,
+  "localModelCount": 9,
   "failures": [],
   "records": [
     {
       "id": "dosan",
       "name": "도산안창호급",
-      "model": "./models/dosan-reference.glb",
-      "status": "untextured-exterior-draft",
+      "model": "./models/dosan-detailed-cc0.glb",
+      "status": "textured-reconstruction-needs-visual-review",
       "photorealismVerified": false,
-      "bytes": 636396,
-      "materials": 5,
-      "images": 0,
-      "textureSlots": []
+      "bytes": 13133512,
+      "materials": 2,
+      "images": 5,
+      "textureSlots": [
+        {
+          "material": 0,
+          "slot": "baseColor",
+          "texture": 1,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 0,
+          "slot": "normal",
+          "texture": 0,
+          "encoding": "linear"
+        },
+        {
+          "material": 0,
+          "slot": "metallicRoughness",
+          "texture": 2,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "baseColor",
+          "texture": 3,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 1,
+          "slot": "metallicRoughness",
+          "texture": 4,
+          "encoding": "linear"
+        }
+      ],
+      "optionalMarkings": false
     },
     {
       "id": "chungnam",
       "name": "충남함",
-      "model": null,
-      "status": "no-local-model",
-      "photorealismVerified": false
+      "model": "./models/chungnam-referenced-v2.glb",
+      "status": "textured-reconstruction-needs-visual-review",
+      "photorealismVerified": false,
+      "bytes": 2468356,
+      "materials": 6,
+      "images": 2,
+      "textureSlots": [
+        {
+          "material": 0,
+          "slot": "normal",
+          "texture": 0,
+          "encoding": "linear"
+        },
+        {
+          "material": 0,
+          "slot": "metallicRoughness",
+          "texture": 1,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "normal",
+          "texture": 2,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "metallicRoughness",
+          "texture": 3,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "normal",
+          "texture": 4,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "metallicRoughness",
+          "texture": 5,
+          "encoding": "linear"
+        },
+        {
+          "material": 3,
+          "slot": "normal",
+          "texture": 6,
+          "encoding": "linear"
+        },
+        {
+          "material": 3,
+          "slot": "metallicRoughness",
+          "texture": 7,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "normal",
+          "texture": 8,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "metallicRoughness",
+          "texture": 9,
+          "encoding": "linear"
+        }
+      ],
+      "optionalMarkings": false
     },
     {
       "id": "k2",
       "name": "K2",
-      "model": "./models/k2-exhibit.glb",
-      "status": "untextured-exterior-draft",
+      "model": "./models/k2-photo-pbr.glb",
+      "status": "textured-reconstruction-needs-visual-review",
       "photorealismVerified": false,
-      "bytes": 1507040,
-      "materials": 9,
-      "images": 0,
-      "textureSlots": []
+      "bytes": 5338812,
+      "materials": 5,
+      "images": 3,
+      "textureSlots": [
+        {
+          "material": 0,
+          "slot": "normal",
+          "texture": 0,
+          "encoding": "linear"
+        },
+        {
+          "material": 0,
+          "slot": "metallicRoughness",
+          "texture": 1,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "normal",
+          "texture": 2,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "metallicRoughness",
+          "texture": 3,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "baseColor",
+          "texture": 5,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 2,
+          "slot": "normal",
+          "texture": 4,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "metallicRoughness",
+          "texture": 6,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "normal",
+          "texture": 7,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "metallicRoughness",
+          "texture": 8,
+          "encoding": "linear"
+        }
+      ],
+      "optionalMarkings": false
     },
     {
       "id": "k9",
       "name": "K9",
-      "model": "./models/k9-exhibit.glb",
-      "status": "untextured-exterior-draft",
+      "model": "./models/k9-gpt-blender.glb",
+      "status": "textured-reconstruction-needs-visual-review",
       "photorealismVerified": false,
-      "bytes": 1495760,
-      "materials": 9,
-      "images": 0,
-      "textureSlots": []
+      "bytes": 10886008,
+      "materials": 5,
+      "images": 5,
+      "textureSlots": [
+        {
+          "material": 0,
+          "slot": "normal",
+          "texture": 0,
+          "encoding": "linear"
+        },
+        {
+          "material": 0,
+          "slot": "metallicRoughness",
+          "texture": 1,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "normal",
+          "texture": 2,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "metallicRoughness",
+          "texture": 3,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "baseColor",
+          "texture": 5,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 2,
+          "slot": "normal",
+          "texture": 4,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "metallicRoughness",
+          "texture": 6,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "normal",
+          "texture": 7,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "metallicRoughness",
+          "texture": 8,
+          "encoding": "linear"
+        }
+      ],
+      "optionalMarkings": false
     },
     {
       "id": "chunmoo",
       "name": "천무",
-      "model": null,
-      "status": "no-local-model",
-      "photorealismVerified": false
+      "model": "./models/chunmoo-gpt-blender.glb",
+      "status": "textured-reconstruction-needs-visual-review",
+      "photorealismVerified": false,
+      "bytes": 9106428,
+      "materials": 6,
+      "images": 6,
+      "textureSlots": [
+        {
+          "material": 0,
+          "slot": "baseColor",
+          "texture": 1,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 0,
+          "slot": "normal",
+          "texture": 0,
+          "encoding": "linear"
+        },
+        {
+          "material": 0,
+          "slot": "metallicRoughness",
+          "texture": 2,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "normal",
+          "texture": 3,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "metallicRoughness",
+          "texture": 4,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "normal",
+          "texture": 5,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "metallicRoughness",
+          "texture": 6,
+          "encoding": "linear"
+        },
+        {
+          "material": 3,
+          "slot": "baseColor",
+          "texture": 8,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 3,
+          "slot": "normal",
+          "texture": 7,
+          "encoding": "linear"
+        },
+        {
+          "material": 3,
+          "slot": "metallicRoughness",
+          "texture": 9,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "normal",
+          "texture": 10,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "metallicRoughness",
+          "texture": 11,
+          "encoding": "linear"
+        }
+      ],
+      "optionalMarkings": false
     },
     {
       "id": "fa50",
       "name": "FA-50",
-      "model": "./models/fa50-reference.glb",
-      "status": "untextured-exterior-draft",
+      "model": "./models/fa50-surface-v2.glb",
+      "status": "textured-reconstruction-needs-visual-review",
       "photorealismVerified": false,
-      "bytes": 935508,
+      "bytes": 3395924,
       "materials": 7,
-      "images": 0,
-      "textureSlots": []
+      "images": 2,
+      "textureSlots": [
+        {
+          "material": 0,
+          "slot": "normal",
+          "texture": 0,
+          "encoding": "linear"
+        },
+        {
+          "material": 0,
+          "slot": "metallicRoughness",
+          "texture": 1,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "normal",
+          "texture": 2,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "metallicRoughness",
+          "texture": 3,
+          "encoding": "linear"
+        },
+        {
+          "material": 3,
+          "slot": "normal",
+          "texture": 4,
+          "encoding": "linear"
+        },
+        {
+          "material": 3,
+          "slot": "metallicRoughness",
+          "texture": 5,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "normal",
+          "texture": 6,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "metallicRoughness",
+          "texture": 7,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "normal",
+          "texture": 8,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "metallicRoughness",
+          "texture": 9,
+          "encoding": "linear"
+        }
+      ],
+      "optionalMarkings": false
     },
     {
       "id": "muav",
@@ -77,7 +427,8 @@
       "bytes": 1696944,
       "materials": 8,
       "images": 0,
-      "textureSlots": []
+      "textureSlots": [],
+      "optionalMarkings": false
     },
     {
       "id": "425",
@@ -96,9 +447,87 @@
     {
       "id": "k21",
       "name": "K21",
-      "model": null,
-      "status": "no-local-model",
-      "photorealismVerified": false
+      "model": "./models/k21-gpt-blender.glb",
+      "status": "textured-reconstruction-needs-visual-review",
+      "photorealismVerified": false,
+      "bytes": 9403468,
+      "materials": 6,
+      "images": 6,
+      "textureSlots": [
+        {
+          "material": 0,
+          "slot": "baseColor",
+          "texture": 1,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 0,
+          "slot": "normal",
+          "texture": 0,
+          "encoding": "linear"
+        },
+        {
+          "material": 0,
+          "slot": "metallicRoughness",
+          "texture": 2,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "normal",
+          "texture": 3,
+          "encoding": "linear"
+        },
+        {
+          "material": 1,
+          "slot": "metallicRoughness",
+          "texture": 4,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "baseColor",
+          "texture": 6,
+          "encoding": "sRGB"
+        },
+        {
+          "material": 2,
+          "slot": "normal",
+          "texture": 5,
+          "encoding": "linear"
+        },
+        {
+          "material": 2,
+          "slot": "metallicRoughness",
+          "texture": 7,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "normal",
+          "texture": 8,
+          "encoding": "linear"
+        },
+        {
+          "material": 4,
+          "slot": "metallicRoughness",
+          "texture": 9,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "normal",
+          "texture": 10,
+          "encoding": "linear"
+        },
+        {
+          "material": 5,
+          "slot": "metallicRoughness",
+          "texture": 11,
+          "encoding": "linear"
+        }
+      ],
+      "optionalMarkings": false
     },
     {
       "id": "k10",
@@ -165,7 +594,8 @@
       "bytes": 1944576,
       "materials": 7,
       "images": 0,
-      "textureSlots": []
+      "textureSlots": [],
+      "optionalMarkings": false
     },
     {
       "id": "anasis",

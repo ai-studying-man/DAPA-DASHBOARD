@@ -61,3 +61,17 @@
 - **최종 실사 품질 미달:** 차륜·패널 투영 위치 불일치, 거친 형상, 늘어짐, 일부 회색 배경 투영이 남는다. 사진측량, 제조사 CAD, 검증된 4면 정합이 아니다.
 - 기본 자산으로 승격하지 않는다. K9에 같은 오류를 확대 적용하지 않았다. K2 부품별 형상/UV 수정과 충분한 허가 자료 확보 후 K9로 확장한다.
 - 독립 코드 검토 PASS. 최초 시각 검토의 빈 캔버스·상면 잘림 캡처는 제외하고 대체 캡처 및 4개 언어 안내 캡처를 추가했다. 일본어 문장 끝 한 글자 줄바꿈도 수정했다. 브라우저 제어 연결 복구 후 실제 375×812 화면을 다시 캡처했고, 새로운 독립 검토가 활성 웹 캡처 20개와 전후 렌더를 확인해 **시험 표시·안내·레이아웃 PASS / 최종 실사 품질 FAIL**로 판정했다. 사이트 전체 시각 검증이 아닌 K2 시험 기능 범위다. 상세: `artifacts/3d/k2-photo-study/QA.md`.
+
+## 2026-11-02 · チェックポイント 1 / K2 생성·검증
+
+- 원문 MD를 `docs/K-DEFENSE-3D-INSTRUCTIONS.md`로 보존했다. 입력/복사본 SHA256 `647a8d471b3a6ba147cd1328d05dc6eaca653c26db819a46451cfb867fb76afc` 일치. 기준 동기화 SHA `f9e14ec`, 지시서 커밋 `90cddec`.
+- `npm ci` 성공. 기존 의존성 감사에서 5개 취약점(중간 1/높음 3/치명 1) 보고. 이번 작업에서 일괄 major 업그레이드하지 않았다.
+- `blender/k2/build.py` 실제 실행 완료. 기존 표면 보정 GLB를 재사용하여 UV를 펼치고 도장 normal/metallicRoughness를 독립 제작했다. baseColor 포함 3개 packed 이미지. `blender/k2/source.blend` 실제 열기·이미지 packed 확인 성공. 형상 정밀 재구축과 AO 베이크는 미완료다.
+- 부품 계층/피벗 유지, NLA 교육용 4초 클립 Turntable/TurretTraverse/BarrelElevation을 실제 GLB로 내보냈다. 실성능·무장 제어 모형이 아니다.
+- Blender의 무텍스처 재질용 불필요 접선 159개 오류를 확인했다. glTF-Transform에서 사용하지 않는 접선 속성 146개만 제거, 도장 normal-map용 19개는 유지. 독립 read-only 진단 3건이 같은 원인과 0오류 결과를 확인했다.
+- `node scripts/optimize-k2.mjs` 성공. 정규화 GLB 7,239,336 → 최적화 7,049,400 bytes, 189,936 bytes 절감. 정규화/최적화 Khronos validator 각각 오류 0 / 경고 0. Blender 직접 export의 오류 원문도 artifacts에 보존했다.
+- `node scripts/qa/k2-pipeline.mjs` 성공: 이미지/UV/12차륜/궤도/부모 관계/3클립/원본 3개 해시 보존.
+- `npm run qa:models` 성공: 실제 현재 카탈로그 23종/로컬 모델 9종. 선택적 Markings를 필수 가동부로 오인하던 감사를 수정했고 다른 필수 부품 검사는 유지했다. 새 후보는 기본 자산으로 승격하지 않는다.
+- 실제 Cycles 정면/측면/3-4면과 사진 나란히 비교: `docs/modeling/k2/pipeline/`. 최적화 전후 같은 브라우저 카메라·조명의 픽셀 차이 0 확인. 사진 가림·시점 차이 때문에 실측 정합 증거로 간주하지 않는다.
+- Python 규칙 검사: Blender 내장 Python으로 실행, 위반 0. `npm run build` 성공, 기존 대형 chunk 경고 잔존.
+- 현재 **K2 실사 품질 게이트 FAIL**: 단순화된 실루엣/패널/궤도, 무가림 다각도 참조 미확보. K9 확장 보류. 다음은 웹 기능·회귀 테스트와 후보 선택 경로 배포 검증.

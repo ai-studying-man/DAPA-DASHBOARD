@@ -1,0 +1,36 @@
+{
+  "tool": "glTF-Transform",
+  "blenderExport": {
+    "path": "artifacts/3d/k2-pipeline/raw.glb",
+    "errors": 159,
+    "removedUnusedTangents": 146
+  },
+  "transforms": [
+    "remove unused tangents",
+    "dedup",
+    "weld"
+  ],
+  "results": [
+    {
+      "path": "artifacts/3d/k2-pipeline/normalized.glb",
+      "bytes": 7239336,
+      "sha256": "20722eccfc353417285ff096a242c825330233501fed4e5e7ffd29b2a915d912",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "path": "public/models/k2-pipeline.glb",
+      "bytes": 7049400,
+      "sha256": "88fc84ce848ba0341258aad604aaf6c197ea7fe6c2fc8df87ac43d695913ba15",
+      "errors": 0,
+      "warnings": 0
+    }
+  ],
+  "savedBytes": 189936,
+  "clips": [
+    "BarrelElevation",
+    "Turntable",
+    "TurretTraverse"
+  ],
+  "photorealismVerified": false
+}

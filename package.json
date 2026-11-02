@@ -26,7 +26,9 @@
     "predev": "node scripts/prepare-cesium.mjs",
     "prebuild": "node scripts/prepare-cesium.mjs",
     "assets:representatives": "node scripts/acquire-representative-assets.mjs",
-    "verify:representatives": "node scripts/verify-representative-sources.mjs"
+    "verify:representatives": "node scripts/verify-representative-sources.mjs",
+    "models:k2:optimize": "node scripts/optimize-k2.mjs",
+    "qa:k2-pipeline": "node scripts/qa/k2-pipeline.mjs"
   },
   "dependencies": {
     "@fontsource/noto-sans-kr": "5.2.6",
@@ -36,6 +38,9 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
+    "gltf-validator": "^2.0.0-dev.3.10",
     "lighthouse": "^13.5.0",
     "playwright": "^1.64.0",
     "pngjs": "^7.0.0",
