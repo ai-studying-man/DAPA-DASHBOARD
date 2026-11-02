@@ -32,6 +32,14 @@ jobs:
         run: npm ci
       - name: Build dashboard
         run: npm run build
+      - name: Validate model assets
+        run: |
+          npm run qa:models
+          npm run qa:k2-pipeline
+      - name: Record deployed commit
+        env:
+          BUILD_SHA: ${{ github.sha }}
+        run: node -e "require('node:fs').writeFileSync('dist/build-info.json', JSON.stringify({sha:process.env.BUILD_SHA})+'\n')"
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - name: Upload site

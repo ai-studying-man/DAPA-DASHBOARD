@@ -88,3 +88,21 @@
 - 다음: production 대시보드 경로 검증, 웹 단계 커밋, 원격 재확인 후 fast-forward push, Actions SHA 및 공개 build-info/GLB/브라우저 확인. 배포 확인 전 전체 완료를 주장하지 않는다.
 
 - Production preview에서 375/1280px 모두 실제 대시보드→3D 시연→장비 외형→클립 재생/정지→닫기·해제 성공. 후보 GLB HTTP200, pageerror 0. `scripts/qa/k2-pages.mjs`와 `artifacts/3d/k2-pipeline/production/report.json` 참조. 60 RAF 표본은 이 PC/Chrome의 관찰값이며 실제 저사양 모바일 성능 보장은 아니다.
+
+## 2026-11-02 · 체크포인트 3 / 배포 준비
+
+- 웹 연동 커밋 `82afac8`, 자산·리깅 `664296d`, 계약 `90cddec`.
+- 서버의 Windows esbuild 잠금 때문에 최종 npm ci가 한 차례 EPERM 실패했다. 이 작업이 시작한 Vite/esbuild 프로세스만 중지하고 `npm ci` 재실행 성공. 이어 `npm run qa:models`, `npm run qa:k2-pipeline`, `npm run build` 재통과. 현재 의존성은 lockfile로 복원 완료.
+- Pages workflow의 GLB 게이트와 공개 SHA 기록 명령을 로컬 dist에서도 실행해 정상 JSON을 확인했다. main push 후 실제 Actions와 공개 build-info의 SHA 일치를 검증해야 한다.
+- 최종 목표 전체 완료 아님: K2 실사 형상/무가림 다각도 참조/AO 베이크 미완료, K9 확장 보류. 다음 실행은 검증한 GLB를 재생성하지 말고 배포 상태 확인부터 재개한다.
+
+```powershell
+git status --short
+git fetch origin
+git log -5 --oneline
+gh run list --workflow deploy-pages.yml --limit 3
+gh api repos/ai-studying-man/DAPA-DASHBOARD/pages
+$env:QA_URL='https://ai-studying-man.github.io/DAPA-DASHBOARD/'
+$env:QA_OUT='artifacts/3d/k2-pipeline/pages'
+node scripts/qa/k2-pages.mjs
+```
