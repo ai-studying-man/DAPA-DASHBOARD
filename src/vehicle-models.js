@@ -6,3 +6,4 @@ export const vehicleModels={
 
 // Explicit review variant; the deployed default stays on its original geometry.
 export const k2PhotoStudy={...vehicleModels.k2,model:'./models/k2-photo-study.glb',modelLabel:'AI 추정 4면 재질 시험 · 형상 초안',modelAttribution:'./models/k2-photo-study-ATTRIBUTION.md',study:true};
+export const k2Pipeline={...vehicleModels.k2,model:'./models/k2-pipeline.glb',modelLabel:'K2 PBR·교육용 모션 검토본 · 실사화 미완료',modelAttribution:'./models/k2-pipeline-ATTRIBUTION.md',pipeline:true};

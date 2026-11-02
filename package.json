@@ -28,7 +28,9 @@
     "assets:representatives": "node scripts/acquire-representative-assets.mjs",
     "verify:representatives": "node scripts/verify-representative-sources.mjs",
     "models:k2:optimize": "node scripts/optimize-k2.mjs",
-    "qa:k2-pipeline": "node scripts/qa/k2-pipeline.mjs"
+    "qa:k2-pipeline": "node scripts/qa/k2-pipeline.mjs",
+    "qa:k2-browser": "node scripts/qa/k2-browser.mjs",
+    "qa:k2-evidence": "node scripts/qa/k2-evidence.mjs"
   },
   "dependencies": {
     "@fontsource/noto-sans-kr": "5.2.6",

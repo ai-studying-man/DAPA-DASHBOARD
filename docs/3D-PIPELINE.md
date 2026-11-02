@@ -32,3 +32,7 @@
 6. **실사 형상 게이트 통과 전 K9 확장 및 K2 기본 승격 보류.**
 
 진행/재개 기록은 대소문자만 다른 파일을 중복 생성하지 않고 기존 `docs/3d-progress.md`에 덧붙인다.
+
+## 도구 채택 기록 · 2026-11-02
+
+기존 Three.js 0.180.0(MIT), Blender 4.5.9 LTS(GPL), glTF exporter를 유지했다. glTF-Transform core/functions 4.5.1(MIT), gltf-validator 2.0.0-dev.3.10(Apache-2.0)을 개발 의존성으로 설치하고 실제 Node/Blender/Chrome 처리로 호환성을 검증했다. npm 라이선스는 설치 패키지의 LICENSE를 기준으로 하며 모델의 CC BY 3.0과 별개다. upstream 최신 조회: glTF-Transform `8e2a94a2616d293c4b503d0fb6a4b42e6ec7c62f`(2026-10-16), glTF-Validator `602c54043ba66856b2e68c40fdf2bced975cdb8a`(2026-10-06). 전체 오픈소스 전수조사는 하지 않았다. COLMAP/Meshroom/NeRF/React 전환은 현재 참조·요구 범위에서 추가하지 않았다.

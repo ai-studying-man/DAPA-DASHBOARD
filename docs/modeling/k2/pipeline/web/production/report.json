@@ -1,0 +1,68 @@
+{
+  "base": "http://127.0.0.1:4173/",
+  "checks": [
+    {
+      "width": 375,
+      "models": [
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        }
+      ],
+      "timing": {
+        "frames": 60,
+        "fps": 45.991108385712096,
+        "p95FrameMs": 16.899999999999636
+      },
+      "errors": [],
+      "opened": true,
+      "played": true,
+      "stopped": true,
+      "closed": true
+    },
+    {
+      "width": 1280,
+      "models": [
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:4173/models/k2-pipeline.glb",
+          "status": 200
+        }
+      ],
+      "timing": {
+        "frames": 60,
+        "fps": 53.20092214921181,
+        "p95FrameMs": 16.90000000000009
+      },
+      "errors": [],
+      "opened": true,
+      "played": true,
+      "stopped": true,
+      "closed": true
+    }
+  ],
+  "scope": "Chrome viewport emulation; not physical mobile GPU or deployment terrain validation"
+}

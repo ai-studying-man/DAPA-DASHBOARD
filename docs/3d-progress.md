@@ -62,7 +62,7 @@
 - 기본 자산으로 승격하지 않는다. K9에 같은 오류를 확대 적용하지 않았다. K2 부품별 형상/UV 수정과 충분한 허가 자료 확보 후 K9로 확장한다.
 - 독립 코드 검토 PASS. 최초 시각 검토의 빈 캔버스·상면 잘림 캡처는 제외하고 대체 캡처 및 4개 언어 안내 캡처를 추가했다. 일본어 문장 끝 한 글자 줄바꿈도 수정했다. 브라우저 제어 연결 복구 후 실제 375×812 화면을 다시 캡처했고, 새로운 독립 검토가 활성 웹 캡처 20개와 전후 렌더를 확인해 **시험 표시·안내·레이아웃 PASS / 최종 실사 품질 FAIL**로 판정했다. 사이트 전체 시각 검증이 아닌 K2 시험 기능 범위다. 상세: `artifacts/3d/k2-photo-study/QA.md`.
 
-## 2026-11-02 · チェックポイント 1 / K2 생성·검증
+## 2026-11-02 · 체크포인트 1 / K2 생성·검증
 
 - 원문 MD를 `docs/K-DEFENSE-3D-INSTRUCTIONS.md`로 보존했다. 입력/복사본 SHA256 `647a8d471b3a6ba147cd1328d05dc6eaca653c26db819a46451cfb867fb76afc` 일치. 기준 동기화 SHA `f9e14ec`, 지시서 커밋 `90cddec`.
 - `npm ci` 성공. 기존 의존성 감사에서 5개 취약점(중간 1/높음 3/치명 1) 보고. 이번 작업에서 일괄 major 업그레이드하지 않았다.
@@ -75,3 +75,16 @@
 - 실제 Cycles 정면/측면/3-4면과 사진 나란히 비교: `docs/modeling/k2/pipeline/`. 최적화 전후 같은 브라우저 카메라·조명의 픽셀 차이 0 확인. 사진 가림·시점 차이 때문에 실측 정합 증거로 간주하지 않는다.
 - Python 규칙 검사: Blender 내장 Python으로 실행, 위반 0. `npm run build` 성공, 기존 대형 chunk 경고 잔존.
 - 현재 **K2 실사 품질 게이트 FAIL**: 단순화된 실루엣/패널/궤도, 무가림 다각도 참조 미확보. K9 확장 보류. 다음은 웹 기능·회귀 테스트와 후보 선택 경로 배포 검증.
+
+## 2026-11-02 · 체크포인트 2 / Three.js 연동
+
+- 생성 단계 커밋 `664296d`. 웹 후보는 `?view=dashboard&system=k2&model=pipeline`에서만 선택한다. 기본 K2 및 기존 장비 자산을 교체하지 않았다.
+- 공통 ModelStudio에 실제 GLB AnimationMixer 클립 선택, Raycaster 단일 터치/클릭→부품 설명·포커스, 픽셀비율1/그림자 끄기의 저사양 모드를 연결했다. 움직임 감소 환경에서 재생과 자동 회전을 비활성화한다. 교육용 전시 표현과 실성능을 4언어로 구분한다.
+- `QA_URL=http://127.0.0.1:5174/ node scripts/qa/k2-browser.mjs` 성공. 3클립 실제 quaternion 변화, 375/768/1280×4언어, 두 손가락 확대와 단일 탭 선택 구분, 404/재시도, reduced-motion, low power, destroy를 확인했다. 물리 모바일 기기·현장 GPU 검증은 아니다.
+- `npm run qa:local-models` 성공. 기존 6종·6시점·4언어·재시도·해제 검사. 브라우저를 설치된 Chrome으로 선택하고 오래된 K9 파일명 인터셉트를 실제 선택 경로로 수정했다.
+- `npm run qa:realism` 성공, 10종×3뷰포트=30 표시 검사. 기존 스크립트의 고정 사진 가정이 현재 native 모델과 맞지 않아 실제 렌더 종류에 맞게 고쳤다. PASS가 실사화 인증은 아니다.
+- 독립 화면 검토 2건에서 중국어 슬라이더 레이블의 마지막 글자 고립을 발견해 desktop caption을 max-content로 수정했다. 전체 14개 캡처를 재생성했고 두 검토 모두 후보 UI 범위 PASS. 최종 실사 형상 품질은 계속 FAIL.
+- 빌드 성공. deployment workflow의 기존 base/main/Pages action을 보존하고 모델 검사 및 `dist/build-info.json`의 SHA 기록을 추가했다.
+- 다음: production 대시보드 경로 검증, 웹 단계 커밋, 원격 재확인 후 fast-forward push, Actions SHA 및 공개 build-info/GLB/브라우저 확인. 배포 확인 전 전체 완료를 주장하지 않는다.
+
+- Production preview에서 375/1280px 모두 실제 대시보드→3D 시연→장비 외형→클립 재생/정지→닫기·해제 성공. 후보 GLB HTTP200, pageerror 0. `scripts/qa/k2-pages.mjs`와 `artifacts/3d/k2-pipeline/production/report.json` 참조. 60 RAF 표본은 이 PC/Chrome의 관찰값이며 실제 저사양 모바일 성능 보장은 아니다.

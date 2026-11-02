@@ -133,3 +133,21 @@ TTS는 브라우저가 제공하는 해당 언어 음성이 필요합니다. 현
 ## WORK 연동 기록
 
 - 2026-10-29 00:33 KST 기준: WORK 모드에서 GitHub 커밋 연동 확인. 다음 작업은 K2 사진 기반 외형·재질 개선.
+
+## K2 제작 검토 후보 · 2026-11-02
+
+K2 우선 Blender/PBR/리깅/GLB 파이프라인은 [작업 계약](docs/K-DEFENSE-3D-INSTRUCTIONS.md), [재현 방법](blender/k2/README.md), [재개 기록](docs/3d-progress.md)에 기록합니다.
+
+[배포 후보 열기](https://ai-studying-man.github.io/DAPA-DASHBOARD/?view=dashboard&system=k2&model=pipeline) 후 `3D 시연` → `장비 외형`에서 검토합니다. 기본 자산은 유지하며 실사화·정밀 형상 검증은 미완료입니다. 세 교육용 모션, 부품 클릭/선택, 저사양·동작 감소를 지원합니다.
+
+```sh
+npm run qa:k2-pipeline
+npm run qa:models
+npm run build
+# Vite 개발 서버 실행 후
+npm run qa:k2-browser
+# production preview 또는 QA_URL의 배포 사이트
+node scripts/qa/k2-pages.mjs
+```
+
+`qa:realism`은 자산의 표시·로딩 회귀 검사입니다. 통과를 실사 품질 인증으로 해석하지 않습니다.

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 
 const browser=await chromium.launch({headless:true,
+ ...(!process.env.CHROME_PATH?{channel:'chrome'}:{}),
  ...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{}),
  args:['--no-sandbox','--enable-unsafe-swiftshader']});
 try{
@@ -39,11 +40,14 @@ try{
   await page.waitForSelector('.model-studio[data-ready="true"]');
   assert.equal(await page.locator('.model-studio').innerText().then(text=>text.includes('undefined')),false,locale);
  }
- await page.route('**/models/k9-exhibit.glb',route=>route.fulfill({status:404,body:'missing'}));
+ // Query the current K9 asset rather than intercepting an obsolete exhibit URL.
+ const k9Model=await page.evaluate(async()=>{const {equipmentAssets}=await import('/src/equipment-assets.js');return equipmentAssets.k9.model});
+ const missingPattern='**/'+k9Model.replace(/^\.\//,'');
+ await page.route(missingPattern,route=>route.fulfill({status:404,body:'missing'}));
  await page.evaluate(()=>{const q=window.modelQA;q.viewer.attach(q.host,q.systems.find(s=>s.id==='k9'))});
  await page.locator('[data-studio-retry]').waitFor({state:'visible'});
  assert.equal(await page.locator('[data-studio-play]').isDisabled(),true);
- await page.unroute('**/models/k9-exhibit.glb');await page.locator('[data-studio-retry]').click();
+ await page.unroute(missingPattern);await page.locator('[data-studio-retry]').click();
  await page.waitForSelector('.model-studio[data-ready="true"]');
  await page.evaluate(()=>window.modelQA.viewer.destroy());
  assert.equal(await page.locator('.studio-canvas canvas').count(),0);

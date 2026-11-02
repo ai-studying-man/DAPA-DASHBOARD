@@ -1,0 +1,39 @@
+{
+  "url": "http://127.0.0.1:5174/",
+  "checks": [
+    {
+      "clip": "Turntable",
+      "moving": true
+    },
+    {
+      "clip": "TurretTraverse",
+      "moving": true
+    },
+    {
+      "clip": "BarrelElevation",
+      "moving": true
+    },
+    {
+      "width": 375,
+      "locales": 4,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "locales": 4,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "locales": 4,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "lowPower": true,
+  "reducedMotion": true,
+  "touchPicking": true,
+  "pinchZoom": true,
+  "fallbackRetry": true,
+  "disposed": true
+}

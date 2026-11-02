@@ -2,6 +2,7 @@ import * as T from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {studioMarkup,studioText as t} from './model-studio-ui.js';
+import {StudioMotion} from './studio-motion.js';
 import './model-studio.css';
 
 const views={front:[0,.18,-1],back:[0,.18,1],left:[-1,.18,0],right:[1,.18,0],top:[0,1,.001],home:[1,.55,-1]};
@@ -32,14 +33,15 @@ export class ModelStudio{
     const bounds=new T.Box3().setFromObject(this.root);if(bounds.isEmpty())throw new Error('Empty GLB');this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.baseRadius=this.radius;
     const floor=new T.Mesh(new T.PlaneGeometry(this.radius*12,this.radius*12),new T.MeshStandardMaterial({color:style.getPropertyValue('--elevated').trim()||'#f2f4f6',roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=bounds.min.y-.015;floor.receiveShadow=true;this.scene.add(floor);
     key.target.position.copy(this.center);key.shadow.camera.left=key.shadow.camera.bottom=-this.radius*2;key.shadow.camera.right=key.shadow.camera.top=this.radius*2;key.shadow.camera.far=100;key.shadow.camera.updateProjectionMatrix();
-    this.controls.minDistance=this.radius*.5;this.controls.maxDistance=this.radius*7;this.view='home';this.resize();this.enableControls();this.status.textContent=t('ready');this.ui.dataset.ready='true';this.loop();
+    this.controls.minDistance=this.radius*.5;this.controls.maxDistance=this.radius*7;this.view='home';this.resize();this.motion=new StudioMotion(this,gltf.animations);this.enableControls();this.status.textContent=t('ready');this.ui.dataset.ready='true';this.loop();
    }finally{clearTimeout(timer)}
   }catch{if(!this.disposed)this.fail()}
  }
  enableControls(){
   this.ui.querySelectorAll('input,select,[data-studio-play],[data-studio-stop]').forEach(control=>control.disabled=false);
   const articulated=Boolean(this.parts.Turret||this.parts.Gun);
-  this.ui.querySelector('[data-studio-play]').disabled=!articulated;
+  this.ui.querySelector('[data-studio-play]').disabled=this.reduced.matches||(!articulated&&!this.motion?.clips.length);
+  this.ui.querySelector('[data-studio-option="auto"]').disabled=this.reduced.matches;
   this.ui.querySelector('[data-studio-range="explode"]').disabled=this.origins.size<2;
   this.ui.querySelector('[data-studio-part]').disabled=this.origins.size===0;
   for(const [option,part]of [['mark','Markings']])this.ui.querySelector(`[data-studio-option="${option}"]`).disabled=!this.parts[part];
@@ -57,11 +59,11 @@ export class ModelStudio{
  loop(){if(!this.renderer)return;this.previous=undefined;this.renderer.setAnimationLoop(this.visible&&!document.hidden&&!this.failed&&!this.disposed?time=>this.draw(time):null);}
  draw(time){const dt=this.previous===undefined?0:Math.min((time-this.previous)/1000,.05);this.previous=time;
   if(this.playing){this.elapsed+=dt;if(this.parts.Turret)this.parts.Turret.rotation.y=Math.sin(this.elapsed*.45)*.55;if(this.parts.Gun)this.parts.Gun.rotation.x=(Math.sin(this.elapsed*.65)+1)*.15;this.parts.Turret?.updateMatrixWorld(true);this.selection?.setFromObject(this.selectedPart);for(const [name,part,axis]of [['turret',this.parts.Turret,'y'],['gun',this.parts.Gun,'x']])if(part){const input=this.ui.querySelector(`[data-studio-range="${name}"]`),value=Math.round(T.MathUtils.radToDeg(part.rotation[axis]));if(input.value!==String(value)){input.value=String(value);input.nextElementSibling.textContent=value+'°';}}}
-  this.controls.autoRotate=this.auto;this.controls.update(dt);this.renderer.render(this.scene,this.camera);
+  this.motion?.update(dt);this.controls.autoRotate=this.auto;this.controls.update(dt);this.renderer.render(this.scene,this.camera);
  }
  bind(){const signal=this.events.signal;
-  this.ui.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;if(button.dataset.studioView)this.setView(button.dataset.studioView);if(button.hasAttribute('data-studio-retry'))this.retry();if(button.hasAttribute('data-studio-play')){this.resetParts();this.playing=true;this.elapsed=0;this.ui.querySelector('[data-studio-play]').setAttribute('aria-pressed','true');for(const range of this.ui.querySelectorAll('[data-studio-range]'))range.disabled=true;}if(button.hasAttribute('data-studio-stop'))this.resetParts();},{signal});
-  this.ui.addEventListener('change',event=>{const input=event.target;if(input.dataset.studioOption){const option=input.dataset.studioOption;if(option==='auto')this.auto=input.checked;if(option==='mark'&&this.parts?.Markings)this.parts.Markings.visible=input.checked;if(option==='wire')this.root?.traverse(object=>{if(object.isMesh)for(const material of Array.isArray(object.material)?object.material:[object.material])material.wireframe=input.checked});}if(input.hasAttribute('data-studio-part'))this.selectPart(input.value);},{signal});
+  this.ui.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;if(button.dataset.studioView)this.setView(button.dataset.studioView);if(button.hasAttribute('data-studio-retry'))this.retry();if(button.hasAttribute('data-studio-play')&&!this.reduced.matches){this.resetParts();this.playing=!this.motion?.play();this.elapsed=0;this.ui.querySelector('[data-studio-play]').setAttribute('aria-pressed','true');for(const range of this.ui.querySelectorAll('[data-studio-range]'))range.disabled=true;}if(button.hasAttribute('data-studio-stop'))this.resetParts();},{signal});
+  this.ui.addEventListener('change',event=>{const input=event.target;if(input.dataset.studioOption){const option=input.dataset.studioOption;if(option==='auto')this.auto=input.checked&&!this.reduced.matches;if(option==='quality'){this.renderer.setPixelRatio(input.checked?1:Math.min(devicePixelRatio||1,1.5));this.renderer.shadowMap.enabled=!input.checked;this.scene.traverse(object=>{for(const material of Array.isArray(object.material)?object.material:object.material?[object.material]:[])material.needsUpdate=true});this.resize();}if(option==='mark'&&this.parts?.Markings)this.parts.Markings.visible=input.checked;if(option==='wire')this.root?.traverse(object=>{if(object.isMesh)for(const material of Array.isArray(object.material)?object.material:[object.material])material.wireframe=input.checked});}if(input.hasAttribute('data-studio-part'))this.selectPart(input.value);},{signal});
   this.ui.addEventListener('input',event=>{const input=event.target,name=input.dataset.studioRange;if(!name||!this.root)return;const value=Number(input.value);input.nextElementSibling.textContent=value+(name==='explode'?'%':'°');this.playing=false;
    if(name==='turret'&&this.parts.Turret)this.parts.Turret.rotation.y=T.MathUtils.degToRad(value);
    if(name==='gun'&&this.parts.Gun)this.parts.Gun.rotation.x=T.MathUtils.degToRad(value);
@@ -69,11 +71,11 @@ export class ModelStudio{
    this.root.updateMatrixWorld(true);if(name!=='explode'){const bounds=new T.Box3().setFromObject(this.root);this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.setView(this.view);}if(this.selectedPart)this.selection.setFromObject(this.selectedPart);
   },{signal});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)this.stop();else this.loop()},{signal});
-  this.reduced.addEventListener('change',()=>{if(this.reduced.matches){this.resetParts();this.auto=false;this.ui.querySelector('[data-studio-option="auto"]').checked=false}},{signal});
+  this.reduced.addEventListener('change',()=>{if(this.reduced.matches){this.resetParts();this.auto=false;this.ui.querySelector('[data-studio-option="auto"]').checked=false}if(this.root)this.enableControls()},{signal});
  }
- selectPart(name){this.selection?.removeFromParent();if(this.selection){this.selection.geometry.dispose();this.selection.material.dispose();this.selection=null;}this.selectedPart=name==='all'?null:this.parts[name];if(this.selectedPart){this.selection=new T.BoxHelper(this.selectedPart,0x1b64da);this.scene.add(this.selection);}this.status.textContent=this.selectedPart?t(name):t('ready');}
- resetParts(){this.playing=false;this.elapsed=0;if(!this.root)return;for(const [part,origin]of this.origins){part.position.copy(origin);if(part===this.parts.Turret||part===this.parts.Gun)part.rotation.set(0,0,0);}this.ui.querySelector('[data-studio-play]').setAttribute('aria-pressed','false');for(const input of this.ui.querySelectorAll('[data-studio-range]')){input.value='0';input.nextElementSibling.textContent=input.dataset.studioRange==='explode'?'0%':'0°';}this.enableControls();const bounds=new T.Box3().setFromObject(this.root);this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.setView(this.view);if(this.selectedPart)this.selection.setFromObject(this.selectedPart);}
+ selectPart(name){this.selection?.removeFromParent();if(this.selection){this.selection.geometry.dispose();this.selection.material.dispose();this.selection=null;}this.selectedPart=name==='all'?null:this.parts[name];if(this.selectedPart){this.selection=new T.BoxHelper(this.selectedPart,0x1b64da);this.scene.add(this.selection);this.motion?.focus(this.selectedPart);}else this.setView(this.view);this.status.textContent=this.selectedPart?t(name)+' · '+t(name+'Info'):t('ready');}
+ resetParts(){this.motion?.stop();this.playing=false;this.elapsed=0;if(!this.root)return;for(const [part,origin]of this.origins){part.position.copy(origin);if(part===this.parts.Turret||part===this.parts.Gun)part.rotation.set(0,0,0);}this.ui.querySelector('[data-studio-play]').setAttribute('aria-pressed','false');for(const input of this.ui.querySelectorAll('[data-studio-range]')){input.value='0';input.nextElementSibling.textContent=input.dataset.studioRange==='explode'?'0%':'0°';}this.enableControls();const bounds=new T.Box3().setFromObject(this.root);this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.setView(this.view);if(this.selectedPart)this.selection.setFromObject(this.selectedPart);}
  stop(){this.resetParts();this.auto=false;if(this.ui)this.ui.querySelector('[data-studio-option="auto"]').checked=false;this.renderer?.setAnimationLoop(null);}
  fail(){this.failed=true;this.playing=false;this.renderer?.setAnimationLoop(null);this.status.textContent=t('error');this.ui.dataset.ready='false';this.ui.querySelector('[data-studio-retry]').hidden=false;for(const input of this.ui.querySelectorAll('input,select,[data-studio-play],[data-studio-stop]'))input.disabled=true;}
- destroy(){this.disposed=true;this.request.abort();this.events.abort();this.observer?.disconnect();this.intersection?.disconnect();this.renderer?.setAnimationLoop(null);this.controls?.dispose();release(this.scene);this.renderer?.dispose();this.renderer?.domElement.remove();}
+ destroy(){this.disposed=true;this.request.abort();this.events.abort();this.observer?.disconnect();this.intersection?.disconnect();this.renderer?.setAnimationLoop(null);this.motion?.destroy();this.controls?.dispose();release(this.scene);this.renderer?.dispose();this.renderer?.domElement.remove();}
 }
