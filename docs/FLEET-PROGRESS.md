@@ -12,3 +12,15 @@ K2 기존 검증 산출물은 재생성하지 않는다. 나머지 기존 GLB는
 4. 전 체계 브라우저·빌드·배포 검증, 커밋과 재개 명령 기록.
 
 실사화 또는 제조사 검증 완료를 전체 공통 배지로 표시하지 않는다. 새 페이지는 기존 지도/대시보드/21종 검토 경로와 병존한다. 원본 모델의 이용 조건은 보존하며 새로 라이선스를 허위 부여하지 않는다.
+
+## 모델·재질·리깅 체크포인트 · 2026-11-03
+
+- 대상/출처 목록 커밋 `ddcde61`. 재사용27종(K2는 검증본 그대로), 신규 외형12종, 최종39종이다.
+- `blender/fleet/build.py` 실제 Blender 4.5.9 실행 완료. 새 `.blend`38개는 `blender/fleet/models/`에 packed 이미지와 함께 저장(최대 약12.4MB, 전체 약60.7MB). K2는 `blender/k2/source.blend`를 재사용한다. 기존 원본 GLB27개를 변경하지 않았다.
+- 신규12종은 MUAV/425/초소형위성/K10/K808/레드백/LAH/T-50/KT-1/ANASIS-II/천궁-II/한산도함. 공개 사진·제조사·정부 자료의 외형을 참고한 독립 제작 연구 모형이다. 위성은 사업 개념형, 특정 호기·센서 상세 검증 모형이 아니다. 원문 자료 이미지를 무단 텍스처로 복제하지 않았다.
+- 원본의 사진·AI 재질·CC0 상세 자산과 사용 조건을 보존했다. 무텍스처 면에는 독립 제작 baseColor/metallicRoughness/normal 기본값을 추가했다. 새 normal 기본값은 평면 맵이며 스캔 요철·AO 베이크라고 표시하지 않는다.
+- 신규 원통 캡 n-gon이 Blender tangent 생성을 막는 원인을 실제 exporter 로그에서 확인해 삼각분할로 해결. 신규12종 normal fallback0. 기존 일부 UV 퇴화 프리미티브는 원본 형상·색을 유지하고 해당 프리미티브에만 flat normal 재질 변형을 사용한다. 체계별 수량은 감사 JSON에 기록한다. 투과·굴절을 포함한 glTF 확장은 등록하여 보존한다.
+- `node scripts/optimize-fleet.mjs` 및 `node scripts/qa/fleet-models.mjs` 통과. 39종 모두 validator 오류0/경고0, PBR 이미지·ExhibitRoot·Turntable·실제 부품 노드·Blender 원본 존재·원본 SHA 보존 검사 통과. 87개 교육용 클립. 전 체계 실사 검증은 미완료 상태다.
+- 체계별 실제 Cycles 렌더38개: `docs/modeling/fleet/`. K2 비교 렌더는 기존 `docs/modeling/k2/pipeline/` 재사용.
+- Python 규칙 검사 4개 파일 위반0. `npm run qa:models`, `npm run qa:k2-pipeline` 회귀 통과. 빌드 성공, 기존 대형 chunk 경고 유지.
+- 재개: 검증 모델을 일괄 재생성하지 말 것. `node scripts/qa/fleet-models.mjs` 후 전체 뷰어 브라우저 검증부터 이어간다. 생성기 기본 실행은 완료한 항목을 건너뛰고 `--only ID`로 필요한 항목만 수정한다.
