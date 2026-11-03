@@ -1,3 +1,4 @@
+import {searchEquipment} from './equipment-search.js';
 import {forcesDashboard, commonSystem} from './forces-dashboard.js';
 import './forces-dashboard.css';
 import './export-proof.css';
@@ -43,7 +44,8 @@ function toast(message) {
 }
 function filtered() {
   const query = state.query.trim().toLowerCase();
-  return systems.filter((s) => (!state.region || regions.find(r=>r.id===state.region).systems.includes(s.id)) && (state.domain === 'all' || s.domains.includes(state.domain)) && (state.branch === '전체' || s.branches.includes(state.branch)) && (!(state.mode==='forces'&&state.forceGroup==='shared') || commonSystem(s)) && (!query || [s.name, s.subtitle, s.english, s.mission, s.maker, s.project, ...s.branches, ...s.events.map((e) => e.country)].flatMap(value=>[value,...['en','ja','zh'].map(code=>translateText(value,code))]).join(' ').toLowerCase().includes(query)));
+  const candidates=systems.filter((s) => (!state.region || regions.find(r=>r.id===state.region).systems.includes(s.id)) && (state.domain === 'all' || s.domains.includes(state.domain)) && (state.branch === '전체' || s.branches.includes(state.branch)) && (!(state.mode==='forces'&&state.forceGroup==='shared') || commonSystem(s)));
+  return searchEquipment(candidates, query, s=>[s.name,s.subtitle,s.english,s.mission,s.maker,s.project,...s.branches,...s.events.map(e=>e.country)].flatMap(value=>[value,...['en','ja','zh'].map(code=>translateText(value,code))]));
 }
 function render() {
   $('.shell').dataset.home = String(state.home);$('.shell').dataset.mode=state.mode;

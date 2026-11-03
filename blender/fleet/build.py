@@ -18,7 +18,7 @@ sys.path[:0] = [str(ROOT / "blender/fleet"), str(ROOT / "scripts/blender")]
 from new_exteriors import Palette, create
 from surfaces import material, apply, finish_layers
 from motions import add
-from refine_airframe import refine_kf21
+from refine_airframe import refine_500md, refine_kf21
 from photo_study import bounds, studio, render
 
 OUT: Final = ROOT / "artifacts/3d/fleet"
@@ -47,6 +47,8 @@ def run() -> None:
             bpy.ops.import_scene.gltf(filepath=str(ROOT / "public" / entry["source"][2:]))
             if identity == "kf21":
                 refine_kf21()
+            elif identity == "500md":
+                refine_500md()
             imported = list(bpy.context.scene.objects)
             for obj in imported:
                 obj.animation_data_clear()

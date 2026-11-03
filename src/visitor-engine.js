@@ -2,7 +2,7 @@
 export function mountVisitorStage(options){
  const {host,item,simulation,language}=options;
  const ko=language==='ko';let stage,disposed=false,version=0;
- let mode=simulation&&item.model&&item.id!=='nuri'?'three':'satellite';
+ let mode='satellite';
  const bar=document.createElement('div');bar.className='visit-renderer-bar';
  const note=document.createElement('span');note.setAttribute('role','status');
  const toggle=document.createElement('button');toggle.type='button';bar.append(note,toggle);
@@ -10,8 +10,8 @@ export function mountVisitorStage(options){
  async function mount(){
   const ticket=++version;stage?.destroy();stage=null;host.replaceChildren();
   host.dataset.renderer=mode;
-  note.textContent=mode==='three'?(ko?`입체 체험 · ${item.visualStage==='draft'?'외형 초안, 실사 모델 아님':'Blender 외형·재질 검토본'}`:'3D exhibit · approximate exterior'):(ko?'실제 위성 영상·고도 지형':'Satellite imagery and elevation');
-  toggle.textContent=mode==='three'?(ko?'위성 지도에서 보기':'Satellite view'):(ko?'입체 체험으로 보기':'3D exhibit');
+  note.textContent='';
+  toggle.textContent=mode==='three'?(ko?'실제 지형':'Terrain'):(ko?'모델만 보기':'Model only');
   toggle.disabled=!item.model||item.id==='nuri';
   document.querySelectorAll('[data-move],#visit-view,#visit-reset').forEach(button=>button.disabled=true);
   try{

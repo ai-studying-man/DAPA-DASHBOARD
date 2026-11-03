@@ -1,3 +1,4 @@
+import {publicEquipment} from './public-equipment.js';
 import mvpEquipment from './equipment-mvp.json' with {type:'json'};
 import {detailedAssets} from './detailed-assets.js';
 export const groundEquipment={
@@ -9,5 +10,6 @@ export function selectGroundEquipment(id){
  if(Object.hasOwn(groundEquipment,id))return {...groundEquipment[id],...(detail?{model:detail.model,attribution:detail.modelAttribution,photo:detail.image,credit:detail.photoCredit,photoReconstructed:true,hatch:null,driver:null}:{}),id};
  const item=mvpEquipment.find(item=>item.id===id);
  if(!item)return {...groundEquipment.k2,id:'k2'};
- return {id:item.id,name:item.name,model:detail?.model||item.model,range:item.range,photo:detail?.image||item.image,credit:detail?.photoCredit||'AI 생성 기준 이미지 · 실제 촬영 사진 아님',source:detail?.photoUrl||'./models/mvp/README.md',attribution:detail?.modelAttribution||'./models/mvp/README.md',hatch:null,driver:null,mvp:!detail,photoReconstructed:detail?.visualStage==='photo-reconstructed',altitude:item.altitude};
+ const record=publicEquipment.get(id);
+ return {id:item.id,name:item.name,model:record?.model||detail?.model||item.model,range:item.range,photo:record?.referencePhoto,credit:record?.photoCredit,source:record?.referenceUrl||record?.sources[0]?.url,attribution:detail?.modelAttribution||'./models/mvp/README.md',hatch:null,driver:null,mvp:!detail,photoReconstructed:detail?.visualStage==='photo-reconstructed',altitude:item.altitude};
 }

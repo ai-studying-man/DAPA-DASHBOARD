@@ -23,6 +23,17 @@ class SatelliteExhibit{
    if(!Number.isFinite(this.groundHeight))throw new Error('실제 지형 고도를 확인하지 못했습니다.');
    this.anchor=C.Cartesian3.fromDegrees(this.site.longitude,this.site.latitude,this.groundHeight+this.site.altitude-(this.item.asset.waterline||0)+.1);
    this.frame=C.Transforms.eastNorthUpToFixedFrame(this.anchor);
+   if(this.item.domain==='sea'){
+    const water=new C.Material({fabric:{type:'Water',uniforms:{
+     normalMap:C.buildModuleUrl('Assets/Textures/waterNormals.jpg'),frequency:1450,animationSpeed:.013,
+     amplitude:2.5,specularIntensity:.35,baseWaterColor:C.Color.fromCssColorString('#234854').withAlpha(.76),
+     blendColor:C.Color.fromCssColorString('#43636c').withAlpha(.6)}}});
+    this.viewer.scene.primitives.add(new C.Primitive({geometryInstances:new C.GeometryInstance({
+     geometry:new C.EllipseGeometry({center:C.Cartesian3.fromDegrees(this.site.longitude,this.site.latitude),
+      semiMajorAxis:800,semiMinorAxis:800,height:0,vertexFormat:C.EllipsoidSurfaceAppearance.VERTEX_FORMAT})}),
+     appearance:new C.EllipsoidSurfaceAppearance({material:water,aboveGround:true})}));
+    this.viewer.scene.maximumRenderTimeChange=.15;this.viewer.clock.shouldAnimate=true;
+   }
    if(this.item.model&&this.item.visualStage!=='draft'){
     let expired=false,timer;
     const loading=C.Model.fromGltfAsync({url:new URL(this.item.model,document.baseURI).href,modelMatrix:this.matrix(),forwardAxis:C.Axis.X,scale:1}).then(model=>{if(expired||this.disposed){model.destroy();throw new Error('Model loading cancelled')}return model});

@@ -3,8 +3,43 @@ import math
 
 import bmesh
 import bpy
-from exterior_parts import group
+from exterior_parts import group, cylinder, box
 from surfaces import material
+
+
+def refine_500md():
+    """500D five-blade silhouette and the rails visible in the ROK Army photograph."""
+    rotor = bpy.data.objects["MainRotor"]
+    old = bpy.data.objects["MainRotor_MVP exposed metal"]
+    steel = old.data.materials[0]
+    bpy.data.objects.remove(old, do_unlink=True)
+    cylinder("Rotor mast", (0,0,2.95), .09,.6,steel,rotor)
+    for index in range(5):
+        angle = index * math.tau / 5
+        blade = box("500D rotor blade", (1.99*math.sin(angle),1.99*math.cos(angle),3.15),
+                    (.16,3.82,.032),steel,rotor,.01)
+        blade.rotation_euler.z = -angle
+    hull = bpy.data.objects["Hull"]
+    paint = bpy.data.objects["Hull_MVP olive paint"].data.materials[0]
+
+    def rail(name, points, thickness, mat, parent):
+        from mathutils import Vector
+        for start,end in zip(points,points[1:]):
+            a,b = Vector(start),Vector(end)
+            segment = cylinder(name,(a+b)/2,thickness,(b-a).length,mat,parent,vertices=12)
+            segment.rotation_euler = (b-a).to_track_quat('Z','Y').to_euler()
+
+    for side in (-1,1):
+        rail("Upturned skid toe",[(side*.95,1.45,.25),(side*.95,1.59,.28),(side*.95,1.69,.37)],
+             .055,steel,bpy.data.objects["RunningGear"])
+    for longitude in (-.98,0,.98):
+        path=[]
+        for i in range(15):
+            latitude=-.45+1.69*i/14
+            path.append((.671*math.sin(longitude)*math.cos(latitude),
+                         .882+.847*math.cos(longitude)*math.cos(latitude),
+                         2.05+.806*math.sin(latitude)))
+        rail("Cockpit frame",path,.016,paint,hull)
 
 
 def shell(name, sections, parent, paint):

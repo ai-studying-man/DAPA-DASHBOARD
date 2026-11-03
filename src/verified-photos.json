@@ -1,0 +1,65 @@
+{
+  "ah1s": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/ah1s.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:2011.1.6_%ED%95%AD%EC%9E%91%EC%82%AC_%EC%BD%94%EB%B8%8C%EB%9D%BC(AH-1S)_%EA%B3%B5%EA%B2%A9%ED%97%AC%EA%B8%B0_%EC%82%AC%EA%B2%A9%ED%9B%88%EB%A0%A8_(7633944752).jpg",
+    "photoCredit": "대한민국 국군 Republic of Korea Armed Forces · CC BY-SA 2.0 · WebP",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "uh60p": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/uh60p.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:2014.11.20._%EC%9C%A1%EA%B5%B0_26%EC%82%AC%EB%8B%A8_%ED%98%B8%EA%B5%AD%ED%9B%88%EB%A0%A8_UH-60P_Republic_of_Korea_Army_(15815606086).jpg",
+    "photoCredit": "대한민국 국군 Republic of Korea Armed Forces · CC BY-SA 2.0 · WebP",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "500md": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/500md.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:2014.4.15_%EC%9C%A1%EA%B5%B0_3%EC%95%BC%EC%A0%84%EA%B5%B0%EC%82%AC%EB%A0%B9%EB%B6%80_15%ED%95%AD%EA%B3%B5%EB%8B%A8_500MD%EC%82%AC%EA%B2%A9_Republic_of_Korea_Army_(13883235272).jpg",
+    "photoCredit": "대한민국 국군 Republic of Korea Armed Forces · CC BY-SA 2.0 · WebP",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "f117": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/f117.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:F-117_Nighthawk_Front.jpg",
+    "photoCredit": "Staff Sgt. Aaron Allmon II · Public domain · WebP",
+    "photoLicenseUrl": ""
+  },
+  "ah64e": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/ah64e.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:Induction_Of_AH-64E_Apache_Attack_Helicopter_in_Indian_Air_Force.jpg",
+    "photoCredit": "Indian Air Force · GODL-India · WebP",
+    "photoLicenseUrl": "https://data.gov.in/sites/default/files/Gazette_Notification_OGDL.pdf"
+  },
+  "k151": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/k151.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:Philippine_Army_Raycolt_KLTV.jpg",
+    "photoCredit": "Public Affairs Office, Philippine Army · Public domain · WebP",
+    "photoLicenseUrl": ""
+  },
+  "f22": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/f22.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:USAF_General_Kevin_Schneider_pilots_F-22_Raptor_off_the_coast_of_Oahu,_Hawaii,_April_2025.jpg",
+    "photoCredit": "Air Force Tech. Sgt. Emerson Nunez · Public domain · WebP",
+    "photoLicenseUrl": ""
+  },
+  "remoeye": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/remoeye.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:RemoEye_002B_UAV.jpg",
+    "photoCredit": "rhk111 · CC BY-SA 4.0 · WebP",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "chunmoo": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/chunmoo.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:K239_Chunmoo_Image1.jpg",
+    "photoCredit": "국방부 - ROK Ministry of National Defense · KOGL Type 1 · WebP",
+    "photoLicenseUrl": "http://www.kogl.or.kr/info/licenseType1.do"
+  }
+}
