@@ -16,7 +16,7 @@ import bpy
 ROOT: Final = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "blender/fleet"), str(ROOT / "scripts/blender")]
 from new_exteriors import Palette, create
-from surfaces import material, apply
+from surfaces import material, apply, finish_layers
 from motions import add
 from refine_airframe import refine_kf21
 from photo_study import bounds, studio, render
@@ -80,6 +80,7 @@ def run() -> None:
             obj.data.update()
         bpy.context.view_layer.update()
         apply(meshes, detailed=identity in {"k9", "dosan", "chungnam", "fa50", "kf21", "kaav", "muav", "425", "smallsat", "remoeye"})
+        finish_layers(identity, meshes)
         for obj in meshes:
             if any(len(polygon.vertices) > 4 for polygon in obj.data.polygons):
                 bpy.context.view_layer.objects.active = obj

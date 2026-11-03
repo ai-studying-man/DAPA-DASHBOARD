@@ -40,6 +40,25 @@ def image(name: str, pixels: np.ndarray) -> bpy.types.Image:
     return result
 
 
+def finish_layers(identity, meshes):
+    """Exhibit finish estimates keyed to the actual source material slots."""
+    roles = {
+        "fa50": {"Material_0": (.24,.35), "Material_1": (.22,.37), "Material_3": (.9,.075)},
+        "kaav": {"Material_0": (.08,.56), "Material_1": (.08,.50), "Material_5": (.8,.09)},
+        "dosan": {"kss3": (.12,.48), "Side_Window": (.85,.09)},
+        "chungnam": {"Naval painted steel": (.16,.45), "Optical glass": (.85,.08)},
+        "k9": {"Camouflage paint.001": (.08,.55), "Optical glass.001": (.8,.08)},
+        "muav": {"Paint": (.26,.36), "Optics": (.85,.08)},
+        "remoeye": {"Paint": (.20,.42), "Optics": (.85,.08)},
+    }
+    for mat in {m for obj in meshes for m in obj.data.materials if m}:
+        finish = roles.get(identity, {}).get(mat.name)
+        if finish:
+            shader = mat.node_tree.nodes.get("Principled BSDF")
+            shader.inputs["Coat Weight"].default_value = finish[0]
+            shader.inputs["Coat Roughness"].default_value = finish[1]
+
+
 def apply(meshes: list[bpy.types.Object], detailed: bool = False) -> None:
     """UV and PBR on missing surfaces only; existing photographic maps stay intact."""
     changed: set[bpy.types.Material] = set()

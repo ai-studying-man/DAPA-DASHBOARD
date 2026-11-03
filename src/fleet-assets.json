@@ -35,7 +35,7 @@
     ],
     "modelAttribution": "./models/fleet/dosan-ATTRIBUTION.md",
     "modelLicense": "CC0",
-    "bytes": 17048544,
+    "bytes": 17049048,
     "images": 5,
     "normalFallbacks": 0
   },
@@ -78,7 +78,7 @@
     ],
     "modelAttribution": "./models/fleet/chungnam-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 2545976,
+    "bytes": 2546528,
     "images": 5,
     "normalFallbacks": 3
   },
@@ -198,7 +198,7 @@
     ],
     "modelAttribution": "./models/fleet/k9-ATTRIBUTION.md",
     "modelLicense": "CC BY-SA 2.0",
-    "bytes": 12084872,
+    "bytes": 12085168,
     "images": 7,
     "normalFallbacks": 0
   },
@@ -292,7 +292,7 @@
     ],
     "modelAttribution": "./models/fleet/fa50-ATTRIBUTION.md",
     "modelLicense": "CC BY 2.0",
-    "bytes": 3660244,
+    "bytes": 3660672,
     "images": 7,
     "normalFallbacks": 0
   },
@@ -338,7 +338,7 @@
     ],
     "modelAttribution": "./models/fleet/muav-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 320348,
+    "bytes": 320648,
     "images": 9,
     "normalFallbacks": 0
   },
@@ -385,7 +385,7 @@
     ],
     "modelAttribution": "./models/fleet/kaav-ATTRIBUTION.md",
     "modelLicense": "CC BY-SA 2.0",
-    "bytes": 3777272,
+    "bytes": 3777684,
     "images": 17,
     "normalFallbacks": 0
   },
@@ -1641,7 +1641,7 @@
     ],
     "modelAttribution": "./models/fleet/remoeye-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 341540,
+    "bytes": 341840,
     "images": 9,
     "normalFallbacks": 0
   }
