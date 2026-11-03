@@ -183,14 +183,22 @@ def create(identity: str, m: Palette) -> bpy.types.Object:
     if identity == "remoeye":
         root = group("RemoEyeExterior")
         hull, wings, tail = group("Hull", root), group("Wings", root), group("Tail", root)
-        ellipsoid("Composite body", (0, .26, .14), (.085, .46, .095), m.paint, hull)
+        m.paint.node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value = (.77, .77, .74, 1)
+        box("Composite fuselage shell", (0, .23, .15), (.144, .55, .173), m.paint, hull, .047)
         cylinder("Tail boom", (0, -.32, .16), .019, .76, m.paint, tail, "Y")
         for side in (-1, 1):
             panel("Outer wing", [(0, .23, .21), (side*.9, .14, .245), (side*.87, -.02, .245), (0, -.04, .21)], m.paint, wings)
-            panel("Tail surface", [(0, -.52, .16), (side*.23, -.63, .25), (side*.21, -.72, .25), (0, -.7, .16)], m.paint, tail)
+            panel("Horizontal stabilizer", [(0, -.52, .16), (side*.23, -.60, .16), (side*.21, -.72, .16), (0, -.7, .16)], m.paint, tail)
+            panel("Aileron hinge line", [(side*.48, .004, .232), (side*.82, .010, .245), (side*.82, .014, .245), (side*.48, .008, .232)], m.steel, wings)
+            for y in (.05, .18, .31, .44):
+                cylinder("Access panel fastener", (side*.073, y, .147), .0031, .002, m.steel, hull, "X", 12)
+        panel("Vertical stabilizer", [(0, -.51, .16), (0, -.57, .37), (0, -.65, .37), (0, -.71, .16)], m.paint, tail)
         payload = group("Payload", hull)
-        ellipsoid("Camera housing", (0, .53, .075), (.062, .08, .064), m.paint, payload)
-        cylinder("Camera lens", (0, .598, .064), .03, .018, m.glass, payload, "Y", 32)
+        cylinder("Sensor joint", (0, .505, .172), .081, .022, m.rubber, payload, "Y", 48)
+        ellipsoid("Nose camera housing", (0, .603, .172), (.083, .117, .079), m.paint, payload)
+        lens = cylinder("Camera lens", (0, .695, .135), .024, .01, m.glass, payload, "Y", 32)
+        lens.rotation_euler.x -= .34
+        box("Wing saddle", (0, .15, .216), (.19, .19, .04), m.paint, hull, .015)
         prop = group("Propeller", hull)
         prop.location = (0, -.19, .28)
         box("Motor pylon", (0, -.135, .218), (.028, .077, .094), m.paint, hull, .007)

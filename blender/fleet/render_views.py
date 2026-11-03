@@ -24,8 +24,11 @@ def run() -> None:
     """Read-only model inputs; only camera render PNGs are written."""
     entries = json.loads((ROOT / "src/fleet-assets.json").read_text(encoding="utf-8"))
     output = ROOT / "docs/modeling/fleet"
+    chosen = set(sys.argv[sys.argv.index("--only") + 1:]) if "--only" in sys.argv else set()
     for entry in entries:
         identity = entry["id"]
+        if chosen and identity not in chosen:
+            continue
         if identity == "k2":
             for view in ("front", "side", "three-quarter"):
                 shutil.copyfile(ROOT / "docs/modeling/k2/pipeline" / (view + ".png"), output / f"k2-{view}.png")
