@@ -291,10 +291,10 @@
     "sourceSha256": null,
     "sourceAttribution": null,
     "sourceLicense": "DAPA DASHBOARD authored exterior study",
-    "referencePhoto": null,
-    "referenceKind": "pending",
+    "referencePhoto": "./media/satellite-concepts.png",
+    "referenceKind": "ai-generated",
     "referenceUrl": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=19681&menuSeq=3069",
-    "photoCredit": null,
+    "photoCredit": "ImageGen · 상단 425 광학형 개념 / 하단 초소형위성 개념",
     "sources": [
       {
         "title": "킬체인의 눈, 본격 임무 시작!",
@@ -327,10 +327,10 @@
     "sourceSha256": null,
     "sourceAttribution": null,
     "sourceLicense": "DAPA DASHBOARD authored exterior study",
-    "referencePhoto": null,
-    "referenceKind": "pending",
+    "referencePhoto": "./media/satellite-concepts.png",
+    "referenceKind": "ai-generated",
     "referenceUrl": "https://dapa.go.kr/dapa/doc/selectDoc.do?bbsSeq=326&docSeq=20862&menuSeq=3069",
-    "photoCredit": null,
+    "photoCredit": "ImageGen · 상단 425 광학형 개념 / 하단 초소형위성 개념",
     "sources": [
       {
         "title": "초소형위성체계 개발 정상 추진 중",
@@ -1057,5 +1057,32 @@
     "blend": "blender/fleet/models/uh60p.blend",
     "photorealismVerified": false,
     "stage": "existing-exterior-enhancement"
+  },
+  {
+    "id": "remoeye",
+    "name": "리모아이-002B",
+    "domain": "air",
+    "family": "aircraft",
+    "foreign": false,
+    "identityReview": false,
+    "source": null,
+    "sourceSha256": null,
+    "sourceAttribution": null,
+    "sourceLicense": "DAPA DASHBOARD authored exterior study",
+    "referencePhoto": null,
+    "referenceKind": "manufacturer-reference",
+    "referenceUrl": "https://www.uconsystem.com/products/military/remoeye-002b.asp",
+    "photoCredit": null,
+    "sources": [
+      {
+        "title": "리모아이-002B 제품규격",
+        "publisher": "유콘시스템",
+        "url": "https://www.uconsystem.com/products/military/remoeye-002b.asp"
+      }
+    ],
+    "model": "./models/fleet/remoeye.glb",
+    "blend": "blender/fleet/models/remoeye.blend",
+    "photorealismVerified": false,
+    "stage": "authored-exterior-study"
   }
 ]

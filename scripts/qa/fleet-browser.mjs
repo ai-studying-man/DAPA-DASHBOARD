@@ -14,7 +14,7 @@ try{
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base+'?view=fleet&item=k2&lang=ko',{waitUntil:'domcontentloaded'});
   await page.waitForSelector('.model-studio[data-ready="true"]',{timeout:30000});
-  assert.equal(await page.locator('[data-fleet-equipment] option').count(),39);
+  assert.equal(await page.locator('[data-fleet-equipment] option').count(),entries.length);
   for(const entry of entries){
    await page.evaluate(()=>{window.previousFleet=window.fleetQA.studio});
    await page.locator('[data-fleet-equipment]').selectOption(entry.id);
@@ -60,6 +60,6 @@ try{
   await context.close();
  }
  assert.deepEqual(errors,[]);
- await writeFile(`${out}/report.json`,JSON.stringify({base,results,errors,allSystems:39,allClips:true,reducedMotion:true,lowPower:true,filters:true,locales:4,lifecycle:true},null,2)+'\n');
- console.log(JSON.stringify({systems:39,screens:results.length,clips:results.reduce((n,r)=>n+r.motion.length,0),errors}));
+ await writeFile(`${out}/report.json`,JSON.stringify({base,results,errors,allSystems:entries.length,allClips:true,reducedMotion:true,lowPower:true,filters:true,locales:4,lifecycle:true},null,2)+'\n');
+ console.log(JSON.stringify({systems:entries.length,screens:results.length,clips:results.reduce((n,r)=>n+r.motion.length,0),errors}));
 }finally{await browser.close()}

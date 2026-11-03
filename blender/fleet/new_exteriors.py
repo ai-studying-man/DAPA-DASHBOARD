@@ -30,6 +30,22 @@ def satellite(identity: str, m: Palette) -> bpy.types.Object:
     small = identity == "smallsat"
     size = .7 if small else 2.5 if identity == "425" else 3.2
     box("External bus", (0, 0, size / 2), (size, size * .8, size), m.paint, hull, .025)
+    if identity in {"425", "smallsat"}:
+        foil = m.steel.copy()
+        foil.name = "Aluminized thermal blanket"
+        shader = foil.node_tree.nodes.get("Principled BSDF")
+        shader.inputs["Base Color"].default_value = (.64, .34, .065, 1)
+        shader.inputs["Roughness"].default_value = .36
+        for side in (-1, 1):
+            for column in range(3):
+                x = (column - 1) * size * .31
+                box("Blanket section", (x, side * size * .411, size * .51),
+                    (size * .30, size * .026, size * .90), foil, hull, size * .009)
+            box("Array hinge", (side * size * .54, 0, size * .55),
+                (size * .16, size * .12, size * .08), m.steel, arrays)
+        for x in (-.48, .48):
+            for y in (-.38, .38):
+                cylinder("Corner rail", (x*size, y*size, size*.5), size*.023, size, m.steel, hull)
     for side in (-1, 1):
         for j in range(2 if small else 3):
             x = side * (size * .7 + j * size * .8)
@@ -164,6 +180,23 @@ def ship(m: Palette) -> bpy.types.Object:
 
 def create(identity: str, m: Palette) -> bpy.types.Object:
     """Dispatch only the twelve explicitly catalogued missing assets."""
+    if identity == "remoeye":
+        root = group("RemoEyeExterior")
+        hull, wings, tail = group("Hull", root), group("Wings", root), group("Tail", root)
+        ellipsoid("Composite body", (0, .26, .14), (.085, .46, .095), m.paint, hull)
+        cylinder("Tail boom", (0, -.32, .16), .019, .76, m.paint, tail, "Y")
+        for side in (-1, 1):
+            panel("Outer wing", [(0, .23, .21), (side*.9, .14, .245), (side*.87, -.02, .245), (0, -.04, .21)], m.paint, wings)
+            panel("Tail surface", [(0, -.52, .16), (side*.23, -.63, .25), (side*.21, -.72, .25), (0, -.7, .16)], m.paint, tail)
+        payload = group("Payload", hull)
+        ellipsoid("Camera housing", (0, .53, .075), (.062, .08, .064), m.paint, payload)
+        cylinder("Camera lens", (0, .598, .064), .03, .018, m.glass, payload, "Y", 32)
+        prop = group("Propeller", hull)
+        prop.location = (0, -.19, .28)
+        box("Motor pylon", (0, -.135, .218), (.028, .077, .094), m.paint, hull, .007)
+        cylinder("Motor housing", (0, -.14, .27), .038, .11, m.paint, hull, "Y")
+        ellipsoid("Two blade propeller", (0, 0, 0), (.157, .008, .016), m.rubber, prop)
+        return root
     if identity in {"425", "smallsat", "anasis"}:
         return satellite(identity, m)
     if identity in {"k10", "k808", "redback", "cheongung"}:

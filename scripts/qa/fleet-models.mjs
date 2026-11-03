@@ -5,7 +5,7 @@ import validator from 'gltf-validator';
 
 const catalog=JSON.parse(await readFile('blender/fleet/catalog.json','utf8'));
 const manifest=JSON.parse(await readFile('src/fleet-assets.json','utf8'));
-assert.equal(catalog.length,39);assert.equal(manifest.length,39);
+assert.equal(catalog.length,40);assert.equal(manifest.length,40);
 assert.deepEqual(manifest.map(x=>x.id).sort(),catalog.map(x=>x.id).sort());
 const results=[];
 for(const item of manifest){

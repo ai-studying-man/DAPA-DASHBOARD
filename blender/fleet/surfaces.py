@@ -40,7 +40,7 @@ def image(name: str, pixels: np.ndarray) -> bpy.types.Image:
     return result
 
 
-def apply(meshes: list[bpy.types.Object]) -> None:
+def apply(meshes: list[bpy.types.Object], detailed: bool = False) -> None:
     """UV and PBR on missing surfaces only; existing photographic maps stay intact."""
     changed: set[bpy.types.Material] = set()
     for mat in {m for obj in meshes for m in obj.data.materials if m}:
@@ -62,6 +62,13 @@ def apply(meshes: list[bpy.types.Object]) -> None:
         if not shader.inputs["Base Color"].is_linked:
             mat.node_tree.links.new(tex.outputs["Color"], shader.inputs["Base Color"])
         pixels[:, :, 0], pixels[:, :, 1], pixels[:, :, 2] = 1, shader.inputs["Roughness"].default_value, shader.inputs["Metallic"].default_value
+        if detailed:
+            # Periodic surface relief stays continuous at a wrapping UV seam.
+            y, x = np.indices((128, 128)) * (np.pi / 64)
+            optical = any(tag in mat.name.lower() for tag in ("glass", "optic", "lens", "canopy"))
+            strength = .004 if optical else .035
+            height = np.sin(3*x + 2*np.sin(y)) * np.cos(5*y) + .23*np.cos(19*x - 11*y)
+            pixels[:, :, 1] = np.clip(pixels[:, :, 1] + strength * height, .04, 1)
         data = mat.node_tree.nodes.new("ShaderNodeTexImage")
         data.image = image("AuthoredMetalRough_" + str(seed), pixels)
         data.image.colorspace_settings.name = "Non-Color"
@@ -71,13 +78,18 @@ def apply(meshes: list[bpy.types.Object]) -> None:
         mat.node_tree.links.new(separate.outputs["Blue"], shader.inputs["Metallic"])
         # Flat authored normal defaults are explicit, not invented measured detail.
         pixels[:, :, :3] = (.5, .5, 1)
+        if detailed:
+            dx = np.roll(height, -1, axis=1) - np.roll(height, 1, axis=1)
+            dy = np.roll(height, -1, axis=0) - np.roll(height, 1, axis=0)
+            vectors = np.stack((-strength * dx, -strength * dy, np.ones_like(dx)), axis=-1)
+            pixels[:, :, :3] = .5 + .5 * vectors / np.linalg.norm(vectors, axis=-1, keepdims=True)
         normal = mat.node_tree.nodes.new("ShaderNodeTexImage")
         normal.image = image("AuthoredNormal_" + str(seed), pixels)
         normal.image.colorspace_settings.name = "Non-Color"
         mapping = mat.node_tree.nodes.new("ShaderNodeNormalMap")
         mat.node_tree.links.new(normal.outputs["Color"], mapping.inputs["Color"])
         mat.node_tree.links.new(mapping.outputs["Normal"], shader.inputs["Normal"])
-        mat["surface_status"] = "Authored color and PBR defaults; no scanned normal or baked AO"
+        mat["surface_status"] = "Authored color and procedural micro-relief" if detailed else "Authored color and PBR defaults; no scanned normal or baked AO"
     for obj in meshes:
         if not any(mat in changed for mat in obj.data.materials):
             continue
