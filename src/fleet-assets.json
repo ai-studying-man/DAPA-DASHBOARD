@@ -245,7 +245,7 @@
     ],
     "modelAttribution": "./models/fleet/chunmoo-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 9450180,
+    "bytes": 9461772,
     "images": 9,
     "normalFallbacks": 1
   },
@@ -435,7 +435,7 @@
     ],
     "modelAttribution": "./models/fleet/425-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 1277212,
+    "bytes": 1277512,
     "images": 11,
     "normalFallbacks": 0
   },
@@ -478,7 +478,7 @@
     ],
     "modelAttribution": "./models/fleet/smallsat-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 1273736,
+    "bytes": 1274036,
     "images": 11,
     "normalFallbacks": 0
   },
@@ -524,7 +524,7 @@
     ],
     "modelAttribution": "./models/fleet/k21-ATTRIBUTION.md",
     "modelLicense": "CC BY-SA 2.0",
-    "bytes": 9932380,
+    "bytes": 9943868,
     "images": 9,
     "normalFallbacks": 0
   },
@@ -566,7 +566,7 @@
     ],
     "modelAttribution": "./models/fleet/k10-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 234112,
+    "bytes": 264432,
     "images": 6,
     "normalFallbacks": 0
   },
@@ -608,7 +608,7 @@
     ],
     "modelAttribution": "./models/fleet/k808-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 172308,
+    "bytes": 202628,
     "images": 6,
     "normalFallbacks": 0
   },
@@ -654,7 +654,7 @@
     ],
     "modelAttribution": "./models/fleet/redback-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 248280,
+    "bytes": 278592,
     "images": 6,
     "normalFallbacks": 0
   },
@@ -697,7 +697,7 @@
     ],
     "modelAttribution": "./models/fleet/kf21-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 517468,
+    "bytes": 517640,
     "images": 10,
     "normalFallbacks": 0
   },
@@ -742,8 +742,8 @@
     ],
     "modelAttribution": "./models/fleet/surion-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 416892,
-    "images": 9,
+    "bytes": 468944,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -786,8 +786,8 @@
     ],
     "modelAttribution": "./models/fleet/lah-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 228048,
-    "images": 8,
+    "bytes": 270320,
+    "images": 9,
     "normalFallbacks": 0
   },
   {
@@ -830,8 +830,8 @@
     ],
     "modelAttribution": "./models/fleet/t50-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 263752,
-    "images": 8,
+    "bytes": 306032,
+    "images": 9,
     "normalFallbacks": 0
   },
   {
@@ -876,8 +876,8 @@
     ],
     "modelAttribution": "./models/fleet/kt1-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 278480,
-    "images": 8,
+    "bytes": 320748,
+    "images": 9,
     "normalFallbacks": 0
   },
   {
@@ -916,7 +916,7 @@
     ],
     "modelAttribution": "./models/fleet/nuri-ATTRIBUTION.md",
     "modelLicense": "CC BY 4.0",
-    "bytes": 4024744,
+    "bytes": 4092708,
     "images": 14,
     "normalFallbacks": 0
   },
@@ -959,8 +959,8 @@
     ],
     "modelAttribution": "./models/fleet/anasis-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 149400,
-    "images": 8,
+    "bytes": 191676,
+    "images": 9,
     "normalFallbacks": 0
   },
   {
@@ -1002,8 +1002,8 @@
     ],
     "modelAttribution": "./models/fleet/cheongung-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 197112,
-    "images": 8,
+    "bytes": 239388,
+    "images": 9,
     "normalFallbacks": 0
   },
   {
@@ -1045,8 +1045,8 @@
     ],
     "modelAttribution": "./models/fleet/hansando-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 175264,
-    "images": 8,
+    "bytes": 217540,
+    "images": 9,
     "normalFallbacks": 0
   },
   {
@@ -1082,8 +1082,8 @@
     ],
     "modelAttribution": "./models/fleet/500md-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 338368,
-    "images": 7,
+    "bytes": 381028,
+    "images": 8,
     "normalFallbacks": 0
   },
   {
@@ -1119,8 +1119,8 @@
     ],
     "modelAttribution": "./models/fleet/ah1s-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 369672,
-    "images": 7,
+    "bytes": 412332,
+    "images": 8,
     "normalFallbacks": 0
   },
   {
@@ -1156,8 +1156,8 @@
     ],
     "modelAttribution": "./models/fleet/ah64e-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 434312,
-    "images": 9,
+    "bytes": 486364,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1190,8 +1190,8 @@
     ],
     "modelAttribution": "./models/fleet/f22-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 292316,
-    "images": 9,
+    "bytes": 344384,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1224,8 +1224,8 @@
     ],
     "modelAttribution": "./models/fleet/f117-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 292132,
-    "images": 9,
+    "bytes": 344200,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1258,7 +1258,7 @@
     ],
     "modelAttribution": "./models/fleet/k1arv-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 625848,
+    "bytes": 665664,
     "images": 7,
     "normalFallbacks": 0
   },
@@ -1292,8 +1292,8 @@
     ],
     "modelAttribution": "./models/fleet/k10cbrn-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 307896,
-    "images": 9,
+    "bytes": 359948,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1326,8 +1326,8 @@
     ],
     "modelAttribution": "./models/fleet/k151-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 235560,
-    "images": 9,
+    "bytes": 287612,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1360,8 +1360,8 @@
     ],
     "modelAttribution": "./models/fleet/k151at-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 265432,
-    "images": 9,
+    "bytes": 317484,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1394,7 +1394,7 @@
     ],
     "modelAttribution": "./models/fleet/k216-ATTRIBUTION.md",
     "modelLicense": "Public Domain",
-    "bytes": 9951140,
+    "bytes": 9962628,
     "images": 9,
     "normalFallbacks": 0
   },
@@ -1428,7 +1428,7 @@
     ],
     "modelAttribution": "./models/fleet/k242-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 622464,
+    "bytes": 662280,
     "images": 7,
     "normalFallbacks": 0
   },
@@ -1462,8 +1462,8 @@
     ],
     "modelAttribution": "./models/fleet/k332-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 250372,
-    "images": 9,
+    "bytes": 302424,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1496,8 +1496,8 @@
     ],
     "modelAttribution": "./models/fleet/km9-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 307884,
-    "images": 9,
+    "bytes": 359936,
+    "images": 10,
     "normalFallbacks": 0
   },
   {
@@ -1528,7 +1528,7 @@
     ],
     "modelAttribution": "./models/fleet/km181-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 121012,
+    "bytes": 151432,
     "images": 5,
     "normalFallbacks": 0
   },
@@ -1560,7 +1560,7 @@
     ],
     "modelAttribution": "./models/fleet/km187-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 120648,
+    "bytes": 151064,
     "images": 5,
     "normalFallbacks": 0
   },
@@ -1597,8 +1597,8 @@
     ],
     "modelAttribution": "./models/fleet/uh60p-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 416892,
-    "images": 9,
+    "bytes": 468944,
+    "images": 10,
     "normalFallbacks": 0
   },
   {

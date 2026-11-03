@@ -51,15 +51,21 @@ def finish_layers(identity, meshes):
         "muav": {"Paint": (.26,.36), "Optics": (.85,.08)},
         "remoeye": {"Paint": (.20,.42), "Optics": (.85,.08)},
     }
+    common_finishes = {
+        "MVP olive paint": (.08,.55), "MVP gray paint": (.20,.38),
+        "MVP optical glass": (.85,.08), "Optical glass": (.85,.08),
+        "Authored Korean camouflage": (.08,.55), "Optics": (.85,.08),
+        "Paint": (.13,.46),
+    }
     for mat in {m for obj in meshes for m in obj.data.materials if m}:
-        finish = roles.get(identity, {}).get(mat.name)
+        finish = roles.get(identity, {}).get(mat.name, common_finishes.get(mat.name))
         if finish:
             shader = mat.node_tree.nodes.get("Principled BSDF")
             shader.inputs["Coat Weight"].default_value = finish[0]
             shader.inputs["Coat Roughness"].default_value = finish[1]
 
 
-def apply(meshes: list[bpy.types.Object], detailed: bool = False) -> None:
+def apply(meshes: list[bpy.types.Object], detailed: bool = True) -> None:
     """UV and PBR on missing surfaces only; existing photographic maps stay intact."""
     changed: set[bpy.types.Material] = set()
     for mat in {m for obj in meshes for m in obj.data.materials if m}:

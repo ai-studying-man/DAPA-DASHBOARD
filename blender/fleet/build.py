@@ -79,7 +79,7 @@ def run() -> None:
         for obj in meshes:
             obj.data.update()
         bpy.context.view_layer.update()
-        apply(meshes, detailed=identity in {"k9", "dosan", "chungnam", "fa50", "kf21", "kaav", "muav", "425", "smallsat", "remoeye"})
+        apply(meshes)
         finish_layers(identity, meshes)
         for obj in meshes:
             if any(len(polygon.vertices) > 4 for polygon in obj.data.polygons):
