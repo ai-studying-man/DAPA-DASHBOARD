@@ -1,6 +1,7 @@
 import * as T from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {studioMarkup,studioText as t} from './model-studio-ui.js';
 import {StudioMotion} from './studio-motion.js';
 import './model-studio.css';
@@ -18,7 +19,11 @@ export class ModelStudio{
    const canvas=this.renderer.domElement;canvas.tabIndex=0;canvas.setAttribute('aria-label',this.stage.getAttribute('aria-label'));this.stage.prepend(canvas);
    this.scene=new T.Scene();const style=getComputedStyle(this.host);this.scene.background=new T.Color(style.getPropertyValue('--sky-light').trim()||'#eef6ff');this.camera=new T.PerspectiveCamera(38,1,.01,1000);
    this.controls=new OrbitControls(this.camera,canvas);this.controls.enableDamping=true;this.controls.autoRotateSpeed=.7;
-   this.scene.add(new T.HemisphereLight(0xffffff,0x66716b,2.2));const key=new T.DirectionalLight(0xfff4de,3);key.position.set(8,16,-9);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.normalBias=.035;this.scene.add(key,key.target);
+   const room=new RoomEnvironment(),generator=new T.PMREMGenerator(this.renderer);
+   try{this.reflections=generator.fromScene(room,.04);this.scene.environment=this.reflections.texture;}
+   finally{room.dispose();generator.dispose();}
+   this.scene.environmentIntensity=.65;
+   this.scene.add(new T.HemisphereLight(0xffffff,0x66716b,1.2));const key=new T.DirectionalLight(0xfff4de,3);key.castShadow=true;key.shadow.mapSize.set(1024,1024);this.scene.add(key,key.target);
    const rim=new T.DirectionalLight(0xc4dbff,1.5);rim.position.set(-10,6,7);this.scene.add(rim);
    canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();this.fail()},{signal:this.events.signal});
    this.observer=new ResizeObserver(()=>this.resize());this.observer.observe(this.stage);
@@ -32,7 +37,8 @@ export class ModelStudio{
     this.origins=new Map(Object.values(this.parts).filter(Boolean).map(part=>[part,part.position.clone()]));this.root.traverse(object=>{if(object.isMesh){object.castShadow=true;object.receiveShadow=true}});
     const bounds=new T.Box3().setFromObject(this.root);if(bounds.isEmpty())throw new Error('Empty GLB');this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.baseRadius=this.radius;
     const floor=new T.Mesh(new T.PlaneGeometry(this.radius*12,this.radius*12),new T.MeshStandardMaterial({color:style.getPropertyValue('--elevated').trim()||'#f2f4f6',roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=bounds.min.y-.015;floor.receiveShadow=true;this.scene.add(floor);
-    key.target.position.copy(this.center);key.shadow.camera.left=key.shadow.camera.bottom=-this.radius*2;key.shadow.camera.right=key.shadow.camera.top=this.radius*2;key.shadow.camera.far=100;key.shadow.camera.updateProjectionMatrix();
+    key.target.position.copy(this.center);key.position.set(.8,1.6,-.9).multiplyScalar(this.radius*2).add(this.center);
+    key.shadow.normalBias=this.radius*.0015;key.shadow.camera.left=key.shadow.camera.bottom=-this.radius*1.2;key.shadow.camera.right=key.shadow.camera.top=this.radius*1.2;key.shadow.camera.near=this.radius*.2;key.shadow.camera.far=this.radius*6;key.shadow.camera.updateProjectionMatrix();
     this.controls.minDistance=this.radius*.5;this.controls.maxDistance=this.radius*7;this.view='home';this.resize();this.motion=new StudioMotion(this,gltf.animations);this.enableControls();this.status.textContent=t('ready');this.ui.dataset.ready='true';this.loop();
    }finally{clearTimeout(timer)}
   }catch{if(!this.disposed)this.fail()}
@@ -79,5 +85,5 @@ export class ModelStudio{
  resetParts(){this.motion?.stop();this.playing=false;this.elapsed=0;if(!this.root)return;for(const [part,origin]of this.origins){part.position.copy(origin);if(part===this.parts.Turret||part===this.parts.Gun)part.rotation.set(0,0,0);}this.ui.querySelector('[data-studio-play]').setAttribute('aria-pressed','false');for(const input of this.ui.querySelectorAll('[data-studio-range]')){input.value='0';input.nextElementSibling.textContent=input.dataset.studioRange==='explode'?'0%':'0°';}this.enableControls();const bounds=new T.Box3().setFromObject(this.root);this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.setView(this.view);if(this.selectedPart)this.selection.setFromObject(this.selectedPart);}
  stop(){this.resetParts();this.auto=false;if(this.ui)this.ui.querySelector('[data-studio-option="auto"]').checked=false;this.renderer?.setAnimationLoop(null);}
  fail(){this.failed=true;this.playing=false;this.renderer?.setAnimationLoop(null);this.status.textContent=t('error');this.ui.dataset.ready='false';this.ui.querySelector('[data-studio-retry]').hidden=false;for(const input of this.ui.querySelectorAll('input,select,[data-studio-play],[data-studio-stop]'))input.disabled=true;}
- destroy(){if(this.disposed)return;this.disposed=true;this.request.abort();this.events.abort();this.observer?.disconnect();this.intersection?.disconnect();this.renderer?.setAnimationLoop(null);this.motion?.destroy();this.controls?.dispose();release(this.scene);this.renderer?.dispose();this.renderer?.forceContextLoss();this.renderer?.domElement.remove();}
+ destroy(){if(this.disposed)return;this.disposed=true;this.request.abort();this.events.abort();this.observer?.disconnect();this.intersection?.disconnect();this.renderer?.setAnimationLoop(null);this.motion?.destroy();this.controls?.dispose();release(this.scene);this.reflections?.dispose();this.renderer?.dispose();this.renderer?.forceContextLoss();this.renderer?.domElement.remove();}
 }
