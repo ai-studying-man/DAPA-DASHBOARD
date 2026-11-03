@@ -277,10 +277,10 @@
       "source": "./models/mvp/kf21.glb",
       "sourceSha256": "db9e97eb4084be17ee5d7324526af8e1a496f590ed1d78cce1e3eb5858661fc3",
       "model": "./models/fleet/kf21.glb",
-      "sha256": "8999b2c1684d3417a076e949a0b7298e91ef459e7b139ba35b23941fe4999b3c",
+      "sha256": "57624e8d74cb0315dedf7bfb980a0a43f79949e75d41b4bf4b3f12f69944da1f",
       "blender": "blender/fleet/models/kf21.blend",
-      "bytes": 343940,
-      "rawBytes": 370032,
+      "bytes": 517468,
+      "rawBytes": 544504,
       "normalFallbacks": 0,
       "images": 10,
       "clips": [

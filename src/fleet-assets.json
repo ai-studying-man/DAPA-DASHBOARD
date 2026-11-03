@@ -688,7 +688,8 @@
     "stage": "existing-exterior-enhancement",
     "parts": [
       "Hull",
-      "RunningGear"
+      "RunningGear",
+      "Wings"
     ],
     "clips": [
       "Turntable",
@@ -696,7 +697,7 @@
     ],
     "modelAttribution": "./models/fleet/kf21-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 343940,
+    "bytes": 517468,
     "images": 10,
     "normalFallbacks": 0
   },
