@@ -435,7 +435,7 @@
     ],
     "modelAttribution": "./models/fleet/425-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 255812,
+    "bytes": 1277212,
     "images": 11,
     "normalFallbacks": 0
   },
@@ -478,7 +478,7 @@
     ],
     "modelAttribution": "./models/fleet/smallsat-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 252356,
+    "bytes": 1273736,
     "images": 11,
     "normalFallbacks": 0
   },

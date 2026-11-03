@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import math
+import random
 from dataclasses import dataclass
 
 import bpy
@@ -21,6 +22,40 @@ class Palette:
     steel: bpy.types.Material
     rubber: bpy.types.Material
     solar: bpy.types.Material
+
+
+def blanket(size, side, column, crosswise, foil, hull):
+    """Triangulated quilt with puckered fasteners and diagonal fold ridges."""
+    rng = random.Random(120 + 3*side + column + 100*crosswise)
+    vertices, faces = [], []
+    nx, nz = 12, 24
+    width = .238 if crosswise else .30
+    depth = .507 if crosswise else .407
+    for j in range(nz+1):
+        for i in range(nx+1):
+            u, v = i/nx, j/nz
+            if 0 < i < nx:
+                u += rng.uniform(-.26,.26)/nx
+            if 0 < j < nz:
+                v += rng.uniform(-.26,.26)/nz
+            tension = (math.sin(math.pi*u)*math.sin(math.pi*v))**.54
+            fold = abs(math.sin(8*u+12*v+1.7*math.sin(6*v+column)))
+            relief = tension*(.006+.025*fold**8+.005*rng.random())
+            along = (column-1)*(width+.012)+(u-.5)*width
+            outward = side*(depth+relief)
+            x,y = (outward,along) if crosswise else (along,outward)
+            vertices.append((size*x,size*y,size*(.055+.89*v)))
+            if i and j:
+                d = j*(nx+1)+i
+                a,b,c = d-nx-2,d-nx-1,d-1
+                triangles = [(a,b,d),(a,d,c)] if rng.random()<.5 else [(a,b,c),(b,d,c)]
+                faces.extend(tri if (side<0) != crosswise else tri[::-1] for tri in triangles)
+    mesh = bpy.data.meshes.new("Pinched thermal foil")
+    mesh.from_pydata(vertices, [], faces)
+    obj = bpy.data.objects.new("Quilted insulation", mesh)
+    bpy.context.collection.objects.link(obj)
+    obj.parent = hull
+    mesh.materials.append(foil)
 
 
 def satellite(identity: str, m: Palette) -> bpy.types.Object:
@@ -38,9 +73,8 @@ def satellite(identity: str, m: Palette) -> bpy.types.Object:
         shader.inputs["Roughness"].default_value = .36
         for side in (-1, 1):
             for column in range(3):
-                x = (column - 1) * size * .31
-                box("Blanket section", (x, side * size * .411, size * .51),
-                    (size * .30, size * .026, size * .90), foil, hull, size * .009)
+                blanket(size, side, column, False, foil, hull)
+                blanket(size, side, column, True, foil, hull)
             box("Array hinge", (side * size * .54, 0, size * .55),
                 (size * .16, size * .12, size * .08), m.steel, arrays)
         for x in (-.48, .48):
