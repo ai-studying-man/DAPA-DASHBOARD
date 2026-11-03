@@ -1,5 +1,6 @@
 """Run from the UE5 editor Python console with a new empty level open."""
 import json
+import hashlib
 import math
 import time
 from pathlib import Path
@@ -7,11 +8,16 @@ from pathlib import Path
 import unreal
 
 
-def import_exhibit(system_id):
+def asset_path(system_id):
     repo = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())).parents[1]
     entries = json.loads((repo / "src/fleet-assets.json").read_text(encoding="utf-8"))
     entry = next(row for row in entries if row["id"] == system_id)
-    filename = (repo / "public" / entry["model"]).resolve()
+    return (repo / "public" / entry["model"]).resolve()
+
+
+def import_exhibit(system_id):
+    filename = asset_path(system_id)
+    digest = hashlib.sha256(filename.read_bytes()).hexdigest()
     manager = unreal.InterchangeManager.get_interchange_manager_scripted()
     source = manager.create_source_data(str(filename))
     settings = unreal.ImportAssetParameters()
@@ -25,7 +31,7 @@ def import_exhibit(system_id):
     if not imported:
         raise RuntimeError("Scene import created no level actors. Use an empty level.")
     for actor in imported:
-        actor.tags = list(actor.tags) + [unreal.Name(tag)]
+        actor.tags = list(actor.tags) + [unreal.Name(tag), unreal.Name("GLB_" + digest)]
     unreal.log(f"Imported {system_id}. Inspect scale, materials and moving pivots before saving the level.")
 
 
@@ -37,7 +43,9 @@ def play_exhibit(system_id):
     worlds = unreal.get_editor_subsystem(unreal.UnrealEditorSubsystem)
     gameplay = unreal.GameplayStatics
     tag = unreal.Name("DAPA_" + system_id)
-    if not gameplay.get_all_actors_with_tag(worlds.get_editor_world(), tag):
+    digest = hashlib.sha256(asset_path(system_id).read_bytes()).hexdigest()
+    digest_tag = unreal.Name("GLB_" + digest)
+    if not any(digest_tag in actor.tags for actor in gameplay.get_all_actors_with_tag(worlds.get_editor_world(), tag)):
         raise RuntimeError("Import this exhibit into the current level before playback.")
     camera_tag = unreal.Name("DAPA_review_camera")
     actors = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
@@ -59,7 +67,10 @@ def play_exhibit(system_id):
                     raise RuntimeError("PIE unavailable or ended before playback completed.")
                 return
             if not camera:
-                targets = gameplay.get_all_actors_with_tag(world, tag)
+                targets = [actor for actor in gameplay.get_all_actors_with_tag(world, tag)
+                           if digest_tag in actor.tags and any(
+                               comp.static_mesh and comp.is_visible()
+                               for comp in actor.get_components_by_class(unreal.StaticMeshComponent))]
                 controller = gameplay.get_player_controller(world, 0)
                 if not targets or not controller:
                     if time.monotonic() - started > 45:
@@ -88,7 +99,7 @@ def play_exhibit(system_id):
                 raise RuntimeError("Camera did not traverse the exhibit.")
             folder = Path(unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_saved_dir()))
             (folder / ("PIE-" + system_id + ".json")).write_text(
-                json.dumps({"system":system_id,"engine":unreal.SystemLibrary.get_engine_version(),
+                json.dumps({"system":system_id,"sourceSha256":digest,"engine":unreal.SystemLibrary.get_engine_version(),
                             "world":world.get_path_name(),"seconds":elapsed,"positions":samples}, indent=2))
         except Exception as exc:
             unreal.log_error(str(exc))
