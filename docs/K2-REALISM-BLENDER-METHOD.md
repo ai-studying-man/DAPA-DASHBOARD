@@ -219,7 +219,7 @@ Get-Content docs/K2-REALISM-AUDIT.json
 
 지도는 위치와 체계 선택을 돕는 간략한 배경으로 유지한다. 시각 검수의 대상은 무기체계 자체다. Blender에서 미터 단위로 형상, 부품 원점, UV, PBR, 전시 모션을 관리한다. 웹은 최적화한 GLB를 Three.js로 읽고, Unreal 전시 프로젝트도 같은 GLB를 Interchange로 읽는다. 두 화면에서 기준 모델을 하나로 유지해야 날개 폭이나 포탑 회전축을 한쪽에서만 고치는 문제를 피할 수 있다.
 
-사용자 제공 Threads 게시물은 본문을 열람하지 못했다. 아래 UE 경로는 Epic의 Interchange 문서에 근거한다. [Threads 원문](https://www.threads.com/@choi.openai/post/Dc3EZU-D2H2) · [Epic의 장면 가져오기 설명](https://dev.epicgames.com/documentation/unreal-engine/importing-assets-using-interchange-in-unreal-engine)
+사용자 제공 Threads 본문은 한 장의 그림을 바탕으로 여러 객체로 구성한 기차를 만들고 Blender와 Unreal에서 게임·도시를 제작한 사례를 소개한다. 이를 전시에는 외부 사진을 부품 단위의 Blender 장면으로 해석하고 같은 장면을 두 엔진에서 확인하는 방식으로 적용한다. 구체적인 UE 가져오기 설정은 Epic 문서를 따른다. [Threads 원문](https://www.threads.com/@choi.openai/post/Dc3EZU-D2H2) · [Epic의 장면 가져오기 설명](https://dev.epicgames.com/documentation/unreal-engine/importing-assets-using-interchange-in-unreal-engine)
 
 | 구분 | 대표 자산 | 사진과 대조할 요소 |
 | --- | --- | --- |
