@@ -1,0 +1,624 @@
+{
+  "date": "2026-11-04",
+  "scope": "Read-only inspection of local files; screenshot URL not provided, so route identity is not uniquely inferred from pixels.",
+  "versions": {
+    "three": "0.180.0",
+    "vite": "7.3.7",
+    "cesium": "1.146.0",
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "playwright": "1.64.0"
+  },
+  "blender": "4.5.9 LTS (build report)",
+  "records": [
+    {
+      "file": "public/models/k2-exhibit.glb",
+      "sha256": "687460c76b936cf645d7d2897855b9c1280a16677889c67bed6651b13a8329e3",
+      "bytes": 1507040,
+      "meshResources": 69,
+      "meshInstances": 69,
+      "sceneTriangles": 20304,
+      "imageCount": 0,
+      "materials": [
+        {
+          "maps": {},
+          "roughnessFactor": 0.82,
+          "metallicFactor": 0.12
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.78,
+          "metallicFactor": 0.12
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.78,
+          "metallicFactor": 0.5
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.78,
+          "metallicFactor": 0.12
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.78,
+          "metallicFactor": 0.12
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.78,
+          "metallicFactor": 0.12
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.78,
+          "metallicFactor": 0.12
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.82,
+          "metallicFactor": 0.12
+        },
+        {
+          "maps": {},
+          "roughnessFactor": 0.2,
+          "metallicFactor": 0.12
+        }
+      ],
+      "clips": []
+    },
+    {
+      "file": "public/models/k2-surface-refinement.glb",
+      "sha256": "7bc26f664f8bac518aa6ea2c5c1aea34312e3465d9e77c648449fbc04b3aecc1",
+      "bytes": 6751700,
+      "meshResources": 165,
+      "meshInstances": 165,
+      "sceneTriangles": 98224,
+      "imageCount": 1,
+      "materials": [
+        {
+          "name": "Painted armor | authored camouflage",
+          "maps": {
+            "baseColor": {
+              "image": "authored-camo",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 0.7699999809265137,
+          "metallicFactor": 0.11999999731779099
+        },
+        {
+          "name": "Weathered steel | tracks and bolts",
+          "maps": {},
+          "roughnessFactor": 0.6800000071525574,
+          "metallicFactor": 0.7200000286102295
+        },
+        {
+          "name": "Recesses and grille",
+          "maps": {},
+          "roughnessFactor": 0.8500000238418579,
+          "metallicFactor": 0.11999999731779099
+        },
+        {
+          "name": "Rubber | roadwheel tires and track pads",
+          "maps": {},
+          "roughnessFactor": 0.9399999976158142,
+          "metallicFactor": 0
+        },
+        {
+          "name": "Optical glass",
+          "maps": {},
+          "roughnessFactor": 0.18000000715255737,
+          "metallicFactor": 0.25
+        }
+      ],
+      "clips": []
+    },
+    {
+      "file": "public/models/k2-pipeline.glb",
+      "sha256": "88fc84ce848ba0341258aad604aaf6c197ea7fe6c2fc8df87ac43d695913ba15",
+      "bytes": 7049400,
+      "meshResources": 66,
+      "meshInstances": 165,
+      "sceneTriangles": 98224,
+      "imageCount": 3,
+      "materials": [
+        {
+          "name": "Painted armor | authored camouflage",
+          "maps": {
+            "baseColor": {
+              "image": "authored-camo",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            },
+            "normal": {
+              "image": "AuthoredPaintNormal",
+              "mimeType": "image/png",
+              "width": 256,
+              "height": 256,
+              "uniqueRGB": 48,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "AuthoredPaintMetalRough",
+              "mimeType": "image/png",
+              "width": 256,
+              "height": 256
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        },
+        {
+          "name": "Weathered steel | tracks and bolts",
+          "maps": {},
+          "roughnessFactor": 0.6800000071525574,
+          "metallicFactor": 0.7200000286102295
+        },
+        {
+          "name": "Recesses and grille",
+          "maps": {},
+          "roughnessFactor": 0.8500000238418579,
+          "metallicFactor": 0.11999999731779099
+        },
+        {
+          "name": "Rubber | roadwheel tires and track pads",
+          "maps": {},
+          "roughnessFactor": 0.9399999976158142,
+          "metallicFactor": 0
+        },
+        {
+          "name": "Optical glass",
+          "maps": {},
+          "roughnessFactor": 0.18000000715255737,
+          "metallicFactor": 0.25
+        }
+      ],
+      "clips": [
+        "Turntable",
+        "TurretTraverse",
+        "BarrelElevation"
+      ]
+    },
+    {
+      "file": "public/models/k2-photo-pbr.glb",
+      "sha256": "84bfb5d12d62b3ff242ed2baea9ea6594bab53a4b91df1a5e502bf741ef7432b",
+      "bytes": 5338812,
+      "meshResources": 79,
+      "meshInstances": 79,
+      "sceneTriangles": 41344,
+      "imageCount": 3,
+      "materials": [
+        {
+          "name": "Track steel and fasteners",
+          "maps": {
+            "normal": {
+              "image": "k2-normal",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024,
+              "uniqueRGB": 1786,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k2-roughness",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0.6499999761581421
+        },
+        {
+          "name": "Grille and openings",
+          "maps": {
+            "normal": {
+              "image": "k2-normal",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024,
+              "uniqueRGB": 1786,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k2-roughness",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0
+        },
+        {
+          "name": "Camouflage paint",
+          "maps": {
+            "baseColor": {
+              "image": "k2-paint",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            },
+            "normal": {
+              "image": "k2-normal",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024,
+              "uniqueRGB": 1786,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k2-roughness",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0.03999999910593033
+        },
+        {
+          "name": "Optical glass",
+          "maps": {},
+          "roughnessFactor": 0.12999999523162842,
+          "metallicFactor": 0.25
+        },
+        {
+          "name": "Rubber tires and pads",
+          "maps": {
+            "normal": {
+              "image": "k2-normal",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024,
+              "uniqueRGB": 1786,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k2-roughness",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0
+        }
+      ],
+      "clips": []
+    },
+    {
+      "file": "public/models/fleet/k9.glb",
+      "sha256": "da432bf4f1a0186c04fe8b228b704623bdb848f2106ba3690182318b24f8d85b",
+      "bytes": 12073752,
+      "meshResources": 79,
+      "meshInstances": 79,
+      "sceneTriangles": 41448,
+      "imageCount": 7,
+      "materials": [
+        {
+          "name": "Track steel and fasteners.001",
+          "maps": {
+            "normal": {
+              "image": "k9-normal",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024,
+              "uniqueRGB": 1786,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k9-roughness",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0.6499999761581421
+        },
+        {
+          "name": "Grille and openings.001",
+          "maps": {
+            "normal": {
+              "image": "k9-normal",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024,
+              "uniqueRGB": 1786,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k9-roughness",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0
+        },
+        {
+          "name": "Camouflage paint.001",
+          "maps": {
+            "baseColor": {
+              "image": "paint-albedo",
+              "mimeType": "image/png",
+              "width": 1254,
+              "height": 1254
+            },
+            "normal": {
+              "image": "Artistic micro normal",
+              "mimeType": "image/png",
+              "width": 1254,
+              "height": 1254,
+              "uniqueRGB": 86,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k9-roughness-Artistic roughness",
+              "mimeType": "image/png",
+              "width": 1254,
+              "height": 1254
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0.03999999910593033
+        },
+        {
+          "name": "Optical glass.001",
+          "maps": {
+            "normal": {
+              "image": "AuthoredNormal_1071467597",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128,
+              "uniqueRGB": 1,
+              "flatNormal": true
+            },
+            "metallicRoughness": {
+              "image": "AuthoredMetalRough_1071467597",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        },
+        {
+          "name": "Rubber tires and pads.001",
+          "maps": {
+            "normal": {
+              "image": "k9-normal",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024,
+              "uniqueRGB": 1786,
+              "flatNormal": false
+            },
+            "metallicRoughness": {
+              "image": "k9-roughness",
+              "mimeType": "image/png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 0
+        }
+      ],
+      "clips": [
+        "Turntable",
+        "ExplodedView",
+        "TurretTraverse",
+        "BarrelElevation"
+      ]
+    },
+    {
+      "file": "public/models/fleet/k808.glb",
+      "sha256": "f8d82085c22b79d51593d7aa7647e3228bb852f54e29e7b1b5db8606b75c1f84",
+      "bytes": 172308,
+      "meshResources": 6,
+      "meshInstances": 20,
+      "sceneTriangles": 2728,
+      "imageCount": 6,
+      "materials": [
+        {
+          "name": "Paint",
+          "maps": {
+            "baseColor": {
+              "image": "AuthoredColor_1355861227",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            },
+            "normal": {
+              "image": "AuthoredNormal_1355861227",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128,
+              "uniqueRGB": 1,
+              "flatNormal": true
+            },
+            "metallicRoughness": {
+              "image": "AuthoredMetalRough_1355861227",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        },
+        {
+          "name": "Steel",
+          "maps": {
+            "baseColor": {
+              "image": "AuthoredColor_3935925201",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            },
+            "normal": {
+              "image": "AuthoredNormal_1355861227",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128,
+              "uniqueRGB": 1,
+              "flatNormal": true
+            },
+            "metallicRoughness": {
+              "image": "AuthoredMetalRough_3935925201",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        },
+        {
+          "name": "Rubber",
+          "maps": {
+            "baseColor": {
+              "image": "AuthoredColor_2786032396",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            },
+            "normal": {
+              "image": "AuthoredNormal_1355861227",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128,
+              "uniqueRGB": 1,
+              "flatNormal": true
+            },
+            "metallicRoughness": {
+              "image": "AuthoredMetalRough_1355861227",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        }
+      ],
+      "clips": [
+        "Turntable",
+        "ExplodedView"
+      ]
+    },
+    {
+      "file": "public/models/fleet/500md.glb",
+      "sha256": "9f2bd64f39391d9217ecb288ab15406cd1b563d1f2b52540170f9d2f1b96d9ef",
+      "bytes": 338368,
+      "meshResources": 6,
+      "meshInstances": 6,
+      "sceneTriangles": 2269,
+      "imageCount": 7,
+      "materials": [
+        {
+          "name": "MVP olive paint",
+          "maps": {
+            "baseColor": {
+              "image": "AuthoredColor_3944279173",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            },
+            "normal": {
+              "image": "AuthoredNormal_3944279173",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128,
+              "uniqueRGB": 1,
+              "flatNormal": true
+            },
+            "metallicRoughness": {
+              "image": "AuthoredMetalRough_3944279173",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        },
+        {
+          "name": "MVP optical glass",
+          "maps": {
+            "baseColor": {
+              "image": "AuthoredColor_820704943",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            },
+            "normal": {
+              "image": "AuthoredNormal_3944279173",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128,
+              "uniqueRGB": 1,
+              "flatNormal": true
+            },
+            "metallicRoughness": {
+              "image": "AuthoredMetalRough_820704943",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        },
+        {
+          "name": "MVP exposed metal",
+          "maps": {
+            "baseColor": {
+              "image": "AuthoredColor_2660258138",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            },
+            "normal": {
+              "image": "AuthoredNormal_3944279173",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128,
+              "uniqueRGB": 1,
+              "flatNormal": true
+            },
+            "metallicRoughness": {
+              "image": "AuthoredMetalRough_2660258138",
+              "mimeType": "image/png",
+              "width": 128,
+              "height": 128
+            }
+          },
+          "roughnessFactor": 1,
+          "metallicFactor": 1
+        }
+      ],
+      "clips": [
+        "Turntable",
+        "RotorStudy",
+        "ExplodedView"
+      ]
+    }
+  ],
+  "notes": [
+    "roughnessFactor and metallicFactor are glTF scalar multipliers; texture channels determine the final spatial values when maps exist.",
+    "sceneTriangles sums node mesh instances rather than counting only deduplicated mesh resources.",
+    "flatNormal means one constant RGB value in the inspected PNG; no varying micro-surface normal detail."
+  ]
+}

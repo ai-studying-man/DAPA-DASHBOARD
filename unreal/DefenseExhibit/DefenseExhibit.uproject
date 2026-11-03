@@ -1,0 +1,10 @@
+{
+  "FileVersion": 3,
+  "Category": "Visualization",
+  "Description": "Inspection of the dashboard's Blender-authored exterior assets",
+  "Plugins": [
+    {"Name": "PythonScriptPlugin", "Enabled": true},
+    {"Name": "EditorScriptingUtilities", "Enabled": true},
+    {"Name": "Interchange", "Enabled": true}
+  ]
+}
