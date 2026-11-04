@@ -718,12 +718,12 @@
       "source": "./models/mvp/km187.glb",
       "sourceSha256": "c412cf98f283b03210d313a307c6ce2e85826423fe3d59d1a293771a47b8aba8",
       "model": "./models/fleet/km187.glb",
-      "sha256": "5d10b199637dc537191dd8a1147cec7d79eebf9b5ca198df75ef10ac364556aa",
+      "sha256": "fb668748a156c066bb65eb3b26b9d3fdd66bef1b79337adc4829a7a40f28657c",
       "blender": "blender/fleet/models/km187.blend",
-      "bytes": 151064,
-      "rawBytes": 163456,
+      "bytes": 183360,
+      "rawBytes": 208008,
       "normalFallbacks": 0,
-      "images": 5,
+      "images": 7,
       "clips": [
         "Turntable"
       ],

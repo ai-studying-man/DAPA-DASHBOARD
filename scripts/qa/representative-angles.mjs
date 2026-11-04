@@ -4,9 +4,11 @@ import {chromium} from 'playwright';
 
 const base=process.env.QA_URL || 'http://127.0.0.1:4187/';
 const fullFleet=process.argv.includes('--all');
+const only=process.argv.find(arg=>arg.startsWith("--only="))?.slice(7);
 const out=process.env.QA_OUT || (fullFleet?'artifacts/3d/fleet-angles':'artifacts/3d/representative-angles');
 const catalog=JSON.parse(await readFile(new URL('../../src/fleet-assets.json',import.meta.url),'utf8'));
-const systems=fullFleet?['k2',...catalog.map(item=>item.id).filter(id=>id!=='k2')]:['k2','k9','kaav','chungnam','dosan','fa50','kf21','muav','remoeye','425','smallsat'];
+if(only) assert.ok(catalog.some(item=>item.id===only),'Unknown equipment: '+only);
+const systems=only?[...new Set(['k2',only])]:fullFleet?['k2',...catalog.map(item=>item.id).filter(id=>id!=='k2')]:['k2','k9','kaav','chungnam','dosan','fa50','kf21','muav','remoeye','425','smallsat'];
 const views=['front','right','back','top','home'];
 await mkdir(out,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',args:['--enable-unsafe-swiftshader']});

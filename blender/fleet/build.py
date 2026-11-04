@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Final
 
 import bpy
+from mathutils import Matrix
 
 ROOT: Final = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "blender/fleet"), str(ROOT / "scripts/blender")]
@@ -49,6 +50,21 @@ def run() -> None:
                 refine_kf21()
             elif identity == "500md":
                 refine_500md()
+            elif identity == "km187":
+                hull = bpy.data.objects["Hull"]
+                meshes = [obj for obj in hull.children if obj.type == "MESH"]
+                # Flatten the rotated, joined source meshes so local bounding boxes
+                # cannot project an empty corner beneath the feet in Blender or Three.js.
+                for obj in meshes:
+                    obj.data.transform(obj.matrix_local)
+                    obj.matrix_basis = Matrix.Identity(4)
+                body = bpy.data.objects["Hull_MVP olive paint"]
+                body.data.materials.append(material("Graphite tube finish", (.055,.061,.065)))
+                for face in body.data.polygons:
+                    if max(body.data.vertices[i].co.z for i in face.vertices) > .11:
+                        face.material_index = 1
+                base = min(v.co.z for obj in meshes for v in obj.data.vertices)
+                hull.parent.location.z = -base * hull.parent.scale.z
             imported = list(bpy.context.scene.objects)
             for obj in imported:
                 obj.animation_data_clear()
