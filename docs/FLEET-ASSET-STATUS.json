@@ -756,10 +756,10 @@
       "source": null,
       "sourceSha256": null,
       "model": "./models/fleet/remoeye.glb",
-      "sha256": "9c0f77f93d4ebd26bbabf615e25f1dafe7ccde3fc0cdec5e0c10cfeb8616c73b",
+      "sha256": "de1488cf7c186bc8fe14c49ae117d04b10e6798d044a7262b2ee8e685f994b6b",
       "blender": "blender/fleet/models/remoeye.blend",
-      "bytes": 395524,
-      "rawBytes": 455824,
+      "bytes": 392708,
+      "rawBytes": 453800,
       "normalFallbacks": 0,
       "images": 9,
       "clips": [

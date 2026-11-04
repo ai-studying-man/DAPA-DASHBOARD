@@ -241,15 +241,21 @@ def create(identity: str, m: Palette) -> bpy.types.Object:
         hull, wings, tail = group("Hull", root), group("Wings", root), group("Tail", root)
         m.paint.node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value = (.77, .77, .74, 1)
         box("Composite fuselage shell", (0, .23, .15), (.144, .55, .173), m.paint, hull, .047)
+        profile = [math.tau*i/24 for i in range(24)]
+        saddle = [(-.07,.043,.155,.21),(-.022,.064,.16,.267),(.032,.070,.17,.296),
+                  (.153,.071,.17,.296),(.19,.067,.17,.28),(.215,.06,.17,.239),
+                  (.25,.053,.17,.229)]
+        shell("Raised wing saddle", [[(width*math.cos(a),y,(top+bottom)/2+
+              (top-bottom)*math.sin(a)/2) for a in profile]
+              for y,width,bottom,top in saddle], hull, m.paint)
         cylinder("Tail boom", (0, -.32, .16), .019, .76, m.paint, tail, "Y")
         for side in (-1, 1):
             # The display photo shows a continuous curved leading edge and rounded, rising tips.
             sections = [(0,.23,-.04,.216,.015),(.48,.218,-.038,.222,.013),
                         (.7,.197,-.035,.235,.010),(.83,.166,-.018,.254,.007),
                         (.88,.134,.016,.261,.004),(.90,.092,.077,.263,.0015)]
-            profile = [math.tau*i/24 for i in range(24)]
             shell("Outer wing", [[(side*x,(lead+trail+(lead-trail)*math.cos(a))/2,
-                                   z+h*math.sin(a)) for a in profile]
+                                   z+.073+h*math.sin(a)) for a in profile]
                                  for x,lead,trail,z,h in sections], wings, m.paint)
             panel("Horizontal stabilizer", [(0, -.52, .16), (side*.23, -.60, .16), (side*.21, -.72, .16), (0, -.7, .16)], m.paint, tail)
             for y in (.05, .18, .31, .44):
@@ -257,10 +263,13 @@ def create(identity: str, m: Palette) -> bpy.types.Object:
         panel("Vertical stabilizer", [(0, -.51, .16), (0, -.57, .37), (0, -.65, .37), (0, -.71, .16)], m.paint, tail)
         payload = group("Payload", hull)
         cylinder("Sensor joint", (0, .505, .172), .081, .022, m.rubber, payload, "Y", 48)
-        ellipsoid("Nose camera housing", (0, .603, .172), (.083, .117, .079), m.paint, payload)
-        lens = cylinder("Camera lens", (0, .695, .135), .024, .01, m.glass, payload, "Y", 32)
+        nose = [(.512,.077),(.537,.08),(.64,.078),(.672,.073),
+                (.695,.057),(.712,.032),(.718,.009)]
+        shell("Camera sleeve and rounded nose", [[(radius*math.cos(a),y,
+              .172+.96*radius*math.sin(a)) for a in profile]
+              for y,radius in nose],payload,m.paint)
+        lens = cylinder("Camera lens", (0, .714, .156), .018, .009, m.glass, payload, "Y", 32)
         lens.rotation_euler.x -= .34
-        box("Wing saddle", (0, .15, .216), (.19, .19, .04), m.paint, hull, .015)
         prop = group("Propeller", hull)
         prop.location = (0, -.19, .28)
         box("Motor pylon", (0, -.135, .218), (.028, .077, .094), m.paint, hull, .007)
