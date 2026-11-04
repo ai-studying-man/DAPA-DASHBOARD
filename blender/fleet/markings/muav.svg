@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="96" viewBox="0 0 512 96">
+  <text x="5" y="76" font-family="Malgun Gothic,sans-serif" font-weight="bold" font-size="79" fill="#272722">대한민국</text>
+  <g transform="translate(415 47)">
+    <path d="M-79 -5h158m-158 10h158" stroke="#333631" stroke-width="4"/>
+    <circle r="32" fill="#ecebe6" stroke="#333631" stroke-width="3"/>
+    <circle r="26" fill="#283b57"/>
+    <path d="M-26 0a26 26 0 0 1 52 0a13 13 0 0 1-26 0a13 13 0 0 0-26 0" fill="#a44943"/>
+  </g>
+</svg>

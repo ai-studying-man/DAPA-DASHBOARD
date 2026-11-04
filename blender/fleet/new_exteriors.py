@@ -9,9 +9,11 @@ from __future__ import annotations
 import math
 import random
 from dataclasses import dataclass
+from pathlib import Path
 
 import bpy
 from refine_airframe import shell
+from surfaces import material
 from exterior_parts import box, cylinder, group, loft
 from mvp_shapes import ellipsoid, panel
 
@@ -157,6 +159,39 @@ def vehicle(identity: str, m: Palette) -> bpy.types.Object:
     return root
 
 
+def side_marking(identity, hull, side, center_y, center_z, width, surface_x):
+    """Fit the marking to the photographed side, with horizontal reading order."""
+    texture = bpy.data.images.load(str(Path(__file__).with_name("markings") / (identity + ".png")))
+    texture.pack()
+    ink = material(identity + " printed marking", (.15,.15,.15))
+    shader = ink.node_tree.nodes.get("Principled BSDF")
+    ink.use_backface_culling = True
+    tex = ink.node_tree.nodes.new("ShaderNodeTexImage")
+    tex.image = texture
+    for output, target in (("Color","Base Color"),("Alpha","Alpha")):
+        ink.node_tree.links.new(tex.outputs[output], shader.inputs[target])
+    vertices, uvs, faces = [], [], []
+    for j in range(5):
+        for i in range(17):
+            u, v = i/16, j/4
+            y = center_y + side*(u-.5)*width
+            z = center_z + (v-.5)*width*96/512
+            vertices.append((side*surface_x(y,z),y,z))
+            uvs.append((u,v))
+            if i and j:
+                k = len(vertices)-1
+                faces.append((k-18,k-17,k,k-1))
+    mesh = bpy.data.meshes.new(identity + " decal")
+    mesh.from_pydata(vertices, [], faces)
+    mesh.materials.append(ink)
+    uv = mesh.uv_layers.new()
+    for loop in mesh.loops:
+        uv.data[loop.index].uv = uvs[loop.vertex_index]
+    obj = bpy.data.objects.new(mesh.name, mesh)
+    bpy.context.collection.objects.link(obj)
+    obj.parent = hull
+
+
 def aircraft(identity: str, m: Palette) -> bpy.types.Object:
     """Distinct conventional trainer and long-wing pusher-UAV external proportions."""
     root = group(identity + "_ExteriorStudy")
@@ -168,6 +203,10 @@ def aircraft(identity: str, m: Palette) -> bpy.types.Object:
         m.paint.node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value = (.71,.72,.68,1)
         ellipsoid("Upper nose fairing", (0,3.35,2.02), (.61,2.26,.63), m.paint,hull)
         ellipsoid("Ventral pod", (0,3.64,1.14), (.40,.52,.41), m.paint,hull)
+        side_marking(identity,hull,-1,-1.10,1.91,2.45,
+                     lambda y,z: .652*math.sqrt(1-(y/6.5)**2-((z-1.7)/.7)**2))
+        control_finish = material("Tail control surface satin", (.63,.65,.62))
+        control_finish.node_tree.nodes.get("Principled BSDF").inputs["Roughness"].default_value = .56
     else:
         ellipsoid("Canopy", (0, length * .24, 2.15), (.47, length * .12, .45), m.glass, hull)
     for side in (-1, 1):
@@ -183,9 +222,13 @@ def aircraft(identity: str, m: Palette) -> bpy.types.Object:
                   for x,lead,trail,z,h in wing_sections],wings,m.paint)
             stations = [(.24,-4.55,1.94,.96,.12),(1.1,-4.98,2.97,.79,.09),
                         (2.05,-5.54,4.15,.48,.045)]
-            shell("Canted tail surface", [[(side*(x+thick*math.sin(a)),
+            fin = shell("Canted tail surface", [[(side*(x+thick*math.sin(a)),
                   y+chord*math.cos(a),z) for a in angles]
                   for x,y,z,chord,thick in stations],tail,m.paint)
+            fin.data.materials.append(control_finish)
+            for face in fin.data.polygons:
+                if len(face.vertices)==4 and all(math.cos(angles[i%24]) < -.39 for i in face.vertices):
+                    face.material_index = 1
         else:
             panel("Wing", [(side * .45, length * .08, 1.8), (side * span / 2, -length * .07, 1.8), (side * span / 2, -length * .18, 1.8), (side * .45, -length * .23, 1.8)], m.paint, wings)
             panel("Tailplane", [(side * .3, -length * .32, 1.9), (side * span * .17, -length * .44, 1.9), (side * span * .15, -length * .49, 1.9), (side * .3, -length * .46, 1.9)], m.paint, tail)
@@ -258,6 +301,7 @@ def create(identity: str, m: Palette) -> bpy.types.Object:
         hull, wings, tail = group("Hull", root), group("Wings", root), group("Tail", root)
         m.paint.node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value = (.77, .77, .74, 1)
         box("Composite fuselage shell", (0, .23, .15), (.144, .55, .173), m.paint, hull, .047)
+        side_marking(identity,hull,1,.23,.153,.194,lambda y,z: .0723)
         profile = [math.tau*i/24 for i in range(24)]
         saddle = [(-.07,.043,.155,.21),(-.022,.064,.16,.267),(.032,.070,.17,.296),
                   (.153,.071,.17,.296),(.19,.067,.17,.28),(.215,.06,.17,.239),
@@ -282,9 +326,11 @@ def create(identity: str, m: Palette) -> bpy.types.Object:
         cylinder("Sensor joint", (0, .505, .172), .081, .022, m.rubber, payload, "Y", 48)
         nose = [(.512,.077),(.537,.08),(.64,.078),(.672,.073),
                 (.695,.057),(.712,.032),(.718,.009)]
+        sleeve = material("Camera sleeve satin", (.66,.68,.66))
+        sleeve.node_tree.nodes.get("Principled BSDF").inputs["Roughness"].default_value = .44
         shell("Camera sleeve and rounded nose", [[(radius*math.cos(a),y,
               .172+.96*radius*math.sin(a)) for a in profile]
-              for y,radius in nose],payload,m.paint)
+              for y,radius in nose],payload,sleeve)
         lens = cylinder("Camera lens", (0, .714, .156), .018, .009, m.glass, payload, "Y", 32)
         lens.rotation_euler.x -= .34
         prop = group("Propeller", hull)

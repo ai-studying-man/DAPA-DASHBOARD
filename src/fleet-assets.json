@@ -338,8 +338,8 @@
     ],
     "modelAttribution": "./models/fleet/muav-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 475372,
-    "images": 6,
+    "bytes": 523164,
+    "images": 9,
     "normalFallbacks": 0
   },
   {
@@ -1641,8 +1641,8 @@
     ],
     "modelAttribution": "./models/fleet/remoeye-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 392708,
-    "images": 9,
+    "bytes": 433440,
+    "images": 12,
     "normalFallbacks": 0
   }
 ]
