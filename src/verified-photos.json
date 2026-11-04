@@ -1,4 +1,15 @@
 {
+  "k242": {
+    "referenceKind": "pending",
+    "referenceUrl": "https://kookbang.dema.mil.kr/newsWeb/20210723/3/BBSMSTR_000000010023/view.do"
+  },
+  "k151at": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/k151at.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:AT-1K_Raybolt.png",
+    "photoCredit": "북한댁사랑방 · K153C1 소형전술차량 상부 현궁 발사대 · 2022년 촬영 영상 스틸 · CC BY 3.0 · 축소·WebP 변환",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by/3.0/"
+  },
   "k1arv": {
     "referenceKind": "public-photo",
     "referencePhoto": "./media/reference-verified/k1arv.webp",
