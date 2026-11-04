@@ -26,6 +26,16 @@ def refine_500md():
     tail = bpy.data.objects["Tail"]
     bpy.data.objects.remove(bpy.data.objects["Tail_MVP olive paint"], do_unlink=True)
     angles = [math.tau*i/24 for i in range(24)]
+    # Fit the lower cabin to the visible silhouette and retain the separate glazing.
+    bpy.data.objects.remove(bpy.data.objects["Hull_MVP olive paint"], do_unlink=True)
+    cabin = [(-1.55,.16,1.97,2.44),(-1.35,.43,1.52,2.65),
+             (-1.05,.64,1.16,2.81),(-.65,.74,.96,2.91),
+             (-.2,.77,.87,2.94),(.35,.75,.86,2.86),
+             (.75,.66,.93,2.66),(1.07,.54,1.06,2.32),
+             (1.34,.41,1.22,1.94),(1.52,.21,1.45,1.82)]
+    shell("Rounded cabin and belly",
+          [[(width*math.cos(a),y,(top+bottom)/2+(top-bottom)/2*math.sin(a))
+            for a in angles] for y,width,bottom,top in cabin], hull, paint)
     boom = [(-.85,2.20,.34,.34),(-1.55,2.27,.25,.24),
             (-2.75,2.43,.15,.16),(-4.05,2.64,.085,.095)]
     shell("Tapered tail boom", [[(w*math.cos(a),y,z+h*math.sin(a)) for a in angles]
@@ -44,9 +54,14 @@ def refine_500md():
             segment = cylinder(name,(a+b)/2,thickness,(b-a).length,mat,parent,vertices=12)
             segment.rotation_euler = (b-a).to_track_quat('Z','Y').to_euler()
 
+    gear = bpy.data.objects["RunningGear"]
+    bpy.data.objects.remove(bpy.data.objects["RunningGear_MVP exposed metal"], do_unlink=True)
     for side in (-1,1):
-        rail("Upturned skid toe",[(side*.95,1.45,.25),(side*.95,1.59,.28),(side*.95,1.69,.37)],
-             .055,steel,bpy.data.objects["RunningGear"])
+        rail("Skid runner",[(side*.95,-1.47,.25),(side*.95,1.45,.25),
+                            (side*.95,1.59,.28),(side*.95,1.69,.37)],.055,steel,gear)
+        for y in (-.77,.73):
+            rail("Skid support",[(side*.95,y-.08,.25),(side*.84,y,.60),
+                                 (side*.48,y,1.39)],.05,steel,gear)
     for longitude in (-.98,0,.98):
         path=[]
         for i in range(15):

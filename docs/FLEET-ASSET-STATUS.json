@@ -450,10 +450,10 @@
       "source": "./models/mvp/500md.glb",
       "sourceSha256": "a17f5cf09f6690481e17d7aa3ddfd15851a444af79769ab80681466f06ebc898",
       "model": "./models/fleet/500md.glb",
-      "sha256": "cf91340b334bb86b2f193bbe6daaf2c6175f2eb3cab1436cfd022d40c9875eaa",
+      "sha256": "cb2dabff25c03a7cd0f38b2bfb90a039fc6852c77bdea327bf7407751b121da1",
       "blender": "blender/fleet/models/500md.blend",
-      "bytes": 662296,
-      "rawBytes": 698512,
+      "bytes": 591104,
+      "rawBytes": 636820,
       "normalFallbacks": 0,
       "images": 8,
       "clips": [
