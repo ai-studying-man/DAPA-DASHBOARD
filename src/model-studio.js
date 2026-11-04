@@ -11,13 +11,15 @@ function release(root){const resources=new Set();root?.traverse(object=>{if(obje
 export class ModelStudio{
  constructor(host,system,asset,retry){
   this.host=host;this.asset=asset;this.retry=retry;this.events=new AbortController();this.request=new AbortController();this.elapsed=0;this.visible=true;this.playing=false;this.auto=false;this.reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  host.innerHTML=studioMarkup(system,asset);this.ui=host.querySelector('.model-studio');this.stage=host.querySelector('.studio-canvas');this.status=host.querySelector('[data-studio-status]');this.bind();this.init();
+  host.innerHTML=studioMarkup(system,asset);this.ui=host.querySelector('.model-studio');this.stage=host.querySelector('.studio-canvas');this.status=host.querySelector('[data-studio-status]');this.bind();this.init(system.id);
  }
- async init(){
+ async init(equipmentId){
   try{
    this.renderer=new T.WebGLRenderer({antialias:true,alpha:false});this.renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;this.renderer.outputColorSpace=T.SRGBColorSpace;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.15;
    const canvas=this.renderer.domElement;canvas.tabIndex=0;canvas.setAttribute('aria-label',this.stage.getAttribute('aria-label'));this.stage.prepend(canvas);
-   this.scene=new T.Scene();const style=getComputedStyle(this.host);this.scene.background=new T.Color(style.getPropertyValue('--sky-light').trim()||'#eef6ff');this.camera=new T.PerspectiveCamera(38,1,.01,1000);
+   this.scene=new T.Scene();const style=getComputedStyle(this.host);
+   const paleAirframe = ['muav','remoeye'].includes(equipmentId);
+   this.scene.background=new T.Color(paleAirframe ? '#8295a5' : style.getPropertyValue('--sky-light').trim()||'#eef6ff');this.camera=new T.PerspectiveCamera(38,1,.01,1000);
    this.controls=new OrbitControls(this.camera,canvas);this.controls.enableDamping=true;this.controls.autoRotateSpeed=.7;
    const room=new RoomEnvironment(),generator=new T.PMREMGenerator(this.renderer);
    try{this.reflections=generator.fromScene(room,.04);this.scene.environment=this.reflections.texture;}
@@ -36,7 +38,8 @@ export class ModelStudio{
     this.root=gltf.scene;this.scene.add(this.root);this.parts=Object.fromEntries((this.asset.parts||['Hull','Turret','Gun','RunningGear','Markings']).map(name=>[name,this.root.getObjectByName(name)]));
     this.origins=new Map(Object.values(this.parts).filter(Boolean).map(part=>[part,part.position.clone()]));this.root.traverse(object=>{if(object.isMesh){object.castShadow=true;object.receiveShadow=true}});
     const bounds=new T.Box3().setFromObject(this.root);if(bounds.isEmpty())throw new Error('Empty GLB');this.center=bounds.getCenter(new T.Vector3());this.radius=bounds.getSize(new T.Vector3()).length()/2;this.baseRadius=this.radius;
-    const floor=new T.Mesh(new T.PlaneGeometry(this.radius*12,this.radius*12),new T.MeshStandardMaterial({color:style.getPropertyValue('--elevated').trim()||'#f2f4f6',roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=bounds.min.y-.015;floor.receiveShadow=true;this.scene.add(floor);
+    const floorColor = paleAirframe ? '#596976' : style.getPropertyValue('--elevated').trim()||'#f2f4f6';
+    const floor=new T.Mesh(new T.PlaneGeometry(this.radius*12,this.radius*12),new T.MeshStandardMaterial({color:floorColor,roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=bounds.min.y-.015;floor.receiveShadow=true;this.scene.add(floor);
     key.target.position.copy(this.center);key.position.set(.8,1.6,-.9).multiplyScalar(this.radius*2).add(this.center);
     key.shadow.normalBias=this.radius*.0015;key.shadow.camera.left=key.shadow.camera.bottom=-this.radius*1.2;key.shadow.camera.right=key.shadow.camera.top=this.radius*1.2;key.shadow.camera.near=this.radius*.2;key.shadow.camera.far=this.radius*6;key.shadow.camera.updateProjectionMatrix();
     this.controls.minDistance=this.radius*.5;this.controls.maxDistance=this.radius*7;this.view='home';this.resize();this.motion=new StudioMotion(this,gltf.animations);this.enableControls();this.status.textContent=t('ready');this.ui.dataset.ready='true';this.loop();
