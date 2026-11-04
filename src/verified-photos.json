@@ -11,16 +11,25 @@
     "referenceUrl": "https://kookbang.dema.mil.kr/newsWeb/20240828/16/ATCE_CTGR_0010010000/view.do"
   },
   "km9": {
-    "referenceKind": "pending",
-    "referenceUrl": "https://www.korea.kr/news/issueQAView.do?newsId=148827238"
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/km9.webp",
+    "referenceUrl": "https://www.dvidshub.net/image/7994446/us-rok-combine-cbrn-eod-training",
+    "photoCredit": "U.S. Air Force · Chase Verzaal · KM9, 오산 · Public domain · 축소·WebP 변환",
+    "photoLicenseUrl": "https://www.dvidshub.net/about/copyright"
   },
   "km181": {
-    "referenceKind": "pending",
-    "referenceUrl": "https://www.hyundai-wia.com/business/defense_ground04.asp"
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/km181.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:60_mm_KM181_firing.png",
+    "photoCredit": "WiaMil · 60 mm KM181 firing · CC BY-SA 4.0 · WebP 변환",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   "k332": {
-    "referenceKind": "pending",
-    "referenceUrl": "https://sourcehere.com/resource/39909"
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/k332.webp",
+    "referenceUrl": "https://www.dvidshub.net/image/9857509/kmep-262-3rd-mlg-us-marine-corps-and-rok-marines-conduct-simulated-casualty-decontamination-operation-south-korea",
+    "photoCredit": "U.S. Marine Corps · Matthew Borruso · 해병대 K332 · Public domain · 축소·WebP 변환",
+    "photoLicenseUrl": "https://www.dvidshub.net/about/copyright"
   },
   "anasis": {
     "referenceKind": "pending",
