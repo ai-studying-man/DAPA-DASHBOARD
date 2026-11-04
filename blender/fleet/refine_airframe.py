@@ -21,6 +21,21 @@ def refine_500md():
         blade.rotation_euler.z = -angle
     hull = bpy.data.objects["Hull"]
     paint = bpy.data.objects["Hull_MVP olive paint"].data.materials[0]
+    # The photographed aircraft carries its stabilizer on top of the fin.
+    # Rebuild the joined paint shell in the exhibit copy; keep the tail rotor.
+    tail = bpy.data.objects["Tail"]
+    bpy.data.objects.remove(bpy.data.objects["Tail_MVP olive paint"], do_unlink=True)
+    angles = [math.tau*i/24 for i in range(24)]
+    boom = [(-.85,2.20,.34,.34),(-1.55,2.27,.25,.24),
+            (-2.75,2.43,.15,.16),(-4.05,2.64,.085,.095)]
+    shell("Tapered tail boom", [[(w*math.cos(a),y,z+h*math.sin(a)) for a in angles]
+                                for y,z,w,h in boom],tail,paint)
+    fin = [(1.98,-3.98,.12),(2.65,-4.03,.32),(3.64,-4.35,.26)]
+    shell("Swept tail fin", [[(.055*math.cos(a),y+chord*math.sin(a),z) for a in angles]
+                             for z,y,chord in fin],tail,paint)
+    box("High stabilizer",(0,-4.35,3.63),(2.16,.34,.06),paint,tail,.018)
+    for side in (-1,1):
+        box("Stabilizer tip plate",(side*1.07,-4.35,3.66),(.032,.38,.17),paint,tail,.012)
 
     def rail(name, points, thickness, mat, parent):
         from mathutils import Vector
