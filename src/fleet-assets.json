@@ -435,7 +435,7 @@
     ],
     "modelAttribution": "./models/fleet/425-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 1277512,
+    "bytes": 1271852,
     "images": 11,
     "normalFallbacks": 0
   },
@@ -478,7 +478,7 @@
     ],
     "modelAttribution": "./models/fleet/smallsat-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 1274036,
+    "bytes": 1268464,
     "images": 11,
     "normalFallbacks": 0
   },
@@ -697,7 +697,7 @@
     ],
     "modelAttribution": "./models/fleet/kf21-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 517640,
+    "bytes": 591396,
     "images": 10,
     "normalFallbacks": 0
   },

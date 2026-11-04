@@ -80,6 +80,11 @@ def refine_kf21():
                                for y,w,h,z in stations], hull, paint)
     wings = group("Wings", hull)
     for side in (-1,1):
+        # Rounded engine shoulders taper into the paired exhausts visible in the dorsal photo.
+        fairing = [(-7.94,.45,.40,.37),(-7.25,.48,.45,.43),(-5.4,.54,.51,.51),
+                   (-3.6,.58,.49,.53),(-1.7,.57,.38,.43),(.25,.49,.25,.28)]
+        shell("Engine shoulder", [[(side*offset+w*math.cos(a),y,1.56+h*math.sin(a))
+                                   for a in angles] for y,offset,w,h in fairing],hull,paint)
         for name, parent, sections in [
             ("Blended wing", wings, [(.63,3.25,-4.8,1.65,.47),(1.08,2.25,-4.85,1.63,.34),
               (1.55,1.36,-4.9,1.60,.22),(2.15,.55,-4.95,1.57,.16),

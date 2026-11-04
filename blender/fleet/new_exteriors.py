@@ -40,7 +40,11 @@ def blanket(size, side, column, crosswise, foil, hull):
                 v += rng.uniform(-.26,.26)/nz
             tension = (math.sin(math.pi*u)*math.sin(math.pi*v))**.54
             fold = abs(math.sin(8*u+12*v+1.7*math.sin(6*v+column)))
-            relief = tension*(.006+.025*fold**8+.005*rng.random())
+            # Pull the foil inward at attachment points and gather it into nearby creases.
+            distance = min(math.hypot(u-x,(v-z)*.89/width)
+                           for x in (.15,.85) for z in (.18,.50,.82))
+            gather = math.exp(-16*distance)
+            relief = tension*(.006+.025*fold**8+.005*rng.random())*(1-gather)
             along = (column-1)*(width+.012)+(u-.5)*width
             outward = side*(depth+relief)
             x,y = (outward,along) if crosswise else (along,outward)
@@ -52,6 +56,8 @@ def blanket(size, side, column, crosswise, foil, hull):
                 faces.extend(tri if (side<0) != crosswise else tri[::-1] for tri in triangles)
     mesh = bpy.data.meshes.new("Pinched thermal foil")
     mesh.from_pydata(vertices, [], faces)
+    for face in mesh.polygons:
+        face.use_smooth = True
     obj = bpy.data.objects.new("Quilted insulation", mesh)
     bpy.context.collection.objects.link(obj)
     obj.parent = hull
