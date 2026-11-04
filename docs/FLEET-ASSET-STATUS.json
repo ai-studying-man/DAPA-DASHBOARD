@@ -121,10 +121,10 @@
       "source": null,
       "sourceSha256": null,
       "model": "./models/fleet/muav.glb",
-      "sha256": "15c667f20fa20937a1f17e00df6eaba06b25c7a300ad404022881cb3e0df2102",
+      "sha256": "543a9b9c40fe855f384c44ae62a1d7892310f4d7ac4f9dff58f32f707fc0bdd0",
       "blender": "blender/fleet/models/muav.blend",
-      "bytes": 369092,
-      "rawBytes": 411984,
+      "bytes": 475372,
+      "rawBytes": 512772,
       "normalFallbacks": 0,
       "images": 6,
       "clips": [
