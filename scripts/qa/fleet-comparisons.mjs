@@ -1,6 +1,6 @@
 import {chromium} from 'playwright';
 import {readFile,mkdir} from 'node:fs/promises';
-const entries=JSON.parse(await readFile('src/fleet-assets.json','utf8'));
+import {publicFleet as entries} from '../../src/public-equipment.js';
 const out='docs/modeling/fleet/comparisons';await mkdir(out,{recursive:true});
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const image=async path=>`data:${path.endsWith('.webp')?'image/webp':path.endsWith('.jpg')?'image/jpeg':'image/png'};base64,${(await readFile(path)).toString('base64')}`;

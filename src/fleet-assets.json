@@ -697,8 +697,8 @@
     ],
     "modelAttribution": "./models/fleet/kf21-ATTRIBUTION.md",
     "modelLicense": "Project exhibition; external redistribution terms pending",
-    "bytes": 591396,
-    "images": 10,
+    "bytes": 612828,
+    "images": 11,
     "normalFallbacks": 0
   },
   {
@@ -1641,7 +1641,7 @@
     ],
     "modelAttribution": "./models/fleet/remoeye-ATTRIBUTION.md",
     "modelLicense": "DAPA DASHBOARD authored exterior study",
-    "bytes": 341840,
+    "bytes": 395524,
     "images": 9,
     "normalFallbacks": 0
   }

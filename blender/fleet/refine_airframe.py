@@ -64,6 +64,7 @@ def shell(name, sections, parent, paint):
     mesh.materials.append(paint)
     for face in mesh.polygons:
         face.use_smooth = len(face.vertices) == 4
+    return obj
 
 
 def refine_kf21():
@@ -79,6 +80,7 @@ def refine_kf21():
     shell("Rounded fuselage", [[(w*math.cos(a),y,z+h*math.sin(a)) for a in angles]
                                for y,w,h,z in stations], hull, paint)
     wings = group("Wings", hull)
+    control_paint = material("Trailing control surface gray", (.195, .222, .24))
     for side in (-1,1):
         # Rounded engine shoulders taper into the paired exhausts visible in the dorsal photo.
         fairing = [(-7.94,.45,.40,.37),(-7.25,.48,.45,.43),(-5.4,.54,.51,.51),
@@ -90,9 +92,16 @@ def refine_kf21():
               (1.55,1.36,-4.9,1.60,.22),(2.15,.55,-4.95,1.57,.16),
               (4.2,-1.45,-5,1.54,.095),(5.8,-3.12,-4.71,1.51,.045)]),
             ("Stabilator", hull, [(.76,-4.7,-7.85,1.64,.095),(3.32,-6.8,-7.94,1.55,.035)])]:
-            shell(name, [[(side*x, (lead+trail)/2+(lead-trail)/2*math.cos(a),
+            surface = shell(name, [[(side*x, (lead+trail)/2+(lead-trail)/2*math.cos(a),
                             z+h*math.sin(a)*(1+.36*math.cos(a))) for a in angles]
                           for x,lead,trail,z,h in sections],parent,paint)
+            if name == "Blended wing":
+                surface.data.materials.append(control_paint)
+                for face in surface.data.polygons:
+                    # Use the same vertices on both finishes so the hinge boundary follows the wing.
+                    station, chord = divmod(min(face.vertices), len(angles))
+                    if len(face.vertices) == 4 and station >= 2 and 11 <= chord < 21:
+                        face.material_index = 1
         shell("Canted fin", [[(side*x+.075*scale*math.sin(a), mid+chord*math.cos(a),z)
                                for a in angles] for x,mid,chord,z,scale in
                               [(.79,-6.48,1.53,1.65,1),(1.06,-6.58,1.3,2.34,.83),

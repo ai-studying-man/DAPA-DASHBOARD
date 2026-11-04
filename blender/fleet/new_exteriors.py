@@ -11,6 +11,7 @@ import random
 from dataclasses import dataclass
 
 import bpy
+from refine_airframe import shell
 from exterior_parts import box, cylinder, group, loft
 from mvp_shapes import ellipsoid, panel
 
@@ -227,9 +228,15 @@ def create(identity: str, m: Palette) -> bpy.types.Object:
         box("Composite fuselage shell", (0, .23, .15), (.144, .55, .173), m.paint, hull, .047)
         cylinder("Tail boom", (0, -.32, .16), .019, .76, m.paint, tail, "Y")
         for side in (-1, 1):
-            panel("Outer wing", [(0, .23, .21), (side*.9, .14, .245), (side*.87, -.02, .245), (0, -.04, .21)], m.paint, wings)
+            # The display photo shows a continuous curved leading edge and rounded, rising tips.
+            sections = [(0,.23,-.04,.216,.015),(.48,.218,-.038,.222,.013),
+                        (.7,.197,-.035,.235,.010),(.83,.166,-.018,.254,.007),
+                        (.88,.134,.016,.261,.004),(.90,.092,.077,.263,.0015)]
+            profile = [math.tau*i/24 for i in range(24)]
+            shell("Outer wing", [[(side*x,(lead+trail+(lead-trail)*math.cos(a))/2,
+                                   z+h*math.sin(a)) for a in profile]
+                                 for x,lead,trail,z,h in sections], wings, m.paint)
             panel("Horizontal stabilizer", [(0, -.52, .16), (side*.23, -.60, .16), (side*.21, -.72, .16), (0, -.7, .16)], m.paint, tail)
-            panel("Aileron hinge line", [(side*.48, .004, .232), (side*.82, .010, .245), (side*.82, .014, .245), (side*.48, .008, .232)], m.steel, wings)
             for y in (.05, .18, .31, .44):
                 cylinder("Access panel fastener", (side*.073, y, .147), .0031, .002, m.steel, hull, "X", 12)
         panel("Vertical stabilizer", [(0, -.51, .16), (0, -.57, .37), (0, -.65, .37), (0, -.71, .16)], m.paint, tail)
