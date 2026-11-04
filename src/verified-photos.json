@@ -1,4 +1,11 @@
 {
+  "k1arv": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/k1arv.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:2010_육군_1군지사_88_정비대대_혹한기_훈련_(7445965222).jpg",
+    "photoCredit": "대한민국 국군 · 왼쪽 K1 구난전차가 오른쪽 K1 전차의 엔진을 인양하는 장면 · CC BY-SA 2.0 · 축소·WebP 변환",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/"
+  },
   "ah1s": {
     "referenceKind": "public-photo",
     "referencePhoto": "./media/reference-verified/ah1s.webp",
