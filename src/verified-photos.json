@@ -1,4 +1,27 @@
 {
+  "km187": {
+    "referenceKind": "public-photo",
+    "referencePhoto": "./media/reference-verified/km187.webp",
+    "referenceUrl": "https://commons.wikimedia.org/wiki/File:2015.7.10_육군_제27보병사단_거점방어전투사격-_KM-187_81_mm_박격포.jpg",
+    "photoCredit": "김남용 · 육군 제27보병사단 KM187 훈련 · CC BY-SA 2.0 · 축소·WebP 변환",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/"
+  },
+  "k10cbrn": {
+    "referenceKind": "pending",
+    "referenceUrl": "https://kookbang.dema.mil.kr/newsWeb/20240828/16/ATCE_CTGR_0010010000/view.do"
+  },
+  "km9": {
+    "referenceKind": "pending",
+    "referenceUrl": "https://www.korea.kr/news/issueQAView.do?newsId=148827238"
+  },
+  "km181": {
+    "referenceKind": "pending",
+    "referenceUrl": "https://www.hyundai-wia.com/business/defense_ground04.asp"
+  },
+  "k332": {
+    "referenceKind": "pending",
+    "referenceUrl": "https://sourcehere.com/resource/39909"
+  },
   "anasis": {
     "referenceKind": "pending",
     "referenceUrl": "https://en.yna.co.kr/view/AEN20200720011852325"
