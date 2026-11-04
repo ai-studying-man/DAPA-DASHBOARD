@@ -163,11 +163,26 @@ def aircraft(identity: str, m: Palette) -> bpy.types.Object:
     hull, wings, tail = group("Hull", root), group("Wings", root), group("Tail", root)
     length, span = (13, 25) if identity == "muav" else (10.3, 10.6) if identity == "kt1" else (13.1, 9.45)
     ellipsoid("Fuselage", (0, 0, 1.7), (.65, length / 2, .7), m.paint, hull)
-    ellipsoid("Canopy or sensor cover", (0, length * .24, 2.15), (.47, length * .12, .45), m.glass, hull)
+    if identity == "muav":
+        # Match the pale opaque nose fairing and ventral pod of the DAPA photo.
+        m.paint.node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value = (.71,.72,.68,1)
+        ellipsoid("Upper nose fairing", (0,3.35,2.02), (.61,2.26,.63), m.paint,hull)
+        ellipsoid("Ventral pod", (0,3.64,1.14), (.40,.52,.41), m.paint,hull)
+    else:
+        ellipsoid("Canopy", (0, length * .24, 2.15), (.47, length * .12, .45), m.glass, hull)
     for side in (-1, 1):
         panel("Wing", [(side * .45, length * .08, 1.8), (side * span / 2, -length * .07, 1.8), (side * span / 2, -length * .18, 1.8), (side * .45, -length * .23, 1.8)], m.paint, wings)
-        panel("Tailplane", [(side * .3, -length * .32, 1.9), (side * span * .17, -length * .44, 1.9), (side * span * .15, -length * .49, 1.9), (side * .3, -length * .46, 1.9)], m.paint, tail)
-    panel("Vertical tail", [(0, -length * .29, 1.9), (0, -length * .43, 4), (0, -length * .5, 3.8), (0, -length * .49, 1.9)], m.paint, tail)
+        if identity == "muav":
+            angles = [i*math.tau/24 for i in range(24)]
+            stations = [(.24,-4.55,1.94,.96,.12),(1.1,-4.98,2.97,.79,.09),
+                        (2.05,-5.54,4.15,.48,.045)]
+            shell("Canted tail surface", [[(side*(x+thick*math.sin(a)),
+                  y+chord*math.cos(a),z) for a in angles]
+                  for x,y,z,chord,thick in stations],tail,m.paint)
+        else:
+            panel("Tailplane", [(side * .3, -length * .32, 1.9), (side * span * .17, -length * .44, 1.9), (side * span * .15, -length * .49, 1.9), (side * .3, -length * .46, 1.9)], m.paint, tail)
+    if identity != "muav":
+        panel("Vertical tail", [(0, -length * .29, 1.9), (0, -length * .43, 4), (0, -length * .5, 3.8), (0, -length * .49, 1.9)], m.paint, tail)
     if identity in {"muav", "kt1"}:
         prop = group("Propeller", root)
         prop.location = (0, -length * .5 if identity == "muav" else length * .5, 1.7)
