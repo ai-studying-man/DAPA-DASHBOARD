@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Final
 
 import bpy
-from mathutils import Matrix
+from mathutils import Matrix, Vector
 
 ROOT: Final = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / "blender/fleet"), str(ROOT / "scripts/blender")]
@@ -21,6 +21,7 @@ from surfaces import material, apply, finish_layers
 from motions import add
 from refine_airframe import refine_500md, refine_kf21
 from photo_study import bounds, studio, render
+from exterior_parts import cylinder
 
 OUT: Final = ROOT / "artifacts/3d/fleet"
 BLENDS: Final = ROOT / "blender/fleet/models"
@@ -64,6 +65,35 @@ def run() -> None:
                     if max(body.data.vertices[i].co.z for i in face.vertices) > .11:
                         face.material_index = 1
                 base = min(v.co.z for obj in meshes for v in obj.data.vertices)
+                # Shallow exterior lip: the dark inset closes the display mesh.
+                # Derive the plane from the imported tube, not a camera angle.
+                axis = Vector((0, .342898, .939373)).normalized()
+                end = max(v.co.dot(axis) for v in body.data.vertices)
+                rim = [v.co for v in body.data.vertices if end-v.co.dot(axis) < .0001]
+                center = sum(rim, Vector()) / len(rim)
+                from math import cos, sin, tau
+                rings = [(.056,-.006),(.058,.015),(.046,.015),(.046,.001)]
+                verts = [(r*cos(tau*i/32),r*sin(tau*i/32),z) for r,z in rings for i in range(32)]
+                faces = [(j*32+i,j*32+(i+1)%32,(j+1)*32+(i+1)%32,(j+1)*32+i)
+                         for j in range(3) for i in range(32)] + [tuple(range(96,128))]
+                lip = bpy.data.meshes.new("Display lip")
+                lip.from_pydata(verts, [], faces)
+                lip.materials.append(body.data.materials[1])
+                lip.materials.append(material("Recess shadow", (.008,.009,.01)))
+                lip.polygons[-1].material_index = 1
+                mouth = bpy.data.objects.new("Recessed muzzle lip", lip)
+                bpy.context.collection.objects.link(mouth)
+                mouth.parent = hull
+                mouth.location = center
+                mouth.rotation_euler.x = -.35
+                for side in (-1,1):
+                    foot = Vector((side*.48,.85,.05))
+                    direction = (Vector((side*.07,.24,.86))-foot).normalized()
+                    sleeve = cylinder("Bipod lower sleeve",foot+direction*.14,.035,.28,body.data.materials[1],hull)
+                    sleeve.rotation_mode = 'QUATERNION'
+                    sleeve.rotation_quaternion = direction.to_track_quat('Z','Y')
+                    shoe = cylinder("Bipod foot", (foot.x,foot.y,base+.022),.061,.044,body.data.materials[1],hull)
+                    shoe.scale.y = 1.35
                 hull.parent.location.z = -base * hull.parent.scale.z
             imported = list(bpy.context.scene.objects)
             for obj in imported:
